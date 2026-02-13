@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>쵸봄 영상 아카이브</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -44,13 +40,75 @@
             color: #8899aa;
         }
 
-        .header-stats span strong {
-            color: #e94560;
+        .header-stats span strong { color: #e94560; }
+
+        /* ── 공지 배너 ── */
+        .notice-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 24px;
+            background: linear-gradient(90deg, #1a3a2a, #1a2a3a);
+            border-bottom: 1px solid #2a4a3a;
+            gap: 12px;
+            animation: noticeSlide 0.4s ease-out;
         }
+
+        @keyframes noticeSlide {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .notice-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .notice-badge {
+            background: #e94560;
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .notice-text {
+            font-size: 13px;
+            color: #c0d8c0;
+            line-height: 1.5;
+        }
+
+        .notice-close {
+            background: none;
+            border: none;
+            color: #667;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .notice-close:hover {
+            background: rgba(255,255,255,0.1);
+            color: #aaa;
+        }
+
+        .notice-banner.hidden { display: none; }
 
         .main-container {
             display: flex;
             height: calc(100vh - 72px);
+        }
+
+        .notice-banner:not(.hidden) ~ .main-container {
+            height: calc(100vh - 72px - 44px);
         }
 
         /* ── Player Section ── */
@@ -72,7 +130,6 @@
             background: #000;
         }
 
-        /* 가로(16:9) 기본 모드 */
         .player-wrapper .iframe-box {
             position: relative;
             width: 100%;
@@ -88,7 +145,6 @@
             border: none;
         }
 
-        /* 세로(Shorts) 모드 */
         .player-wrapper.vertical-mode {
             background: #0a0a0a;
         }
@@ -117,9 +173,7 @@
             opacity: 0.3;
         }
 
-        .player-placeholder p {
-            font-size: 16px;
-        }
+        .player-placeholder p { font-size: 16px; }
 
         .video-info {
             padding: 16px 20px;
@@ -185,13 +239,8 @@
             transition: border-color 0.2s;
         }
 
-        .search-box input:focus {
-            border-color: #e94560;
-        }
-
-        .search-box input::placeholder {
-            color: #666;
-        }
+        .search-box input:focus { border-color: #e94560; }
+        .search-box input::placeholder { color: #666; }
 
         .search-box svg {
             position: absolute;
@@ -220,9 +269,7 @@
             transition: all 0.2s;
         }
 
-        .filter-btn:hover {
-            background: #333;
-        }
+        .filter-btn:hover { background: #333; }
 
         .filter-btn.active {
             background: #e94560;
@@ -256,18 +303,9 @@
             scrollbar-color: #333 #181818;
         }
 
-        .video-list::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .video-list::-webkit-scrollbar-track {
-            background: #181818;
-        }
-
-        .video-list::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 3px;
-        }
+        .video-list::-webkit-scrollbar { width: 6px; }
+        .video-list::-webkit-scrollbar-track { background: #181818; }
+        .video-list::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
 
         .video-item {
             display: flex;
@@ -278,9 +316,7 @@
             border-bottom: 1px solid #222;
         }
 
-        .video-item:hover {
-            background: #222;
-        }
+        .video-item:hover { background: #222; }
 
         .video-item.active {
             background: #1e2a3a;
@@ -306,9 +342,7 @@
             background: #333;
         }
 
-        .video-item:hover .video-thumb img {
-            transform: scale(1.05);
-        }
+        .video-item:hover .video-thumb img { transform: scale(1.05); }
 
         .video-thumb .duration {
             position: absolute;
@@ -354,10 +388,7 @@
             word-break: break-word;
         }
 
-        .video-details .meta-line {
-            font-size: 10px;
-            color: #777;
-        }
+        .video-details .meta-line { font-size: 10px; color: #777; }
 
         .category-tag {
             display: inline-block;
@@ -378,64 +409,39 @@
 
         @media (max-width: 1024px) {
             body { overflow: auto; }
-
-            .main-container {
-                flex-direction: column;
-                height: auto;
-            }
-
-            .player-section {
-                height: 56vw;
-                min-height: 260px;
-                max-height: 70vh;
-            }
-
-            .player-wrapper.vertical-mode {
-                height: 80vh;
-            }
-
+            .main-container { flex-direction: column; height: auto; }
+            .player-section { height: 56vw; min-height: 260px; max-height: 70vh; }
+            .player-wrapper.vertical-mode { height: 80vh; }
             .sidebar {
-                width: 100%;
-                min-width: 100%;
-                height: auto;
-                max-height: 55vh;
-                border-left: none;
-                border-top: 1px solid #272727;
+                width: 100%; min-width: 100%;
+                height: auto; max-height: 55vh;
+                border-left: none; border-top: 1px solid #272727;
             }
-
-            .video-thumb {
-                width: 120px;
-                min-width: 120px;
-                height: 68px;
-            }
+            .video-thumb { width: 120px; min-width: 120px; height: 68px; }
         }
 
         @media (max-width: 640px) {
             .header { padding: 12px; }
             .header h1 { font-size: 18px; }
+            .notice-banner { padding: 8px 12px; }
+            .notice-text { font-size: 12px; }
             .video-info { padding: 10px 12px; }
             .video-info h2 { font-size: 14px; }
         }
 
         .scroll-top {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
+            bottom: 20px; right: 20px;
+            width: 40px; height: 40px;
             background: #e94560;
-            border: none;
-            border-radius: 50%;
-            color: #fff;
-            font-size: 18px;
+            border: none; border-radius: 50%;
+            color: #fff; font-size: 18px;
             cursor: pointer;
             display: none;
-            align-items: center;
-            justify-content: center;
+            align-items: center; justify-content: center;
             z-index: 50;
             box-shadow: 0 4px 12px rgba(233,69,96,0.4);
         }
-
         .scroll-top.visible { display: flex; }
         .scroll-top:hover { transform: scale(1.1); }
     </style>
@@ -449,6 +455,14 @@
         <span>총 용량 <strong id="totalSize">0</strong></span>
         <span>총 재생시간 <strong id="totalDuration">0</strong></span>
     </div>
+</div>
+
+<div class="notice-banner" id="noticeBanner">
+    <div class="notice-content">
+        <span class="notice-badge">공지</span>
+        <span class="notice-text">플레이어 안에 작은 플레이어 문제로 모바일에서 시청 불가능한 문제가 해결되었습니다.</span>
+    </div>
+    <button class="notice-close" id="noticeClose" title="닫기">✕</button>
 </div>
 
 <div class="main-container">
@@ -504,7 +518,7 @@ const videos = [
   {title:"효녀가 아니고 효년이고만.. (w.경식이 할아버지)",url:"https://iframe.mediadelivery.net/play/596875/173ae28d-5fd1-4ba7-a006-41abcb77725b",thumb:"https://vz-7533d228-c25.b-cdn.net/173ae28d-5fd1-4ba7-a006-41abcb77725b/thumbnail.jpg",size:1932.89,duration:550},
   {title:"(Show me your Phone) 핸드폰 보여줘 지금 당장",url:"https://iframe.mediadelivery.net/play/596875/f2a3f0c1-4056-4217-8fe6-2a7df815babd",thumb:"https://vz-7533d228-c25.b-cdn.net/f2a3f0c1-4056-4217-8fe6-2a7df815babd/thumbnail.jpg",size:19.89,duration:18},
   {title:"힘이 전부인 세상 (27) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/eda8117f-950a-4e9b-8376-e265395642ca",thumb:"https://vz-7533d228-c25.b-cdn.net/eda8117f-950a-4e9b-8376-e265395642ca/thumbnail.jpg",size:21.76,duration:22},
-  {title:"흐즈므르.....,,즌쯔....^^ ;;;  (w.최케빈,애덕,연다,연비)",url:"https://iframe.mediadelivery.net/play/596875/6ae5c591-ce14-49d0-bafd-ec5aac2f9483",thumb:"https://vz-7533d228-c25.b-cdn.net/6ae5c591-ce14-49d0-bafd-ec5aac2f9483/thumbnail.jpg",size:1429.82,duration:501},
+  {title:"흐즈므르.....,,즌쯔....^^ ;;; (w.최케빈,애덕,연다,연비)",url:"https://iframe.mediadelivery.net/play/596875/6ae5c591-ce14-49d0-bafd-ec5aac2f9483",thumb:"https://vz-7533d228-c25.b-cdn.net/6ae5c591-ce14-49d0-bafd-ec5aac2f9483/thumbnail.jpg",size:1429.82,duration:501},
   {title:"호요랜드 Vlog # 드디어 성덕이 되었다",url:"https://iframe.mediadelivery.net/play/596875/641a356a-8857-45c0-bede-3764ac883a4e",thumb:"https://vz-7533d228-c25.b-cdn.net/641a356a-8857-45c0-bede-3764ac883a4e/thumbnail.jpg",size:1322.7,duration:783},
   {title:"혼돈부기 ( 混沌ブギ ) 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/da351058-21d5-44fb-b90d-689aa4e224d9",thumb:"https://vz-7533d228-c25.b-cdn.net/da351058-21d5-44fb-b90d-689aa4e224d9/thumbnail.jpg",size:302.5,duration:155},
   {title:"헤으응 눈나..❤️ (w.포비위키) (1기 여스 목소리 대회)",url:"https://iframe.mediadelivery.net/play/596875/5f7e3a2a-f1aa-46fb-afea-470dcdc3b44f",thumb:"https://vz-7533d228-c25.b-cdn.net/5f7e3a2a-f1aa-46fb-afea-470dcdc3b44f/thumbnail.jpg",size:758.02,duration:607},
@@ -532,7 +546,7 @@ const videos = [
   {title:"크고....우람한....! 무언가..❤️ (갈틱폰)",url:"https://iframe.mediadelivery.net/play/596875/7af3b340-9771-4317-a38f-d95a4d1db122",thumb:"https://vz-7533d228-c25.b-cdn.net/7af3b340-9771-4317-a38f-d95a4d1db122/thumbnail.jpg",size:754.32,duration:440},
   {title:"코이 恋 【Korean Cover】 【 쵸봄 × 김토키(김신우) 】",url:"https://iframe.mediadelivery.net/play/596875/06965f0f-251b-4e0f-a004-77a2a63562df",thumb:"https://vz-7533d228-c25.b-cdn.net/06965f0f-251b-4e0f-a004-77a2a63562df/thumbnail.jpg",size:523.3,duration:250},
   {title:"코이 恋 【Korean Cover】 【 쵸봄 × 김토키(김신우) 】 (1)",url:"https://iframe.mediadelivery.net/play/596875/8098e36c-987f-4f65-ae00-4e8a76b78866",thumb:"https://vz-7533d228-c25.b-cdn.net/8098e36c-987f-4f65-ae00-4e8a76b78866/thumbnail.jpg",size:125.87,duration:45},
-  {title:"ㅋㄷ으로 목졸라 죽인 사람  #Shorts",url:"https://iframe.mediadelivery.net/play/596875/f55bbc5a-fb37-4f0e-9d8c-cc6b70d8f8a9",thumb:"https://vz-7533d228-c25.b-cdn.net/f55bbc5a-fb37-4f0e-9d8c-cc6b70d8f8a9/thumbnail.jpg",size:31.93,duration:59},
+  {title:"ㅋㄷ으로 목졸라 죽인 사람 #Shorts",url:"https://iframe.mediadelivery.net/play/596875/f55bbc5a-fb37-4f0e-9d8c-cc6b70d8f8a9",thumb:"https://vz-7533d228-c25.b-cdn.net/f55bbc5a-fb37-4f0e-9d8c-cc6b70d8f8a9/thumbnail.jpg",size:31.93,duration:59},
   {title:"친구들한테 버림 받았습니다...",url:"https://iframe.mediadelivery.net/play/596875/17df551d-0868-431a-bf96-b4ea7ecf2c6d",thumb:"https://vz-7533d228-c25.b-cdn.net/17df551d-0868-431a-bf96-b4ea7ecf2c6d/thumbnail.jpg",size:730.21,duration:577},
   {title:"춘향님 왜 저한테만 그러세요",url:"https://iframe.mediadelivery.net/play/596875/65204683-c656-4898-8d6f-4f88d6e9f85f",thumb:"https://vz-7533d228-c25.b-cdn.net/65204683-c656-4898-8d6f-4f88d6e9f85f/thumbnail.jpg",size:2239.72,duration:719},
   {title:"취한줄도 모르고 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/d39a8900-16d2-4661-8926-1bc02243f868",thumb:"https://vz-7533d228-c25.b-cdn.net/d39a8900-16d2-4661-8926-1bc02243f868/thumbnail.jpg",size:177.22,duration:135},
@@ -556,7 +570,7 @@ const videos = [
   {title:"절정찬가(絶頂讃歌) 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/788a8759-de1d-46ca-8296-d6d7934fe1d4",thumb:"https://vz-7533d228-c25.b-cdn.net/788a8759-de1d-46ca-8296-d6d7934fe1d4/thumbnail.jpg",size:536.71,duration:182},
   {title:"저희.. 사이.. 좋아요...^^^^.. (w.참외몬)",url:"https://iframe.mediadelivery.net/play/596875/e2129147-d160-4ed3-ac03-97774ade59c6",thumb:"https://vz-7533d228-c25.b-cdn.net/e2129147-d160-4ed3-ac03-97774ade59c6/thumbnail.jpg",size:1525.98,duration:493},
   {title:"절정찬가(絶頂讃歌) 【Korean Cover】 【쵸봄】 (1)",url:"https://iframe.mediadelivery.net/play/596875/f92a69dc-f23d-4192-8458-d0895e8de1fc",thumb:"https://vz-7533d228-c25.b-cdn.net/f92a69dc-f23d-4192-8458-d0895e8de1fc/thumbnail.jpg",size:90.79,duration:30},
-  {title:"절대 연다님이 괴롭히는 영상  (w.연다)",url:"https://iframe.mediadelivery.net/play/596875/d7abb591-fe2e-4f70-9a38-179b19d2689a",thumb:"https://vz-7533d228-c25.b-cdn.net/d7abb591-fe2e-4f70-9a38-179b19d2689a/thumbnail.jpg",size:1809.7,duration:497},
+  {title:"절대 연다님이 괴롭히는 영상 (w.연다)",url:"https://iframe.mediadelivery.net/play/596875/d7abb591-fe2e-4f70-9a38-179b19d2689a",thumb:"https://vz-7533d228-c25.b-cdn.net/d7abb591-fe2e-4f70-9a38-179b19d2689a/thumbnail.jpg",size:1809.7,duration:497},
   {title:"전방향 미소녀 #全方向美少女 #meme #tiktok",url:"https://iframe.mediadelivery.net/play/596875/cbcd5812-df30-40b2-ac8d-486b77e1f804",thumb:"https://vz-7533d228-c25.b-cdn.net/cbcd5812-df30-40b2-ac8d-486b77e1f804/thumbnail.jpg",size:21.79,duration:9},
   {title:"저질러 버렸습니다.. (곧 감옥 갑니다)",url:"https://iframe.mediadelivery.net/play/596875/9fdb228e-ed55-4ddb-a801-3abb89483a51",thumb:"https://vz-7533d228-c25.b-cdn.net/9fdb228e-ed55-4ddb-a801-3abb89483a51/thumbnail.jpg",size:1762.44,duration:542},
   {title:"저는 이 발언과 무관합니다 (36) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/6c359bc6-2942-4373-bd8c-873172e98fce",thumb:"https://vz-7533d228-c25.b-cdn.net/6c359bc6-2942-4373-bd8c-873172e98fce/thumbnail.jpg",size:22.9,duration:24},
@@ -593,7 +607,7 @@ const videos = [
   {title:"와! 포켓몬빵! 와! 섅즈!",url:"https://iframe.mediadelivery.net/play/596875/bb1404bd-b582-4435-8e77-451eed44fd93",thumb:"https://vz-7533d228-c25.b-cdn.net/bb1404bd-b582-4435-8e77-451eed44fd93/thumbnail.jpg",size:297.89,duration:179},
   {title:"요새 유행하는 마라 '탕' 후루 #meme #마라탕후루",url:"https://iframe.mediadelivery.net/play/596875/f93175d7-b154-4bc9-99a8-491e06339059",thumb:"https://vz-7533d228-c25.b-cdn.net/f93175d7-b154-4bc9-99a8-491e06339059/thumbnail.jpg",size:19.11,duration:7},
   {title:"옥쓔님과 막이마기님은 제가 NTR 하겠습니다! (w.막이마기,옥쓔,연다)",url:"https://iframe.mediadelivery.net/play/596875/083a224f-6e35-4ead-82fd-565104da71ba",thumb:"https://vz-7533d228-c25.b-cdn.net/083a224f-6e35-4ead-82fd-565104da71ba/thumbnail.jpg",size:1854.28,duration:561},
-  {title:"오징어 게임 우승자 스포 제목학원 레전드 ㅋㅋㅋㅋ (7) #shorts",url:"https://iframe.mediadelivery.net/play/596875/fdc4eaec-0c4d-4aff-b900-381ce82df69c",thumb:"https://vz-7533d228-c25.b-cdn.net/fdc4eaec-0c4d-4aff-b900-381ce82df69c/thumbnail.jpg",size:23.67,duration:24},
+  {title:"오징어 게임 우승자 스포 제목학원 레전드 (7) #shorts",url:"https://iframe.mediadelivery.net/play/596875/fdc4eaec-0c4d-4aff-b900-381ce82df69c",thumb:"https://vz-7533d228-c25.b-cdn.net/fdc4eaec-0c4d-4aff-b900-381ce82df69c/thumbnail.jpg",size:23.67,duration:24},
   {title:"오이시소~! #mochimochi #모찌모찌",url:"https://iframe.mediadelivery.net/play/596875/012af5df-be05-4b9f-996d-f6abeb00a765",thumb:"https://vz-7533d228-c25.b-cdn.net/012af5df-be05-4b9f-996d-f6abeb00a765/thumbnail.jpg",size:79.41,duration:20},
   {title:"옆 집 개가 개시끄럽다",url:"https://iframe.mediadelivery.net/play/596875/96b09e3c-6833-4385-88d3-1157a9b2a6a4",thumb:"https://vz-7533d228-c25.b-cdn.net/96b09e3c-6833-4385-88d3-1157a9b2a6a4/thumbnail.jpg",size:54.42,duration:38},
   {title:"영포티의 제목학원 레전드ㅋㅋㅋ (6) #shorts",url:"https://iframe.mediadelivery.net/play/596875/0b1b6b89-1189-43f0-a113-665a1626a56f",thumb:"https://vz-7533d228-c25.b-cdn.net/0b1b6b89-1189-43f0-a113-665a1626a56f/thumbnail.jpg",size:27.49,duration:27},
@@ -777,29 +791,32 @@ const videos = [
   {title:"1 2 3 4 5 6 7",url:"https://iframe.mediadelivery.net/play/596875/edcb1e1f-02f0-4488-9c86-48acd3aa5cbd",thumb:"https://vz-7533d228-c25.b-cdn.net/edcb1e1f-02f0-4488-9c86-48acd3aa5cbd/thumbnail.jpg",size:84.32,duration:57},
   {title:"【위풍당당】(威風堂々) 💋 [쵸봄×비몽×마리모×박도나×투미츠×로에×노이×감규리]",url:"https://iframe.mediadelivery.net/play/596875/f6db34d3-1e28-47a9-b6b6-348b80f9f11f",thumb:"https://vz-7533d228-c25.b-cdn.net/f6db34d3-1e28-47a9-b6b6-348b80f9f11f/thumbnail.jpg",size:473.76,duration:198},
   {title:"【위풍당당】(威風堂々) 💋 (Teaser)",url:"https://iframe.mediadelivery.net/play/596875/6eba2168-530f-4169-9bb8-01c6219eaac4",thumb:"https://vz-7533d228-c25.b-cdn.net/6eba2168-530f-4169-9bb8-01c6219eaac4/thumbnail.jpg",size:37.07,duration:13},
-  {title:"[👊 필살의 커맨드 👊] [Korean Cover] [최케빈×우고×눈쟁이×쵸봄×매동이×토뎀이×순당무×참외몬]",url:"https://iframe.mediadelivery.net/play/596875/68052278-b1c3-4717-b009-0d3db4e807d5",thumb:"https://vz-7533d228-c25.b-cdn.net/68052278-b1c3-4717-b009-0d3db4e807d5/thumbnail.jpg",size:993.8,duration:246},
+  {title:"[👊 필살의 커맨드 👊] [Korean Cover]",url:"https://iframe.mediadelivery.net/play/596875/68052278-b1c3-4717-b009-0d3db4e807d5",thumb:"https://vz-7533d228-c25.b-cdn.net/68052278-b1c3-4717-b009-0d3db4e807d5/thumbnail.jpg",size:993.8,duration:246},
   {title:"[💤잘자요 아가씨💤] 【Korean Cover】 [쵸쵸우×쵸봄]",url:"https://iframe.mediadelivery.net/play/596875/4aeb2a99-f938-46e7-974b-f4ac03206dff",thumb:"https://vz-7533d228-c25.b-cdn.net/4aeb2a99-f938-46e7-974b-f4ac03206dff/thumbnail.jpg",size:206.71,duration:114},
-  {title:"[👊 필살의 커맨드 👊] 【Korean Cover】(Teaser)",url:"https://iframe.mediadelivery.net/play/596875/a71a911f-68af-4817-9417-e9bd6ab422b7",thumb:"https://vz-7533d228-c25.b-cdn.net/a71a911f-68af-4817-9417-e9bd6ab422b7/thumbnail.jpg",size:45.19,duration:16},
+  {title:"[👊 필살의 커맨드 👊] (Teaser)",url:"https://iframe.mediadelivery.net/play/596875/a71a911f-68af-4817-9417-e9bd6ab422b7",thumb:"https://vz-7533d228-c25.b-cdn.net/a71a911f-68af-4817-9417-e9bd6ab422b7/thumbnail.jpg",size:45.19,duration:16},
   {title:"[🎸하나 둘 팬클럽🎸] 【Korean Cover】 [쵸쵸우×쵸봄]",url:"https://iframe.mediadelivery.net/play/596875/6a603e61-d3bf-4a17-96a9-90d151324138",thumb:"https://vz-7533d228-c25.b-cdn.net/6a603e61-d3bf-4a17-96a9-90d151324138/thumbnail.jpg",size:301.26,duration:233},
-  {title:"[🎄Black Christmas🎄] 【Korean Cover】 [대타맨×쵸봄×애덕×취무등×카운터×통깡이×솔뮤×휴복]",url:"https://iframe.mediadelivery.net/play/596875/a47c625e-36f7-4063-9b22-462de2bf87f2",thumb:"https://vz-7533d228-c25.b-cdn.net/a47c625e-36f7-4063-9b22-462de2bf87f2/thumbnail.jpg",size:774.17,duration:266},
-  {title:"[🎸하나 둘 팬클럽🎸] 【Korean Cover】(Teaser)",url:"https://iframe.mediadelivery.net/play/596875/6ca84611-aead-412c-ad4a-88c9993ad79c",thumb:"https://vz-7533d228-c25.b-cdn.net/6ca84611-aead-412c-ad4a-88c9993ad79c/thumbnail.jpg",size:15.47,duration:11},
-  {title:"[🎄Black Christmas🎄] 【Korean Cover】(Teaser)",url:"https://iframe.mediadelivery.net/play/596875/a56fb1d2-b02f-4a13-a86d-70a8e87778f6",thumb:"https://vz-7533d228-c25.b-cdn.net/a56fb1d2-b02f-4a13-a86d-70a8e87778f6/thumbnail.jpg",size:58.88,duration:21},
+  {title:"[🎄Black Christmas🎄] 【Korean Cover】",url:"https://iframe.mediadelivery.net/play/596875/a47c625e-36f7-4063-9b22-462de2bf87f2",thumb:"https://vz-7533d228-c25.b-cdn.net/a47c625e-36f7-4063-9b22-462de2bf87f2/thumbnail.jpg",size:774.17,duration:266},
+  {title:"[🎸하나 둘 팬클럽🎸] (Teaser)",url:"https://iframe.mediadelivery.net/play/596875/6ca84611-aead-412c-ad4a-88c9993ad79c",thumb:"https://vz-7533d228-c25.b-cdn.net/6ca84611-aead-412c-ad4a-88c9993ad79c/thumbnail.jpg",size:15.47,duration:11},
+  {title:"[🎄Black Christmas🎄] (Teaser)",url:"https://iframe.mediadelivery.net/play/596875/a56fb1d2-b02f-4a13-a86d-70a8e87778f6",thumb:"https://vz-7533d228-c25.b-cdn.net/a56fb1d2-b02f-4a13-a86d-70a8e87778f6/thumbnail.jpg",size:58.88,duration:21},
   {title:"[🎄Black Christmas🎄] 【Korean Cover】 (1)",url:"https://iframe.mediadelivery.net/play/596875/7873bb34-3598-4c9a-b30e-383803108ba6",thumb:"https://vz-7533d228-c25.b-cdn.net/7873bb34-3598-4c9a-b30e-383803108ba6/thumbnail.jpg",size:153.6,duration:40},
   {title:"[🎃Mrs.Pumpkin의 우스꽝스러운 꿈🎃] (Teaser)",url:"https://iframe.mediadelivery.net/play/596875/d5526152-ec95-4aac-b755-3734622d719e",thumb:"https://vz-7533d228-c25.b-cdn.net/d5526152-ec95-4aac-b755-3734622d719e/thumbnail.jpg",size:26.52,duration:15},
   {title:"[🎃Mrs.Pumpkin의 우스꽝스러운 꿈🎃] 【Korean Cover】",url:"https://iframe.mediadelivery.net/play/596875/e2367d5a-0101-47b1-8163-9456151cc897",thumb:"https://vz-7533d228-c25.b-cdn.net/e2367d5a-0101-47b1-8163-9456151cc897/thumbnail.jpg",size:503.38,duration:252},
-  {title:"[🎃Mrs.Pumpkin의 우스꽝스러운 꿈🎃] 【Korean Cover】 (1)",url:"https://iframe.mediadelivery.net/play/596875/d4c63ddc-3e4e-454a-bfb2-e4ab19d699e4",thumb:"https://vz-7533d228-c25.b-cdn.net/d4c63ddc-3e4e-454a-bfb2-e4ab19d699e4/thumbnail.jpg",size:48.42,duration:34},
+  {title:"[🎃Mrs.Pumpkin의 우스꽝스러운 꿈🎃] (1)",url:"https://iframe.mediadelivery.net/play/596875/d4c63ddc-3e4e-454a-bfb2-e4ab19d699e4",thumb:"https://vz-7533d228-c25.b-cdn.net/d4c63ddc-3e4e-454a-bfb2-e4ab19d699e4/thumbnail.jpg",size:48.42,duration:34},
   {title:"[🍻 KANPAI FUNK 🍻] 30명이 다 같이 불러보았다",url:"https://iframe.mediadelivery.net/play/596875/31781b6b-afb4-4f05-b115-c629dce74d6b",thumb:"https://vz-7533d228-c25.b-cdn.net/31781b6b-afb4-4f05-b115-c629dce74d6b/thumbnail.jpg",size:882.65,duration:221},
   {title:"[🍬 Drop pop candy 🍬] 【팔칠 × 쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/10234cce-1459-483b-8eae-b874d0d0ed22",thumb:"https://vz-7533d228-c25.b-cdn.net/10234cce-1459-483b-8eae-b874d0d0ed22/thumbnail.jpg",size:257.25,duration:227},
   {title:"[🌻summertime🌻] 【Korean Cover】",url:"https://iframe.mediadelivery.net/play/596875/ff2e2dac-84e8-4aac-a871-9180b276ac15",thumb:"https://vz-7533d228-c25.b-cdn.net/ff2e2dac-84e8-4aac-a871-9180b276ac15/thumbnail.jpg",size:608.35,duration:248},
-  {title:"[⛄ Must Have Love ⛄] [쵸봄×모잉×하우카우×장마군×헤가×델로략국]",url:"https://iframe.mediadelivery.net/play/596875/5306b66e-2609-4969-be05-e28d4d5fcfc4",thumb:"https://vz-7533d228-c25.b-cdn.net/5306b66e-2609-4969-be05-e28d4d5fcfc4/thumbnail.jpg",size:888.07,duration:255},
+  {title:"[⛄ Must Have Love ⛄]",url:"https://iframe.mediadelivery.net/play/596875/5306b66e-2609-4969-be05-e28d4d5fcfc4",thumb:"https://vz-7533d228-c25.b-cdn.net/5306b66e-2609-4969-be05-e28d4d5fcfc4/thumbnail.jpg",size:888.07,duration:255},
   {title:"[ 🔷Blessing🔷 ] 【Korean Cover】",url:"https://iframe.mediadelivery.net/play/596875/d0ce3bba-77a3-469b-9095-2353b5a6b763",thumb:"https://vz-7533d228-c25.b-cdn.net/d0ce3bba-77a3-469b-9095-2353b5a6b763/thumbnail.jpg",size:603.21,duration:271},
-  {title:"[🌻summertime🌻] 【Korean Cover】(Teaser)",url:"https://iframe.mediadelivery.net/play/596875/526d37ab-e939-4d8f-814b-a7467ec4fd07",thumb:"https://vz-7533d228-c25.b-cdn.net/526d37ab-e939-4d8f-814b-a7467ec4fd07/thumbnail.jpg",size:25.63,duration:17},
+  {title:"[🌻summertime🌻] (Teaser)",url:"https://iframe.mediadelivery.net/play/596875/526d37ab-e939-4d8f-814b-a7467ec4fd07",thumb:"https://vz-7533d228-c25.b-cdn.net/526d37ab-e939-4d8f-814b-a7467ec4fd07/thumbnail.jpg",size:25.63,duration:17},
   {title:"[⛄ Must Have Love ⛄] (Teaser)",url:"https://iframe.mediadelivery.net/play/596875/da9e3c3c-8e4a-459e-a5ac-611376d1d1ee",thumb:"https://vz-7533d228-c25.b-cdn.net/da9e3c3c-8e4a-459e-a5ac-611376d1d1ee/thumbnail.jpg",size:46.25,duration:17},
   {title:"[ 🎀 쵸봄 버츄얼 데뷔 🎀 ] (Teaser video)",url:"https://iframe.mediadelivery.net/play/596875/ee0522de-0174-4396-ae97-e79aa2727186",thumb:"https://vz-7533d228-c25.b-cdn.net/ee0522de-0174-4396-ae97-e79aa2727186/thumbnail.jpg",size:122.04,duration:45},
-  {title:"[ 🔷Blessing🔷 ] 【Korean Cover】(Teaser)",url:"https://iframe.mediadelivery.net/play/596875/c5d956fc-3061-4efc-9b8b-e96226c91ed4",thumb:"https://vz-7533d228-c25.b-cdn.net/c5d956fc-3061-4efc-9b8b-e96226c91ed4/thumbnail.jpg",size:27.41,duration:29}
+  {title:"[ 🔷Blessing🔷 ] (Teaser)",url:"https://iframe.mediadelivery.net/play/596875/c5d956fc-3061-4efc-9b8b-e96226c91ed4",thumb:"https://vz-7533d228-c25.b-cdn.net/c5d956fc-3061-4efc-9b8b-e96226c91ed4/thumbnail.jpg",size:27.41,duration:29}
 ];
 
-// ── Utility ──
+// ══════════════════════════════════
+// ── Utility Functions ──
+// ══════════════════════════════════
+
 function formatDuration(sec) {
     const h = Math.floor(sec / 3600);
     const m = Math.floor((sec % 3600) / 60);
@@ -819,17 +836,24 @@ function formatTotalDuration(sec) {
     return `${h}시간 ${m}분`;
 }
 
-// play → embed 변환
 function toEmbedUrl(url) {
     return url.replace('/play/', '/embed/');
 }
 
-// Shorts 판별: 제목에 #shorts 포함 또는 duration 60초 이하
 function isShorts(v) {
     return v.duration <= 60 || v.title.toLowerCase().includes('#shorts');
 }
 
-// ── Category ──
+function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+
+// ══════════════════════════════════
+// ── Category System ──
+// ══════════════════════════════════
+
 function getCategory(title) {
     const t = title.toLowerCase();
     if (t.includes('cover') || t.includes('【쵸봄】') || t.includes('【korean') || t.includes('커버'))
@@ -854,13 +878,19 @@ function getCategoryLabel(cat) {
 
 function getCategoryClass(cat) { return 'cat-' + cat; }
 
+// ══════════════════════════════════
 // ── State ──
+// ══════════════════════════════════
+
 let currentFilter = 'all';
 let currentSort = 'default';
 let currentSearch = '';
 let activeIndex = -1;
 
+// ══════════════════════════════════
 // ── Stats ──
+// ══════════════════════════════════
+
 const totalCount = videos.length;
 const totalSize = videos.reduce((a, v) => a + v.size, 0);
 const totalDuration = videos.reduce((a, v) => a + v.duration, 0);
@@ -868,7 +898,10 @@ document.getElementById('totalCount').textContent = totalCount;
 document.getElementById('totalSize').textContent = formatSize(totalSize);
 document.getElementById('totalDuration').textContent = formatTotalDuration(totalDuration);
 
+// ══════════════════════════════════
 // ── Filter & Sort ──
+// ══════════════════════════════════
+
 function getFilteredVideos() {
     let filtered = videos.map((v, i) => ({...v, origIndex: i}));
     if (currentSearch) {
@@ -889,13 +922,10 @@ function getFilteredVideos() {
     return filtered;
 }
 
-function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-}
-
+// ══════════════════════════════════
 // ── Render List ──
+// ══════════════════════════════════
+
 function renderList() {
     const filtered = getFilteredVideos();
     const list = document.getElementById('videoList');
@@ -920,7 +950,10 @@ function renderList() {
     }).join('');
 }
 
+// ══════════════════════════════════
 // ── Play Video ──
+// ══════════════════════════════════
+
 function playVideo(index) {
     const v = videos[index];
     activeIndex = index;
@@ -928,7 +961,6 @@ function playVideo(index) {
     const embedUrl = toEmbedUrl(v.url);
     const vertical = isShorts(v);
 
-    // 세로/가로 모드 전환
     if (vertical) {
         wrapper.classList.add('vertical-mode');
     } else {
@@ -965,7 +997,10 @@ function playVideo(index) {
     if (window.innerWidth <= 1024) window.scrollTo({ top:0, behavior:'smooth' });
 }
 
-// ── Events ──
+// ══════════════════════════════════
+// ── Event Listeners ──
+// ══════════════════════════════════
+
 document.getElementById('searchInput').addEventListener('input', e => {
     currentSearch = e.target.value;
     renderList();
@@ -985,6 +1020,7 @@ document.getElementById('sortSelect').addEventListener('change', e => {
     renderList();
 });
 
+// Scroll to top button
 const videoListEl = document.getElementById('videoList');
 videoListEl.addEventListener('scroll', () => {
     document.getElementById('scrollTopBtn').classList.toggle('visible', videoListEl.scrollTop > 300);
@@ -994,7 +1030,7 @@ document.getElementById('scrollTopBtn').addEventListener('click', () => {
     videoListEl.scrollTo({ top:0, behavior:'smooth' });
 });
 
-// Keyboard nav
+// Keyboard navigation
 document.addEventListener('keydown', e => {
     if (e.target.tagName === 'INPUT') return;
     const filtered = getFilteredVideos();
@@ -1008,6 +1044,28 @@ document.addEventListener('keydown', e => {
         if (cur - 1 >= 0) playVideo(filtered[cur - 1].origIndex);
     }
 });
+
+// ══════════════════════════════════
+// ── Notice Banner ──
+// ══════════════════════════════════
+
+(function() {
+    const banner = document.getElementById('noticeBanner');
+    const closeBtn = document.getElementById('noticeClose');
+
+    if (sessionStorage.getItem('noticeClosed') === 'true') {
+        banner.classList.add('hidden');
+    }
+
+    closeBtn.addEventListener('click', () => {
+        banner.classList.add('hidden');
+        sessionStorage.setItem('noticeClosed', 'true');
+    });
+})();
+
+// ══════════════════════════════════
+// ── Init ──
+// ══════════════════════════════════
 
 renderList();
 </script>
