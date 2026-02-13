@@ -16,20 +16,19 @@
             background: #0f0f0f;
             color: #e1e1e1;
             min-height: 100vh;
+            overflow: hidden;
         }
 
-        /* Header */
         .header {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            padding: 24px 32px;
+            padding: 16px 24px;
             border-bottom: 2px solid #e94560;
-            position: sticky;
-            top: 0;
+            position: relative;
             z-index: 100;
         }
 
         .header h1 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
             background: linear-gradient(90deg, #e94560, #ff6b8a);
             -webkit-background-clip: text;
@@ -39,9 +38,9 @@
 
         .header-stats {
             display: flex;
-            gap: 24px;
-            margin-top: 8px;
-            font-size: 13px;
+            gap: 20px;
+            margin-top: 4px;
+            font-size: 12px;
             color: #8899aa;
         }
 
@@ -49,42 +48,65 @@
             color: #e94560;
         }
 
-        /* Layout */
         .main-container {
             display: flex;
-            height: calc(100vh - 100px);
+            height: calc(100vh - 72px);
         }
 
-        /* Player Section */
+        /* ── Player Section ── */
         .player-section {
             flex: 1;
             display: flex;
             flex-direction: column;
             min-width: 0;
+            background: #000;
         }
 
         .player-wrapper {
+            flex: 1;
             position: relative;
-            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
             background: #000;
-            aspect-ratio: 16 / 9;
-            max-height: 70vh;
         }
 
-        .player-wrapper iframe {
+        /* 가로(16:9) 기본 모드 */
+        .player-wrapper .iframe-box {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .player-wrapper .iframe-box iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             border: none;
         }
 
-        .player-placeholder {
-            width: 100%;
+        /* 세로(Shorts) 모드 */
+        .player-wrapper.vertical-mode {
+            background: #0a0a0a;
+        }
+
+        .player-wrapper.vertical-mode .iframe-box {
+            width: auto;
             height: 100%;
+            aspect-ratio: 9 / 16;
+            max-height: 100%;
+        }
+
+        .player-placeholder {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #1a1a2e, #0f0f0f);
+            width: 100%;
+            height: 100%;
             color: #555;
         }
 
@@ -100,63 +122,65 @@
         }
 
         .video-info {
-            padding: 20px 24px;
+            padding: 16px 20px;
             background: #181818;
-            border-bottom: 1px solid #272727;
+            border-top: 1px solid #272727;
+            flex-shrink: 0;
         }
 
         .video-info h2 {
-            font-size: 20px;
+            font-size: 17px;
             font-weight: 600;
             line-height: 1.4;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             word-break: break-word;
         }
 
         .video-meta {
             display: flex;
-            gap: 16px;
-            font-size: 13px;
+            gap: 10px;
+            font-size: 12px;
             color: #888;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         .video-meta .tag {
             background: #272727;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
         }
 
-        /* Sidebar */
+        /* ── Sidebar ── */
         .sidebar {
-            width: 420px;
-            min-width: 420px;
+            width: 400px;
+            min-width: 400px;
             background: #181818;
             border-left: 1px solid #272727;
             display: flex;
             flex-direction: column;
         }
 
-        /* Search & Filter */
         .sidebar-controls {
-            padding: 16px;
+            padding: 12px;
             border-bottom: 1px solid #272727;
             background: #1a1a1a;
         }
 
         .search-box {
             position: relative;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .search-box input {
             width: 100%;
-            padding: 10px 14px 10px 38px;
+            padding: 9px 12px 9px 36px;
             background: #272727;
             border: 1px solid #333;
             border-radius: 8px;
             color: #e1e1e1;
-            font-size: 14px;
+            font-size: 13px;
             outline: none;
             transition: border-color 0.2s;
         }
@@ -171,30 +195,29 @@
 
         .search-box svg {
             position: absolute;
-            left: 12px;
+            left: 11px;
             top: 50%;
             transform: translateY(-50%);
-            width: 16px;
-            height: 16px;
+            width: 15px;
+            height: 15px;
             color: #666;
         }
 
         .filter-row {
             display: flex;
-            gap: 8px;
+            gap: 6px;
+            flex-wrap: wrap;
         }
 
         .filter-btn {
-            flex: 1;
-            padding: 7px 12px;
+            padding: 5px 10px;
             background: #272727;
             border: 1px solid #333;
             border-radius: 6px;
             color: #aaa;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
             transition: all 0.2s;
-            text-align: center;
         }
 
         .filter-btn:hover {
@@ -208,25 +231,24 @@
         }
 
         .sort-select {
-            padding: 7px 12px;
+            padding: 5px 10px;
             background: #272727;
             border: 1px solid #333;
             border-radius: 6px;
             color: #aaa;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
             outline: none;
         }
 
         .results-count {
-            padding: 8px 16px;
-            font-size: 12px;
+            padding: 6px 12px;
+            font-size: 11px;
             color: #666;
             background: #1a1a1a;
             border-bottom: 1px solid #272727;
         }
 
-        /* Video List */
         .video-list {
             flex: 1;
             overflow-y: auto;
@@ -249,8 +271,8 @@
 
         .video-item {
             display: flex;
-            gap: 12px;
-            padding: 12px 16px;
+            gap: 10px;
+            padding: 10px 12px;
             cursor: pointer;
             transition: background 0.15s;
             border-bottom: 1px solid #222;
@@ -263,14 +285,14 @@
         .video-item.active {
             background: #1e2a3a;
             border-left: 3px solid #e94560;
-            padding-left: 13px;
+            padding-left: 9px;
         }
 
         .video-thumb {
-            width: 168px;
-            min-width: 168px;
-            height: 94px;
-            border-radius: 8px;
+            width: 150px;
+            min-width: 150px;
+            height: 84px;
+            border-radius: 6px;
             overflow: hidden;
             position: relative;
             background: #222;
@@ -281,6 +303,7 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s;
+            background: #333;
         }
 
         .video-item:hover .video-thumb img {
@@ -289,25 +312,25 @@
 
         .video-thumb .duration {
             position: absolute;
-            bottom: 4px;
-            right: 4px;
+            bottom: 3px;
+            right: 3px;
             background: rgba(0,0,0,0.85);
             color: #fff;
-            padding: 2px 6px;
+            padding: 1px 5px;
             border-radius: 3px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 500;
         }
 
         .video-thumb .size-badge {
             position: absolute;
-            top: 4px;
-            left: 4px;
+            top: 3px;
+            left: 3px;
             background: rgba(233,69,96,0.9);
             color: #fff;
-            padding: 1px 6px;
+            padding: 1px 5px;
             border-radius: 3px;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
         }
 
@@ -320,30 +343,29 @@
         }
 
         .video-details h3 {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             line-height: 1.4;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             word-break: break-word;
         }
 
         .video-details .meta-line {
-            font-size: 11px;
+            font-size: 10px;
             color: #777;
         }
 
-        /* Category Tags */
         .category-tag {
             display: inline-block;
-            padding: 1px 6px;
+            padding: 1px 5px;
             border-radius: 3px;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
-            margin-right: 4px;
+            margin-right: 3px;
         }
 
         .cat-cover { background: #2d1b69; color: #b794f6; }
@@ -354,24 +376,31 @@
         .cat-vlog { background: #1a3c34; color: #80cbc4; }
         .cat-other { background: #333; color: #aaa; }
 
-        /* Mobile */
         @media (max-width: 1024px) {
+            body { overflow: auto; }
+
             .main-container {
                 flex-direction: column;
                 height: auto;
+            }
+
+            .player-section {
+                height: 56vw;
+                min-height: 260px;
+                max-height: 70vh;
+            }
+
+            .player-wrapper.vertical-mode {
+                height: 80vh;
             }
 
             .sidebar {
                 width: 100%;
                 min-width: 100%;
                 height: auto;
-                max-height: 60vh;
+                max-height: 55vh;
                 border-left: none;
                 border-top: 1px solid #272727;
-            }
-
-            .player-wrapper {
-                max-height: 50vh;
             }
 
             .video-thumb {
@@ -382,56 +411,33 @@
         }
 
         @media (max-width: 640px) {
-            .header {
-                padding: 16px;
-            }
-
-            .header h1 {
-                font-size: 20px;
-            }
-
-            .video-info {
-                padding: 12px 16px;
-            }
-
-            .video-info h2 {
-                font-size: 16px;
-            }
+            .header { padding: 12px; }
+            .header h1 { font-size: 18px; }
+            .video-info { padding: 10px 12px; }
+            .video-info h2 { font-size: 14px; }
         }
 
-        /* Scroll to top */
         .scroll-top {
             position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 44px;
-            height: 44px;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
             background: #e94560;
             border: none;
             border-radius: 50%;
             color: #fff;
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
             display: none;
             align-items: center;
             justify-content: center;
             z-index: 50;
             box-shadow: 0 4px 12px rgba(233,69,96,0.4);
-            transition: transform 0.2s;
         }
 
-        .scroll-top:hover {
-            transform: scale(1.1);
-        }
-
-        .scroll-top.visible {
-            display: flex;
-        }
-
-        /* Loading placeholder for images */
-        .video-thumb img {
-            background: #333;
-        }
+        .scroll-top.visible { display: flex; }
+        .scroll-top:hover { transform: scale(1.1); }
     </style>
 </head>
 <body>
@@ -446,13 +452,10 @@
 </div>
 
 <div class="main-container">
-    <!-- Player Section -->
     <div class="player-section">
         <div class="player-wrapper" id="playerWrapper">
             <div class="player-placeholder" id="placeholder">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8 5v14l11-7z"/>
-                </svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                 <p>영상을 선택해주세요</p>
             </div>
         </div>
@@ -462,7 +465,6 @@
         </div>
     </div>
 
-    <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-controls">
             <div class="search-box">
@@ -498,306 +500,306 @@
 
 <script>
 const videos = [
-  {title:"죄송합니다",url:"https://iframe.mediadelivery.net/play/596875/744717d5-ffad-4fe8-bfb3-d47095d253be",thumb:"https://vz-7533d228-c25.b-cdn.net/744717d5-ffad-4fe8-bfb3-d47095d253be/thumbnail.jpg",size:78.87,duration:281},
-  {title:"효녀가 아니고 효년이고만.. (w.경식이 할아버지)",url:"https://iframe.mediadelivery.net/play/596875/173ae28d-5fd1-4ba7-a006-41abcb77725b",thumb:"https://vz-7533d228-c25.b-cdn.net/173ae28d-5fd1-4ba7-a006-41abcb77725b/thumbnail.jpg",size:1932.89,duration:550},
-  {title:"(Show me your Phone) 핸드폰 보여줘 지금 당장",url:"https://iframe.mediadelivery.net/play/596875/f2a3f0c1-4056-4217-8fe6-2a7df815babd",thumb:"https://vz-7533d228-c25.b-cdn.net/f2a3f0c1-4056-4217-8fe6-2a7df815babd/thumbnail.jpg",size:19.89,duration:18},
-  {title:"힘이 전부인 세상 (27) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/eda8117f-950a-4e9b-8376-e265395642ca",thumb:"https://vz-7533d228-c25.b-cdn.net/eda8117f-950a-4e9b-8376-e265395642ca/thumbnail.jpg",size:21.76,duration:22},
-  {title:"흐즈므르.....,,즌쯔....^^ ;;;  (w.최케빈,애덕,연다,연비)",url:"https://iframe.mediadelivery.net/play/596875/6ae5c591-ce14-49d0-bafd-ec5aac2f9483",thumb:"https://vz-7533d228-c25.b-cdn.net/6ae5c591-ce14-49d0-bafd-ec5aac2f9483/thumbnail.jpg",size:1429.82,duration:501},
-  {title:"호요랜드 Vlog # 드디어 성덕이 되었다",url:"https://iframe.mediadelivery.net/play/596875/641a356a-8857-45c0-bede-3764ac883a4e",thumb:"https://vz-7533d228-c25.b-cdn.net/641a356a-8857-45c0-bede-3764ac883a4e/thumbnail.jpg",size:1322.7,duration:783},
-  {title:"혼돈부기 ( 混沌ブギ ) 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/da351058-21d5-44fb-b90d-689aa4e224d9",thumb:"https://vz-7533d228-c25.b-cdn.net/da351058-21d5-44fb-b90d-689aa4e224d9/thumbnail.jpg",size:302.5,duration:155},
-  {title:"헤으응 눈나..❤️ (w.포비위키) (1기 여스 목소리 대회)",url:"https://iframe.mediadelivery.net/play/596875/5f7e3a2a-f1aa-46fb-afea-470dcdc3b44f",thumb:"https://vz-7533d228-c25.b-cdn.net/5f7e3a2a-f1aa-46fb-afea-470dcdc3b44f/thumbnail.jpg",size:758.02,duration:607},
-  {title:"하카야, 진짜 딸 수 있다니까",url:"https://iframe.mediadelivery.net/play/596875/50c5e81c-a65f-4042-ad36-109a60a4b701",thumb:"https://vz-7533d228-c25.b-cdn.net/50c5e81c-a65f-4042-ad36-109a60a4b701/thumbnail.jpg",size:1979.58,duration:632},
-  {title:"허~접ㅋ 완전못해~",url:"https://iframe.mediadelivery.net/play/596875/ac024a6e-e501-444d-861d-a2639a1e2e26",thumb:"https://vz-7533d228-c25.b-cdn.net/ac024a6e-e501-444d-861d-a2639a1e2e26/thumbnail.jpg",size:1921.82,duration:533},
-  {title:"햄스터 중성화 시키는 법 (13) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/b4e0d016-1bb7-45c2-9ca4-a8f525f06bcd",thumb:"https://vz-7533d228-c25.b-cdn.net/b4e0d016-1bb7-45c2-9ca4-a8f525f06bcd/thumbnail.jpg",size:29.67,duration:29},
-  {title:"합방에서 지각하면 X되는 이유",url:"https://iframe.mediadelivery.net/play/596875/82074e4a-9125-4b55-9562-5e71b5475a1b",thumb:"https://vz-7533d228-c25.b-cdn.net/82074e4a-9125-4b55-9562-5e71b5475a1b/thumbnail.jpg",size:1602.26,duration:767},
-  {title:"하루토님.. 뭐하시는거에요...",url:"https://iframe.mediadelivery.net/play/596875/e1dc9c47-eff4-4cbd-bf5a-4b5ef5de1b2b",thumb:"https://vz-7533d228-c25.b-cdn.net/e1dc9c47-eff4-4cbd-bf5a-4b5ef5de1b2b/thumbnail.jpg",size:1167.91,duration:556},
-  {title:"하렘물.. (w.포비위키) (1기 여스 대회)",url:"https://iframe.mediadelivery.net/play/596875/4a08b0c9-98d0-4d03-864c-2de029ae788d",thumb:"https://vz-7533d228-c25.b-cdn.net/4a08b0c9-98d0-4d03-864c-2de029ae788d/thumbnail.jpg",size:601.07,duration:556},
-  {title:"하나 둘 셋 야",url:"https://iframe.mediadelivery.net/play/596875/ebe3e539-3b65-4f70-ae59-644d99f32f0e",thumb:"https://vz-7533d228-c25.b-cdn.net/ebe3e539-3b65-4f70-ae59-644d99f32f0e/thumbnail.jpg",size:62.79,duration:59},
-  {title:"픽셀몬에 미싱노가 나타났다!",url:"https://iframe.mediadelivery.net/play/596875/b0741fcf-c2e2-48ce-af81-a073e6a59bce",thumb:"https://vz-7533d228-c25.b-cdn.net/b0741fcf-c2e2-48ce-af81-a073e6a59bce/thumbnail.jpg",size:159.84,duration:59},
-  {title:"포비위키님의 고백...",url:"https://iframe.mediadelivery.net/play/596875/16d151ce-01b2-4948-abeb-95e8b28a958b",thumb:"https://vz-7533d228-c25.b-cdn.net/16d151ce-01b2-4948-abeb-95e8b28a958b/thumbnail.jpg",size:31.74,duration:40},
-  {title:"팔칠님 오늘부터 1일❤️",url:"https://iframe.mediadelivery.net/play/596875/9bb92513-6f42-4136-936c-85031e909458",thumb:"https://vz-7533d228-c25.b-cdn.net/9bb92513-6f42-4136-936c-85031e909458/thumbnail.jpg",size:2074.88,duration:495},
-  {title:"편집자가 살아남는 방법 (18) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/dbb6adeb-e9ef-4688-b33f-cfa51875164c",thumb:"https://vz-7533d228-c25.b-cdn.net/dbb6adeb-e9ef-4688-b33f-cfa51875164c/thumbnail.jpg",size:36.63,duration:34},
-  {title:"파크모님의 결혼을 진심으로 축하드립니다",url:"https://iframe.mediadelivery.net/play/596875/3a7b2953-d62a-4dad-8515-c03c0369107f",thumb:"https://vz-7533d228-c25.b-cdn.net/3a7b2953-d62a-4dad-8515-c03c0369107f/thumbnail.jpg",size:759.62,duration:595},
-  {title:"파크모의 15초 억까 랩",url:"https://iframe.mediadelivery.net/play/596875/2063f6b8-38aa-45ee-9fc3-9877244b4fe5",thumb:"https://vz-7533d228-c25.b-cdn.net/2063f6b8-38aa-45ee-9fc3-9877244b4fe5/thumbnail.jpg",size:64.81,duration:46},
-  {title:"파크모 ) 쵸봄 ( 흰자눈",url:"https://iframe.mediadelivery.net/play/596875/0735b157-a566-4128-a0dc-8d91932fa2aa",thumb:"https://vz-7533d228-c25.b-cdn.net/0735b157-a566-4128-a0dc-8d91932fa2aa/thumbnail.jpg",size:177.45,duration:174},
-  {title:"파크모님의 결혼을 진심으로 축하드립니다 (1)",url:"https://iframe.mediadelivery.net/play/596875/11203d6e-3d78-4013-bc96-951513130b0c",thumb:"https://vz-7533d228-c25.b-cdn.net/11203d6e-3d78-4013-bc96-951513130b0c/thumbnail.jpg",size:27.42,duration:27},
-  {title:"친오빠랑 제대로 한번 붙었습니다",url:"https://iframe.mediadelivery.net/play/596875/26c62a60-be8f-4c1c-af51-6f2c90a79a93",thumb:"https://vz-7533d228-c25.b-cdn.net/26c62a60-be8f-4c1c-af51-6f2c90a79a93/thumbnail.jpg",size:2610.84,duration:688},
-  {title:"트수와 쵸봄TS의 리즈시절 졸업앨범 #반전그림 #졸업앨범",url:"https://iframe.mediadelivery.net/play/596875/905e47f1-ae8d-4e37-b67b-4917a7e0de48",thumb:"https://vz-7533d228-c25.b-cdn.net/905e47f1-ae8d-4e37-b67b-4917a7e0de48/thumbnail.jpg",size:39.0,duration:15},
-  {title:"투디 여자친구분은 조심하세요 (22) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/f25bbf8f-7b04-4c84-bd6e-a243f572503f",thumb:"https://vz-7533d228-c25.b-cdn.net/f25bbf8f-7b04-4c84-bd6e-a243f572503f/thumbnail.jpg",size:21.14,duration:22},
-  {title:"투네 관리자가 오는 방송",url:"https://iframe.mediadelivery.net/play/596875/9460ebd6-004b-49b2-96cb-21e23abfa334",thumb:"https://vz-7533d228-c25.b-cdn.net/9460ebd6-004b-49b2-96cb-21e23abfa334/thumbnail.jpg",size:286.77,duration:179},
-  {title:"텔레캐스터 비보이 【Korean Cover】 【쵸봄 x 악월 x 배카인 x 설경】",url:"https://iframe.mediadelivery.net/play/596875/25cc6b01-58be-4592-be0e-3eb9c1dcee8c",thumb:"https://vz-7533d228-c25.b-cdn.net/25cc6b01-58be-4592-be0e-3eb9c1dcee8c/thumbnail.jpg",size:512.66,duration:165},
-  {title:"텔레캐스터 비보이 【Korean Cover】 【쵸봄 x 악월 x 배카인 x 설경】 (1)",url:"https://iframe.mediadelivery.net/play/596875/8c2b1621-9c40-43ca-8722-d9dd0f6b135f",thumb:"https://vz-7533d228-c25.b-cdn.net/8c2b1621-9c40-43ca-8722-d9dd0f6b135f/thumbnail.jpg",size:76.48,duration:29},
-  {title:"크고....우람한....! 무언가..❤️ (갈틱폰)",url:"https://iframe.mediadelivery.net/play/596875/7af3b340-9771-4317-a38f-d95a4d1db122",thumb:"https://vz-7533d228-c25.b-cdn.net/7af3b340-9771-4317-a38f-d95a4d1db122/thumbnail.jpg",size:754.32,duration:440},
-  {title:"코이 恋 【Korean Cover】 【 쵸봄 × 김토키(김신우) 】",url:"https://iframe.mediadelivery.net/play/596875/06965f0f-251b-4e0f-a004-77a2a63562df",thumb:"https://vz-7533d228-c25.b-cdn.net/06965f0f-251b-4e0f-a004-77a2a63562df/thumbnail.jpg",size:523.3,duration:250},
-  {title:"코이 恋 【Korean Cover】 【 쵸봄 × 김토키(김신우) 】 (1)",url:"https://iframe.mediadelivery.net/play/596875/8098e36c-987f-4f65-ae00-4e8a76b78866",thumb:"https://vz-7533d228-c25.b-cdn.net/8098e36c-987f-4f65-ae00-4e8a76b78866/thumbnail.jpg",size:125.87,duration:45},
-  {title:"ㅋㄷ으로 목졸라 죽인 사람  #Shorts",url:"https://iframe.mediadelivery.net/play/596875/f55bbc5a-fb37-4f0e-9d8c-cc6b70d8f8a9",thumb:"https://vz-7533d228-c25.b-cdn.net/f55bbc5a-fb37-4f0e-9d8c-cc6b70d8f8a9/thumbnail.jpg",size:31.93,duration:59},
-  {title:"친구들한테 버림 받았습니다...",url:"https://iframe.mediadelivery.net/play/596875/17df551d-0868-431a-bf96-b4ea7ecf2c6d",thumb:"https://vz-7533d228-c25.b-cdn.net/17df551d-0868-431a-bf96-b4ea7ecf2c6d/thumbnail.jpg",size:730.21,duration:577},
-  {title:"춘향님 왜 저한테만 그러세요",url:"https://iframe.mediadelivery.net/play/596875/65204683-c656-4898-8d6f-4f88d6e9f85f",thumb:"https://vz-7533d228-c25.b-cdn.net/65204683-c656-4898-8d6f-4f88d6e9f85f/thumbnail.jpg",size:2239.72,duration:719},
-  {title:"취한줄도 모르고 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/d39a8900-16d2-4661-8926-1bc02243f868",thumb:"https://vz-7533d228-c25.b-cdn.net/d39a8900-16d2-4661-8926-1bc02243f868/thumbnail.jpg",size:177.22,duration:135},
-  {title:"취한 무드등이 드디어 미쳤나보다",url:"https://iframe.mediadelivery.net/play/596875/07483408-a59e-49bd-be16-3a82e184165b",thumb:"https://vz-7533d228-c25.b-cdn.net/07483408-a59e-49bd-be16-3a82e184165b/thumbnail.jpg",size:1082.5,duration:744},
-  {title:"춤 (踊) 【쵸봄】【Korean Cover】",url:"https://iframe.mediadelivery.net/play/596875/4954e737-0ed5-40f4-8a07-394b8a7e0129",thumb:"https://vz-7533d228-c25.b-cdn.net/4954e737-0ed5-40f4-8a07-394b8a7e0129/thumbnail.jpg",size:405.51,duration:208},
-  {title:"쵸쵸우랑 싸웠습니다 ㅠ",url:"https://iframe.mediadelivery.net/play/596875/9e8fdca4-301d-4695-9182-ff22bd7c67b4",thumb:"https://vz-7533d228-c25.b-cdn.net/9e8fdca4-301d-4695-9182-ff22bd7c67b4/thumbnail.jpg",size:1101.22,duration:510},
-  {title:"쵸쵸우, 나는 동료를 쉽게 배신하지..",url:"https://iframe.mediadelivery.net/play/596875/17ab0ff4-fda7-46ad-83ca-12944c643c8c",thumb:"https://vz-7533d228-c25.b-cdn.net/17ab0ff4-fda7-46ad-83ca-12944c643c8c/thumbnail.jpg",size:2234.43,duration:663},
-  {title:"최케빈 침대전쟁 #(쵸봄 시점)",url:"https://iframe.mediadelivery.net/play/596875/014b6b69-2979-49b1-9bf6-b5e35d0885fb",thumb:"https://vz-7533d228-c25.b-cdn.net/014b6b69-2979-49b1-9bf6-b5e35d0885fb/thumbnail.jpg",size:1531.2,duration:482},
-  {title:"쵸봄님 이거 두고 가셨어요~!! (w.연다)",url:"https://iframe.mediadelivery.net/play/596875/e6fe46ce-9d8b-4e67-b585-271cd5c7ee1c",thumb:"https://vz-7533d228-c25.b-cdn.net/e6fe46ce-9d8b-4e67-b585-271cd5c7ee1c/thumbnail.jpg",size:1793.85,duration:454},
-  {title:"쵸봄 래빗 홀 DECO 27 Rabbit Hole Pure Pure",url:"https://iframe.mediadelivery.net/play/596875/e62465b8-cc66-4aa4-b052-c261cbc69638",thumb:"https://vz-7533d228-c25.b-cdn.net/e62465b8-cc66-4aa4-b052-c261cbc69638/thumbnail.jpg",size:147.5,duration:59},
-  {title:"초면인데 메이드복이라뇨",url:"https://iframe.mediadelivery.net/play/596875/0b47a29a-b88c-40d8-a3b9-4172f766efe5",thumb:"https://vz-7533d228-c25.b-cdn.net/0b47a29a-b88c-40d8-a3b9-4172f766efe5/thumbnail.jpg",size:510.54,duration:515},
-  {title:"창공 라구 50개 깡 (아 ㅋㅋ 창공 별거 없네)",url:"https://iframe.mediadelivery.net/play/596875/8e566760-aad4-47e7-ae2f-c2d546c8d725",thumb:"https://vz-7533d228-c25.b-cdn.net/8e566760-aad4-47e7-ae2f-c2d546c8d725/thumbnail.jpg",size:796.27,duration:387},
-  {title:"짱구 아빠의 마지막 유언 (12) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/32304c46-0683-46ee-afbd-502e21c252b9",thumb:"https://vz-7533d228-c25.b-cdn.net/32304c46-0683-46ee-afbd-502e21c252b9/thumbnail.jpg",size:28.84,duration:29},
-  {title:"지스타 Vlog # 릴파님 영접하고 왔습니다!!",url:"https://iframe.mediadelivery.net/play/596875/a0c4a88f-5ab2-4d5d-9405-96830d551c8f",thumb:"https://vz-7533d228-c25.b-cdn.net/a0c4a88f-5ab2-4d5d-9405-96830d551c8f/thumbnail.jpg",size:1142.06,duration:306},
-  {title:"진짜 타이나리 성우와 함께 푸리나 뽑기",url:"https://iframe.mediadelivery.net/play/596875/efa93749-cbc1-42d8-abba-a4bf8a2f860d",thumb:"https://vz-7533d228-c25.b-cdn.net/efa93749-cbc1-42d8-abba-a4bf8a2f860d/thumbnail.jpg",size:1451.1,duration:685},
-  {title:"진정한 낭자애 등장.. (트수 랜덤 소개팅)",url:"https://iframe.mediadelivery.net/play/596875/61e87ef6-ff23-4dea-8f01-3ebea76d7a3f",thumb:"https://vz-7533d228-c25.b-cdn.net/61e87ef6-ff23-4dea-8f01-3ebea76d7a3f/thumbnail.jpg",size:496.18,duration:485},
-  {title:"'지스타' Vlog # 대기업 스트리머와의 '현실' 만남!!!",url:"https://iframe.mediadelivery.net/play/596875/2442e276-2ca4-4bae-a3ba-8c87444dd23b",thumb:"https://vz-7533d228-c25.b-cdn.net/2442e276-2ca4-4bae-a3ba-8c87444dd23b/thumbnail.jpg",size:2519.61,duration:630},
-  {title:"좋아해요",url:"https://iframe.mediadelivery.net/play/596875/5b849e39-df3a-4589-be88-2e2375610c51",thumb:"https://vz-7533d228-c25.b-cdn.net/5b849e39-df3a-4589-be88-2e2375610c51/thumbnail.jpg",size:3544.26,duration:905},
-  {title:"지극히 평범한 대화입니다",url:"https://iframe.mediadelivery.net/play/596875/8e1c3c81-b2cb-4e37-993d-5e012b280624",thumb:"https://vz-7533d228-c25.b-cdn.net/8e1c3c81-b2cb-4e37-993d-5e012b280624/thumbnail.jpg",size:246.85,duration:337},
-  {title:"주인님... (24) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/aa0d10cc-1b2c-4c69-bafd-b747a28754d7",thumb:"https://vz-7533d228-c25.b-cdn.net/aa0d10cc-1b2c-4c69-bafd-b747a28754d7/thumbnail.jpg",size:24.74,duration:24},
-  {title:"절정찬가(絶頂讃歌) 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/788a8759-de1d-46ca-8296-d6d7934fe1d4",thumb:"https://vz-7533d228-c25.b-cdn.net/788a8759-de1d-46ca-8296-d6d7934fe1d4/thumbnail.jpg",size:536.71,duration:182},
-  {title:"저희.. 사이.. 좋아요...^^^^.. (w.참외몬)",url:"https://iframe.mediadelivery.net/play/596875/e2129147-d160-4ed3-ac03-97774ade59c6",thumb:"https://vz-7533d228-c25.b-cdn.net/e2129147-d160-4ed3-ac03-97774ade59c6/thumbnail.jpg",size:1525.98,duration:493},
-  {title:"절정찬가(絶頂讃歌) 【Korean Cover】 【쵸봄】 (1)",url:"https://iframe.mediadelivery.net/play/596875/f92a69dc-f23d-4192-8458-d0895e8de1fc",thumb:"https://vz-7533d228-c25.b-cdn.net/f92a69dc-f23d-4192-8458-d0895e8de1fc/thumbnail.jpg",size:90.79,duration:30},
-  {title:"절대 연다님이 괴롭히는 영상  (w.연다)",url:"https://iframe.mediadelivery.net/play/596875/d7abb591-fe2e-4f70-9a38-179b19d2689a",thumb:"https://vz-7533d228-c25.b-cdn.net/d7abb591-fe2e-4f70-9a38-179b19d2689a/thumbnail.jpg",size:1809.7,duration:497},
-  {title:"전방향 미소녀 #全方向美少女 #meme #tiktok",url:"https://iframe.mediadelivery.net/play/596875/cbcd5812-df30-40b2-ac8d-486b77e1f804",thumb:"https://vz-7533d228-c25.b-cdn.net/cbcd5812-df30-40b2-ac8d-486b77e1f804/thumbnail.jpg",size:21.79,duration:9},
-  {title:"저질러 버렸습니다.. (곧 감옥 갑니다)",url:"https://iframe.mediadelivery.net/play/596875/9fdb228e-ed55-4ddb-a801-3abb89483a51",thumb:"https://vz-7533d228-c25.b-cdn.net/9fdb228e-ed55-4ddb-a801-3abb89483a51/thumbnail.jpg",size:1762.44,duration:542},
-  {title:"저는 이 발언과 무관합니다 (36) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/6c359bc6-2942-4373-bd8c-873172e98fce",thumb:"https://vz-7533d228-c25.b-cdn.net/6c359bc6-2942-4373-bd8c-873172e98fce/thumbnail.jpg",size:22.9,duration:24},
-  {title:"장기자랑 국룰 (39) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/ff6a53ae-52ac-454a-8bfb-c21fd5a57174",thumb:"https://vz-7533d228-c25.b-cdn.net/ff6a53ae-52ac-454a-8bfb-c21fd5a57174/thumbnail.jpg",size:17.64,duration:20},
-  {title:"이것만 잡으면 에이스..ㄷ.....! (발로란트)",url:"https://iframe.mediadelivery.net/play/596875/960c9433-3d1d-4c4e-8bd4-06dcb35664c8",thumb:"https://vz-7533d228-c25.b-cdn.net/960c9433-3d1d-4c4e-8bd4-06dcb35664c8/thumbnail.jpg",size:1806.31,duration:509},
-  {title:"자 입 안에 있는건 애기씨 라는거에요~ (w.박지,취무등)",url:"https://iframe.mediadelivery.net/play/596875/2f680cb0-f9d1-499d-97dd-ac703f71aa94",thumb:"https://vz-7533d228-c25.b-cdn.net/2f680cb0-f9d1-499d-97dd-ac703f71aa94/thumbnail.jpg",size:900.29,duration:378},
-  {title:"ㅈ됨을 감지함..ㄷㄷ 제목학원 레전드 (5) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/05f424fc-c4dd-4e21-ba79-9f2cfedeeeba",thumb:"https://vz-7533d228-c25.b-cdn.net/05f424fc-c4dd-4e21-ba79-9f2cfedeeeba/thumbnail.jpg",size:32.54,duration:34},
-  {title:"이분이 유명한 갈통 성우님...",url:"https://iframe.mediadelivery.net/play/596875/1a14a92e-4dbe-4ba4-b02e-8273ed48a560",thumb:"https://vz-7533d228-c25.b-cdn.net/1a14a92e-4dbe-4ba4-b02e-8273ed48a560/thumbnail.jpg",size:1917.74,duration:664},
-  {title:"이게,. 초심자의 행운인가! 한번에 뽑아버렸다...!",url:"https://iframe.mediadelivery.net/play/596875/8c594310-6b3c-47ba-b0ea-cc3171cf549c",thumb:"https://vz-7533d228-c25.b-cdn.net/8c594310-6b3c-47ba-b0ea-cc3171cf549c/thumbnail.jpg",size:1546.67,duration:555},
-  {title:"이거 진짜 겁나 무서운 게임",url:"https://iframe.mediadelivery.net/play/596875/fb8994c1-6f2b-412c-843d-e79b87a87652",thumb:"https://vz-7533d228-c25.b-cdn.net/fb8994c1-6f2b-412c-843d-e79b87a87652/thumbnail.jpg",size:2029.21,duration:677},
-  {title:"이걸 이기네 #Shorts",url:"https://iframe.mediadelivery.net/play/596875/2ed05bed-f453-4822-96c3-a94ba51496c9",thumb:"https://vz-7533d228-c25.b-cdn.net/2ed05bed-f453-4822-96c3-a94ba51496c9/thumbnail.jpg",size:96.56,duration:59},
-  {title:"윤데드와 포켓몬 모드 탐방! (포켓몬 모드)",url:"https://iframe.mediadelivery.net/play/596875/a979b21a-ecfb-490c-868b-5d96fb39523a",thumb:"https://vz-7533d228-c25.b-cdn.net/a979b21a-ecfb-490c-868b-5d96fb39523a/thumbnail.jpg",size:1163.17,duration:414},
-  {title:"유튜버들이 쵸봄을 따라한다면",url:"https://iframe.mediadelivery.net/play/596875/13af1b5f-2ffb-4387-9a03-db00104c6f6a",thumb:"https://vz-7533d228-c25.b-cdn.net/13af1b5f-2ffb-4387-9a03-db00104c6f6a/thumbnail.jpg",size:401.72,duration:362},
-  {title:"유튜브 접습니다 그동안 감사했습니다..",url:"https://iframe.mediadelivery.net/play/596875/c580d2fe-4b85-4ab2-9827-e808e7861536",thumb:"https://vz-7533d228-c25.b-cdn.net/c580d2fe-4b85-4ab2-9827-e808e7861536/thumbnail.jpg",size:51.58,duration:41},
-  {title:"유튜버들의 진귀한 애교 영상 (후회 안함)",url:"https://iframe.mediadelivery.net/play/596875/c232b32d-f4a1-4f0f-9f66-697b1e3449d5",thumb:"https://vz-7533d228-c25.b-cdn.net/c232b32d-f4a1-4f0f-9f66-697b1e3449d5/thumbnail.jpg",size:2124.78,duration:562},
-  {title:"유튜버 햄식이 실물 ㄷㄷ (47) #shorts #제목학원 #마인크래프트",url:"https://iframe.mediadelivery.net/play/596875/618e42e6-0c64-44f0-acf8-fa557019db5f",thumb:"https://vz-7533d228-c25.b-cdn.net/618e42e6-0c64-44f0-acf8-fa557019db5f/thumbnail.jpg",size:23.5,duration:26},
-  {title:"유콘님 애교 잘 하시네요 ㅋㅋㅋㅋ",url:"https://iframe.mediadelivery.net/play/596875/51271acc-bcf9-4f09-b5e4-6c5b199d9708",thumb:"https://vz-7533d228-c25.b-cdn.net/51271acc-bcf9-4f09-b5e4-6c5b199d9708/thumbnail.jpg",size:1479.0,duration:481},
-  {title:"유시후님이 그린 노래 보고 갈래",url:"https://iframe.mediadelivery.net/play/596875/197ed243-5d20-425d-801c-baed4248d8c6",thumb:"https://vz-7533d228-c25.b-cdn.net/197ed243-5d20-425d-801c-baed4248d8c6/thumbnail.jpg",size:134.58,duration:42},
-  {title:"웨이백홈 원툴 가수 숀 님과 게임 했습니다",url:"https://iframe.mediadelivery.net/play/596875/979cd9cc-b82d-4ced-b45a-faf6df6ea3f0",thumb:"https://vz-7533d228-c25.b-cdn.net/979cd9cc-b82d-4ced-b45a-faf6df6ea3f0/thumbnail.jpg",size:1827.76,duration:591},
-  {title:"유명 틱톡커들과 함께 부른 여름 노래 #옐언니 #먹스나 #가토 #혜다 #아누누 #신사장 #또솔 #쵸봄",url:"https://iframe.mediadelivery.net/play/596875/59a8451c-926d-4dae-b619-07aad0b2ef14",thumb:"https://vz-7533d228-c25.b-cdn.net/59a8451c-926d-4dae-b619-07aad0b2ef14/thumbnail.jpg",size:61.87,duration:31},
-  {title:"원신 나비아 떴냐! 40만원 질러버렸다...",url:"https://iframe.mediadelivery.net/play/596875/70764e6b-5f66-43f2-ab24-8896b38144be",thumb:"https://vz-7533d228-c25.b-cdn.net/70764e6b-5f66-43f2-ab24-8896b38144be/thumbnail.jpg",size:2175.6,duration:728},
-  {title:"원신 클로린드의 로리신 레퀴엠 #genshinimpact #Genshin",url:"https://iframe.mediadelivery.net/play/596875/4b6f69e6-6e79-4320-b51c-f9f7007729ce",thumb:"https://vz-7533d228-c25.b-cdn.net/4b6f69e6-6e79-4320-b51c-f9f7007729ce/thumbnail.jpg",size:56.25,duration:26},
-  {title:"원신 뉴비에요ㅠㅠ 하지만 느비예트 풀돌을 곁들인....",url:"https://iframe.mediadelivery.net/play/596875/d0b1a79b-ce03-4b2a-867c-4893458ee9fc",thumb:"https://vz-7533d228-c25.b-cdn.net/d0b1a79b-ce03-4b2a-867c-4893458ee9fc/thumbnail.jpg",size:1817.57,duration:586},
-  {title:"연다야 다치면 엑스레이 찍으러 가야지",url:"https://iframe.mediadelivery.net/play/596875/9ae89ddf-0e18-43cf-8163-11a2b884817f",thumb:"https://vz-7533d228-c25.b-cdn.net/9ae89ddf-0e18-43cf-8163-11a2b884817f/thumbnail.jpg",size:2002.58,duration:657},
-  {title:"원신 가명 그자체, 김윤기 성우님 영접 해버렸다야~!",url:"https://iframe.mediadelivery.net/play/596875/8f546b6c-0cf8-41c6-a839-94c874aabbd4",thumb:"https://vz-7533d228-c25.b-cdn.net/8f546b6c-0cf8-41c6-a839-94c874aabbd4/thumbnail.jpg",size:2071.24,duration:1816},
-  {title:"운터의 온몸 비틀기 개그 (19) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/6c85a540-b691-4738-9bcd-ffdcf8753e87",thumb:"https://vz-7533d228-c25.b-cdn.net/6c85a540-b691-4738-9bcd-ffdcf8753e87/thumbnail.jpg",size:26.91,duration:24},
-  {title:"운터 애교 보고 가세요 (21) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/60ae3376-cdd1-405f-a8d2-a539bc27bde2",thumb:"https://vz-7533d228-c25.b-cdn.net/60ae3376-cdd1-405f-a8d2-a539bc27bde2/thumbnail.jpg",size:23.64,duration:23},
-  {title:"운터야.. 이미지 챙겨.. (29) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/a879552b-2a2d-482c-ad57-6b9637d67c86",thumb:"https://vz-7533d228-c25.b-cdn.net/a879552b-2a2d-482c-ad57-6b9637d67c86/thumbnail.jpg",size:23.9,duration:25},
-  {title:"우린.. 친구... 잖아요 ㅎㅎ",url:"https://iframe.mediadelivery.net/play/596875/0029f46e-9866-4d06-a708-7877a64010c6",thumb:"https://vz-7533d228-c25.b-cdn.net/0029f46e-9866-4d06-a708-7877a64010c6/thumbnail.jpg",size:581.33,duration:473},
-  {title:"우리가 발로란트를 하는 이유 (Why We Play Valorant)",url:"https://iframe.mediadelivery.net/play/596875/7d137b44-3cbe-40f1-b168-7a8bdb1774e5",thumb:"https://vz-7533d228-c25.b-cdn.net/7d137b44-3cbe-40f1-b168-7a8bdb1774e5/thumbnail.jpg",size:134.27,duration:32},
-  {title:"우고님을 믿으면 안돼....",url:"https://iframe.mediadelivery.net/play/596875/19b47164-7c58-4584-8b04-bb5912d691ce",thumb:"https://vz-7533d228-c25.b-cdn.net/19b47164-7c58-4584-8b04-bb5912d691ce/thumbnail.jpg",size:820.33,duration:479},
-  {title:"우는 고양이 댄스",url:"https://iframe.mediadelivery.net/play/596875/5193ec2f-e36c-4fd1-991d-b1432e19a398",thumb:"https://vz-7533d228-c25.b-cdn.net/5193ec2f-e36c-4fd1-991d-b1432e19a398/thumbnail.jpg",size:22.26,duration:17},
-  {title:"용술사라구 150개 깡",url:"https://iframe.mediadelivery.net/play/596875/9aec8a19-0cda-464c-943c-9953ec008e12",thumb:"https://vz-7533d228-c25.b-cdn.net/9aec8a19-0cda-464c-943c-9953ec008e12/thumbnail.jpg",size:1206.21,duration:638},
-  {title:"와! 포켓몬빵! 와! 섅즈!",url:"https://iframe.mediadelivery.net/play/596875/bb1404bd-b582-4435-8e77-451eed44fd93",thumb:"https://vz-7533d228-c25.b-cdn.net/bb1404bd-b582-4435-8e77-451eed44fd93/thumbnail.jpg",size:297.89,duration:179},
-  {title:"요새 유행하는 마라 '탕' 후루 #meme #마라탕후루",url:"https://iframe.mediadelivery.net/play/596875/f93175d7-b154-4bc9-99a8-491e06339059",thumb:"https://vz-7533d228-c25.b-cdn.net/f93175d7-b154-4bc9-99a8-491e06339059/thumbnail.jpg",size:19.11,duration:7},
-  {title:"옥쓔님과 막이마기님은 제가 NTR 하겠습니다! (w.막이마기,옥쓔,연다)",url:"https://iframe.mediadelivery.net/play/596875/083a224f-6e35-4ead-82fd-565104da71ba",thumb:"https://vz-7533d228-c25.b-cdn.net/083a224f-6e35-4ead-82fd-565104da71ba/thumbnail.jpg",size:1854.28,duration:561},
-  {title:"오징어 게임 우승자 스포 제목학원 레전드 ㅋㅋㅋㅋ (7) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/fdc4eaec-0c4d-4aff-b900-381ce82df69c",thumb:"https://vz-7533d228-c25.b-cdn.net/fdc4eaec-0c4d-4aff-b900-381ce82df69c/thumbnail.jpg",size:23.67,duration:24},
-  {title:"오이시소~! #mochimochi #모찌모찌",url:"https://iframe.mediadelivery.net/play/596875/012af5df-be05-4b9f-996d-f6abeb00a765",thumb:"https://vz-7533d228-c25.b-cdn.net/012af5df-be05-4b9f-996d-f6abeb00a765/thumbnail.jpg",size:79.41,duration:20},
-  {title:"옆 집 개가 개시끄럽다",url:"https://iframe.mediadelivery.net/play/596875/96b09e3c-6833-4385-88d3-1157a9b2a6a4",thumb:"https://vz-7533d228-c25.b-cdn.net/96b09e3c-6833-4385-88d3-1157a9b2a6a4/thumbnail.jpg",size:54.42,duration:38},
-  {title:"영포티의 제목학원 레전드ㅋㅋㅋ (6) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/0b1b6b89-1189-43f0-a113-665a1626a56f",thumb:"https://vz-7533d228-c25.b-cdn.net/0b1b6b89-1189-43f0-a113-665a1626a56f/thumbnail.jpg",size:27.49,duration:27},
-  {title:"어이쿠 , 손이 미끄러졌네",url:"https://iframe.mediadelivery.net/play/596875/d5155b7b-39dd-4a5e-84f0-0eeb85ac2a9d",thumb:"https://vz-7533d228-c25.b-cdn.net/d5155b7b-39dd-4a5e-84f0-0eeb85ac2a9d/thumbnail.jpg",size:1338.09,duration:607},
-  {title:"열사병을 천천히 말해봐! #열사병 #반전",url:"https://iframe.mediadelivery.net/play/596875/a072c98d-f973-4557-ba2a-f784090c098c",thumb:"https://vz-7533d228-c25.b-cdn.net/a072c98d-f973-4557-ba2a-f784090c098c/thumbnail.jpg",size:20.54,duration:12},
-  {title:"여름엔 summertime",url:"https://iframe.mediadelivery.net/play/596875/d30238d1-5e9c-4584-90cf-cd681b76b0ee",thumb:"https://vz-7533d228-c25.b-cdn.net/d30238d1-5e9c-4584-90cf-cd681b76b0ee/thumbnail.jpg",size:119.12,duration:42},
-  {title:"역대급 웃긴 제목학원 레전드ㅋㅋㅋㅋ (4) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/7b548926-109a-48b9-89f5-b89e7e1cafb6",thumb:"https://vz-7533d228-c25.b-cdn.net/7b548926-109a-48b9-89f5-b89e7e1cafb6/thumbnail.jpg",size:22.35,duration:27},
-  {title:"에이 설마 괴물이 나오겠어 ㅋㅋ",url:"https://iframe.mediadelivery.net/play/596875/8b7a0c11-a52d-465a-acc2-4b669e3d5076",thumb:"https://vz-7533d228-c25.b-cdn.net/8b7a0c11-a52d-465a-acc2-4b669e3d5076/thumbnail.jpg",size:1767.94,duration:666},
-  {title:"에스파 카리나가 제로투 추는걸 볼 수 있다고",url:"https://iframe.mediadelivery.net/play/596875/3ded06d5-cfec-4b75-99eb-46a5c0c11622",thumb:"https://vz-7533d228-c25.b-cdn.net/3ded06d5-cfec-4b75-99eb-46a5c0c11622/thumbnail.jpg",size:1245.12,duration:561},
-  {title:"에고록 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/26ea3f13-ef2a-4006-8177-904ea98375dc",thumb:"https://vz-7533d228-c25.b-cdn.net/26ea3f13-ef2a-4006-8177-904ea98375dc/thumbnail.jpg",size:257.24,duration:167},
-  {title:"언니야 나랑 놀아~ #비챤 #이세돌 #언니야",url:"https://iframe.mediadelivery.net/play/596875/2d7160b0-3f26-4929-9029-f465cba6738b",thumb:"https://vz-7533d228-c25.b-cdn.net/2d7160b0-3f26-4929-9029-f465cba6738b/thumbnail.jpg",size:15.99,duration:10},
-  {title:"어서오세요 집사 카페에 (집사카페)",url:"https://iframe.mediadelivery.net/play/596875/2e2911c1-d714-4a6d-aebb-544648f62804",thumb:"https://vz-7533d228-c25.b-cdn.net/2e2911c1-d714-4a6d-aebb-544648f62804/thumbnail.jpg",size:1130.06,duration:649},
-  {title:"아니.. 넌 뭔가 보일거 같아서...",url:"https://iframe.mediadelivery.net/play/596875/615dfe2c-0006-4755-9289-283f9464e1e0",thumb:"https://vz-7533d228-c25.b-cdn.net/615dfe2c-0006-4755-9289-283f9464e1e0/thumbnail.jpg",size:1565.4,duration:527},
-  {title:"앤비베이비 (エンヴィーベイビー) 【쵸봄】【Cover】",url:"https://iframe.mediadelivery.net/play/596875/932ee38d-2c99-4fb1-9331-8133eb5fffeb",thumb:"https://vz-7533d228-c25.b-cdn.net/932ee38d-2c99-4fb1-9331-8133eb5fffeb/thumbnail.jpg",size:170.3,duration:135},
-  {title:"앞으로 먼저 가 김재원..!!",url:"https://iframe.mediadelivery.net/play/596875/e67d7af3-9dec-4926-a233-82d0d6d2da26",thumb:"https://vz-7533d228-c25.b-cdn.net/e67d7af3-9dec-4926-a233-82d0d6d2da26/thumbnail.jpg",size:2322.53,duration:716},
-  {title:"악마를 만났다.... (w.박지,취무등)",url:"https://iframe.mediadelivery.net/play/596875/1f8b1312-df6f-44f5-8520-f637459196ed",thumb:"https://vz-7533d228-c25.b-cdn.net/1f8b1312-df6f-44f5-8520-f637459196ed/thumbnail.jpg",size:721.17,duration:538},
-  {title:"아이돌 アイドル 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/c61c1ef8-081a-4a01-abe3-0300fd1d7582",thumb:"https://vz-7533d228-c25.b-cdn.net/c61c1ef8-081a-4a01-abe3-0300fd1d7582/thumbnail.jpg",size:566.33,duration:213},
-  {title:"아니 왜 나한테 오는데 !!!!!!!!!! ( 러스트 #1 )",url:"https://iframe.mediadelivery.net/play/596875/fa5b4213-a0a1-45aa-8542-530c0ac3833e",thumb:"https://vz-7533d228-c25.b-cdn.net/fa5b4213-a0a1-45aa-8542-530c0ac3833e/thumbnail.jpg",size:2140.76,duration:549},
-  {title:"아리 성대모사 19금... #shorts",url:"https://iframe.mediadelivery.net/play/596875/e93c63f1-9349-47b8-ad26-b324e0cc7950",thumb:"https://vz-7533d228-c25.b-cdn.net/e93c63f1-9349-47b8-ad26-b324e0cc7950/thumbnail.jpg",size:22.3,duration:41},
-  {title:"아니 파크모님 말을 하세요 말을 (금지어 전데) (w.파크모)",url:"https://iframe.mediadelivery.net/play/596875/da57b839-ff98-416c-9943-0f2cf729b051",thumb:"https://vz-7533d228-c25.b-cdn.net/da57b839-ff98-416c-9943-0f2cf729b051/thumbnail.jpg",size:708.79,duration:439},
-  {title:"아니 그래서 이게 뭔데",url:"https://iframe.mediadelivery.net/play/596875/0e80f6ad-8112-4551-8dd1-78c4361c7c69",thumb:"https://vz-7533d228-c25.b-cdn.net/0e80f6ad-8112-4551-8dd1-78c4361c7c69/thumbnail.jpg",size:1374.07,duration:601},
-  {title:"아니 이거 뭔 신종 밀당이야 #Shorts",url:"https://iframe.mediadelivery.net/play/596875/5d78d94a-4795-4d72-a778-a361db919851",thumb:"https://vz-7533d228-c25.b-cdn.net/5d78d94a-4795-4d72-a778-a361db919851/thumbnail.jpg",size:32.51,duration:59},
-  {title:"아니 왜 나만 따라오는건데!!!",url:"https://iframe.mediadelivery.net/play/596875/9e67d96b-6c23-4b2d-ba93-923cb877626a",thumb:"https://vz-7533d228-c25.b-cdn.net/9e67d96b-6c23-4b2d-ba93-923cb877626a/thumbnail.jpg",size:1116.3,duration:494},
-  {title:"아니 금지어가 영어 라니까 (금지어 전데)",url:"https://iframe.mediadelivery.net/play/596875/3d7fb7da-0438-451b-92c8-d14e6c3c1dd8",thumb:"https://vz-7533d228-c25.b-cdn.net/3d7fb7da-0438-451b-92c8-d14e6c3c1dd8/thumbnail.jpg",size:728.01,duration:489},
-  {title:"아니 금지어가 네 라니까.. (금지어 전화)",url:"https://iframe.mediadelivery.net/play/596875/779c0092-92e7-4661-8a63-8a58edfc4221",thumb:"https://vz-7533d228-c25.b-cdn.net/779c0092-92e7-4661-8a63-8a58edfc4221/thumbnail.jpg",size:410.8,duration:363},
-  {title:"아 막이님은 내꺼라고! 놔라!!!!  (w.막이마기,옥쓔,연다,윤데드)",url:"https://iframe.mediadelivery.net/play/596875/91feef61-e049-4479-8a68-449a576c5a02",thumb:"https://vz-7533d228-c25.b-cdn.net/91feef61-e049-4479-8a68-449a576c5a02/thumbnail.jpg",size:1984.61,duration:565},
-  {title:"아가씨 또 핸드폰 하는거에요 #집사",url:"https://iframe.mediadelivery.net/play/596875/9714fe87-c26b-4721-9f3d-2710d4c7958f",thumb:"https://vz-7533d228-c25.b-cdn.net/9714fe87-c26b-4721-9f3d-2710d4c7958f/thumbnail.jpg",size:16.7,duration:20},
-  {title:"아 하지 말라고 !!!!!!!!!!!!!!!!!!!!  (w.파크모)",url:"https://iframe.mediadelivery.net/play/596875/9b9a2793-5454-4933-8cd6-dc4099790918",thumb:"https://vz-7533d228-c25.b-cdn.net/9b9a2793-5454-4933-8cd6-dc4099790918/thumbnail.jpg",size:537.26,duration:451},
-  {title:"시카노코노코노코호시탄탄 #meme  #사슴아이 #しかのこのこのこ",url:"https://iframe.mediadelivery.net/play/596875/337e47d8-bb0d-4970-97a1-0e8bf9587e71",thumb:"https://vz-7533d228-c25.b-cdn.net/337e47d8-bb0d-4970-97a1-0e8bf9587e71/thumbnail.jpg",size:57.7,duration:13},
-  {title:"싸울때 무조건 화 풀리는 방법 (37) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/208a7258-f07d-4d66-b7b2-20110a9c70d6",thumb:"https://vz-7533d228-c25.b-cdn.net/208a7258-f07d-4d66-b7b2-20110a9c70d6/thumbnail.jpg",size:26.3,duration:26},
-  {title:"스파이더맨 신작 출시 (32) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/18d4b1b4-77e2-48dd-8020-3d415b87fe85",thumb:"https://vz-7533d228-c25.b-cdn.net/18d4b1b4-77e2-48dd-8020-3d415b87fe85/thumbnail.jpg",size:16.71,duration:17},
-  {title:"쉿 나의 아기 고양이..♡ (1기 남스 목소리 대회) (완)",url:"https://iframe.mediadelivery.net/play/596875/092ee316-82ea-4cce-8b2d-a7b38bc70e12",thumb:"https://vz-7533d228-c25.b-cdn.net/092ee316-82ea-4cce-8b2d-a7b38bc70e12/thumbnail.jpg",size:1014.84,duration:611},
-  {title:"스켈레톤이 만들어지는 과정 (34) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/cd9ef2e3-be03-4894-8e04-34990fd7cc3f",thumb:"https://vz-7533d228-c25.b-cdn.net/cd9ef2e3-be03-4894-8e04-34990fd7cc3f/thumbnail.jpg",size:20.47,duration:19},
-  {title:"손가락 챱챱챱",url:"https://iframe.mediadelivery.net/play/596875/119e4f0a-9b37-4f5c-af86-b2c419e1b562",thumb:"https://vz-7533d228-c25.b-cdn.net/119e4f0a-9b37-4f5c-af86-b2c419e1b562/thumbnail.jpg",size:55.58,duration:30},
-  {title:"수위 높은 자학개그.. (33) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/39878503-5e09-4de9-ab29-06e4fb01093a",thumb:"https://vz-7533d228-c25.b-cdn.net/39878503-5e09-4de9-ab29-06e4fb01093a/thumbnail.jpg",size:23.55,duration:23},
-  {title:"서로의 음식이 뭔지 모른다! [랜덤 배달 디펜스] #1",url:"https://iframe.mediadelivery.net/play/596875/60430799-5504-48a3-a6ed-bce587d14298",thumb:"https://vz-7533d228-c25.b-cdn.net/60430799-5504-48a3-a6ed-bce587d14298/thumbnail.jpg",size:904.88,duration:481},
-  {title:"성대모사 대회 하다가 정지 먹을뻔.. (상금 10만원 성대모사 대회)",url:"https://iframe.mediadelivery.net/play/596875/93e400e9-b72b-4019-9464-6c94d9aa84c0",thumb:"https://vz-7533d228-c25.b-cdn.net/93e400e9-b72b-4019-9464-6c94d9aa84c0/thumbnail.jpg",size:621.65,duration:384},
-  {title:"생일때 친오빠의 반응은!",url:"https://iframe.mediadelivery.net/play/596875/d6b9b911-b3fa-4910-abe1-6423abdb7155",thumb:"https://vz-7533d228-c25.b-cdn.net/d6b9b911-b3fa-4910-abe1-6423abdb7155/thumbnail.jpg",size:84.45,duration:50},
-  {title:"살고싶으면 도망쳐라.. skull meme 제목학원 (16) #shorts #제목학원 #마인크래프트 #웃긴영상 #skullmeme #memes",url:"https://iframe.mediadelivery.net/play/596875/6874527c-33ca-4cea-afe4-7507bf4f624d",thumb:"https://vz-7533d228-c25.b-cdn.net/6874527c-33ca-4cea-afe4-7507bf4f624d/thumbnail.jpg",size:17.77,duration:18},
-  {title:"사신 shinigami 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/84d00092-c406-4548-9291-85043d93d342",thumb:"https://vz-7533d228-c25.b-cdn.net/84d00092-c406-4548-9291-85043d93d342/thumbnail.jpg",size:268.56,duration:182},
-  {title:"사진 찍을때 공감 ㅋㅋ (41) #shorts #제목학원 #마인크래프트 #웃긴영상 #발로란트",url:"https://iframe.mediadelivery.net/play/596875/ef7560ad-ceb6-403d-ad96-286cb6f0f4f2",thumb:"https://vz-7533d228-c25.b-cdn.net/ef7560ad-ceb6-403d-ad96-286cb6f0f4f2/thumbnail.jpg",size:19.84,duration:19},
-  {title:"사람 살려!! ㅠㅠ 나만 괴롭혀!!ㅜㅜ (w.파크모,우고,연다,제미니 )",url:"https://iframe.mediadelivery.net/play/596875/a99a1aad-1a2e-4aaa-8361-c00080af9990",thumb:"https://vz-7533d228-c25.b-cdn.net/a99a1aad-1a2e-4aaa-8361-c00080af9990/thumbnail.jpg",size:1592.64,duration:576},
-  {title:"사신 shinigami 【Korean Cover】 【쵸봄】 (1)",url:"https://iframe.mediadelivery.net/play/596875/2df4ea38-035e-45c4-8d10-063c9120816a",thumb:"https://vz-7533d228-c25.b-cdn.net/2df4ea38-035e-45c4-8d10-063c9120816a/thumbnail.jpg",size:94.77,duration:41},
-  {title:"빵 드실래요 죽  빵",url:"https://iframe.mediadelivery.net/play/596875/f0234ec3-4e1a-4714-85be-b548178d7c42",thumb:"https://vz-7533d228-c25.b-cdn.net/f0234ec3-4e1a-4714-85be-b548178d7c42/thumbnail.jpg",size:2019.04,duration:541},
-  {title:"불륜 (비비) 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/8ee5c0cb-511c-4aa8-9718-9ffe4c7e63b6",thumb:"https://vz-7533d228-c25.b-cdn.net/8ee5c0cb-511c-4aa8-9718-9ffe4c7e63b6/thumbnail.jpg",size:57.13,duration:68},
-  {title:"부엉이 フクロウ 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/b557a212-4e8b-4e75-9836-e28d31db3007",thumb:"https://vz-7533d228-c25.b-cdn.net/b557a212-4e8b-4e75-9836-e28d31db3007/thumbnail.jpg",size:437.84,duration:288},
-  {title:"버츄얼 데뷔 한다니까요",url:"https://iframe.mediadelivery.net/play/596875/12df07e2-4869-4a50-b06a-4b8cc1f3b0af",thumb:"https://vz-7533d228-c25.b-cdn.net/12df07e2-4869-4a50-b06a-4b8cc1f3b0af/thumbnail.jpg",size:1403.44,duration:684},
-  {title:"별수호자 라구 50개 깡",url:"https://iframe.mediadelivery.net/play/596875/8d46817c-1a36-470e-8014-f6bb9f11983d",thumb:"https://vz-7533d228-c25.b-cdn.net/8d46817c-1a36-470e-8014-f6bb9f11983d/thumbnail.jpg",size:880.96,duration:446},
-  {title:"백출 배꼽 강화하기 #원신 #백출",url:"https://iframe.mediadelivery.net/play/596875/9a5263f0-4495-44b5-ac4a-f2865e11f9fc",thumb:"https://vz-7533d228-c25.b-cdn.net/9a5263f0-4495-44b5-ac4a-f2865e11f9fc/thumbnail.jpg",size:90.14,duration:55},
-  {title:"배카인님의 생일 축하 송",url:"https://iframe.mediadelivery.net/play/596875/24f1e00b-106a-4710-8636-edd850221800",thumb:"https://vz-7533d228-c25.b-cdn.net/24f1e00b-106a-4710-8636-edd850221800/thumbnail.jpg",size:91.53,duration:53},
-  {title:"밟아 그냥 밟아 (w.일하는 용형)",url:"https://iframe.mediadelivery.net/play/596875/ff37a4f5-ea9f-4930-bf2d-75e6dd611f44",thumb:"https://vz-7533d228-c25.b-cdn.net/ff37a4f5-ea9f-4930-bf2d-75e6dd611f44/thumbnail.jpg",size:2060.88,duration:489},
-  {title:"방송의 재미를 위해서라면...",url:"https://iframe.mediadelivery.net/play/596875/a069ee16-b37d-4fc2-bdc9-ab0ac0ec4ff2",thumb:"https://vz-7533d228-c25.b-cdn.net/a069ee16-b37d-4fc2-bdc9-ab0ac0ec4ff2/thumbnail.jpg",size:379.9,duration:240},
-  {title:"발키리라구 50개 깡",url:"https://iframe.mediadelivery.net/play/596875/c6f516e6-1958-4509-9d9b-15eaf2394a93",thumb:"https://vz-7533d228-c25.b-cdn.net/c6f516e6-1958-4509-9d9b-15eaf2394a93/thumbnail.jpg",size:865.41,duration:438},
-  {title:"발로란트 잼민이 특 (42) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/c80dab46-d0c5-4c38-9c01-b8f68b36b4ef",thumb:"https://vz-7533d228-c25.b-cdn.net/c80dab46-d0c5-4c38-9c01-b8f68b36b4ef/thumbnail.jpg",size:22.02,duration:21},
-  {title:"발로란트 에이스",url:"https://iframe.mediadelivery.net/play/596875/995dbe4b-ff57-409c-b0fb-bcb203ee5ef8",thumb:"https://vz-7533d228-c25.b-cdn.net/995dbe4b-ff57-409c-b0fb-bcb203ee5ef8/thumbnail.jpg",size:169.71,duration:41},
-  {title:"발로란트 스킨충 (45) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/763760b4-f3e6-489c-a4be-4e6d6b2cfb30",thumb:"https://vz-7533d228-c25.b-cdn.net/763760b4-f3e6-489c-a4be-4e6d6b2cfb30/thumbnail.jpg",size:19.1,duration:21},
-  {title:"발로란트 고인물 (데스매치)",url:"https://iframe.mediadelivery.net/play/596875/04a06e30-0989-47db-a9fe-37e748195797",thumb:"https://vz-7533d228-c25.b-cdn.net/04a06e30-0989-47db-a9fe-37e748195797/thumbnail.jpg",size:62.24,duration:25},
-  {title:"발로란트 서폿 특징 ㅋㅋㅋ (43) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/86e62334-2e47-47c0-ae7a-96129469ad6e",thumb:"https://vz-7533d228-c25.b-cdn.net/86e62334-2e47-47c0-ae7a-96129469ad6e/thumbnail.jpg",size:20.24,duration:24},
-  {title:"바니걸 입은 트수",url:"https://iframe.mediadelivery.net/play/596875/46bde775-8ece-477b-af07-6c73caa40797",thumb:"https://vz-7533d228-c25.b-cdn.net/46bde775-8ece-477b-af07-6c73caa40797/thumbnail.jpg",size:80.74,duration:55},
-  {title:"박지님 골탕 먹이기",url:"https://iframe.mediadelivery.net/play/596875/70c9e349-3ca9-4f6a-8d2c-d0c20f57ab8c",thumb:"https://vz-7533d228-c25.b-cdn.net/70c9e349-3ca9-4f6a-8d2c-d0c20f57ab8c/thumbnail.jpg",size:82.38,duration:51},
-  {title:"미드가 너무 크면 생기는 일",url:"https://iframe.mediadelivery.net/play/596875/56bdeeed-2f37-4e5f-8f71-ae6647527e9c",thumb:"https://vz-7533d228-c25.b-cdn.net/56bdeeed-2f37-4e5f-8f71-ae6647527e9c/thumbnail.jpg",size:1606.93,duration:450},
-  {title:"뭔가 이상한 IRIS OUT 커버",url:"https://iframe.mediadelivery.net/play/596875/27b8777f-deb5-477e-afe0-a216123eb247",thumb:"https://vz-7533d228-c25.b-cdn.net/27b8777f-deb5-477e-afe0-a216123eb247/thumbnail.jpg",size:37.13,duration:74},
-  {title:"뭐야 빅헤드님 내 말 돌려줘요",url:"https://iframe.mediadelivery.net/play/596875/cf836df9-378a-4068-a517-60f824b82b4b",thumb:"https://vz-7533d228-c25.b-cdn.net/cf836df9-378a-4068-a517-60f824b82b4b/thumbnail.jpg",size:1751.17,duration:467},
-  {title:"뭐지.. 방시우 성우님 운이 장난이 아니신데...",url:"https://iframe.mediadelivery.net/play/596875/1cd0ef30-aa44-4e4d-adb8-5ccd0623b3d3",thumb:"https://vz-7533d228-c25.b-cdn.net/1cd0ef30-aa44-4e4d-adb8-5ccd0623b3d3/thumbnail.jpg",size:1276.93,duration:500},
-  {title:"뭐가 보인다는거야 규식아...",url:"https://iframe.mediadelivery.net/play/596875/3b1979f0-4263-472d-8610-7da52d92581e",thumb:"https://vz-7533d228-c25.b-cdn.net/3b1979f0-4263-472d-8610-7da52d92581e/thumbnail.jpg",size:1424.96,duration:759},
-  {title:"뭐가 자꾸 덜렁거려;;",url:"https://iframe.mediadelivery.net/play/596875/4d653a77-5421-4550-ba2f-fab311d0b083",thumb:"https://vz-7533d228-c25.b-cdn.net/4d653a77-5421-4550-ba2f-fab311d0b083/thumbnail.jpg",size:1814.13,duration:518},
-  {title:"모잉님의 첫 빵댕이는 제가 가져갑니다",url:"https://iframe.mediadelivery.net/play/596875/c8058cf2-95e8-4dbe-b24e-6e227a946ac9",thumb:"https://vz-7533d228-c25.b-cdn.net/c8058cf2-95e8-4dbe-b24e-6e227a946ac9/thumbnail.jpg",size:3896.62,duration:1225},
-  {title:"무슨 색깔을 좋아하시나요 (38) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/7ae945d2-4532-49a3-b0f9-b15339299ab9",thumb:"https://vz-7533d228-c25.b-cdn.net/7ae945d2-4532-49a3-b0f9-b15339299ab9/thumbnail.jpg",size:18.44,duration:18},
-  {title:"모두에게 사랑 받고있는 나!",url:"https://iframe.mediadelivery.net/play/596875/a19c959b-d200-426c-87a6-ab4544a60ab6",thumb:"https://vz-7533d228-c25.b-cdn.net/a19c959b-d200-426c-87a6-ab4544a60ab6/thumbnail.jpg",size:1381.97,duration:717},
-  {title:"모잉님만을 위한 사랑의 홋치홋치",url:"https://iframe.mediadelivery.net/play/596875/ef5926ff-5a31-4475-a90c-a657489f0c89",thumb:"https://vz-7533d228-c25.b-cdn.net/ef5926ff-5a31-4475-a90c-a657489f0c89/thumbnail.jpg",size:1375.34,duration:506},
-  {title:"메이드복 이야기 그만하라고!!!!!!!!!!!!",url:"https://iframe.mediadelivery.net/play/596875/50f81cce-7e61-4254-ae52-1381c27643b1",thumb:"https://vz-7533d228-c25.b-cdn.net/50f81cce-7e61-4254-ae52-1381c27643b1/thumbnail.jpg",size:1332.94,duration:772},
-  {title:"모니터링 실사화 (14) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/d0044cec-efc5-456a-872a-9203eaed3acb",thumb:"https://vz-7533d228-c25.b-cdn.net/d0044cec-efc5-456a-872a-9203eaed3acb/thumbnail.jpg",size:23.8,duration:25},
-  {title:"메이드 카페 알바생이 되버린 쵸봄쨩",url:"https://iframe.mediadelivery.net/play/596875/a6cf4fd3-91cb-4234-b7ad-8307a1dcaa6a",thumb:"https://vz-7533d228-c25.b-cdn.net/a6cf4fd3-91cb-4234-b7ad-8307a1dcaa6a/thumbnail.jpg",size:2467.0,duration:769},
-  {title:"마카오톡 Twilight 콘서트 롱편집 풀영상",url:"https://iframe.mediadelivery.net/play/596875/c052b05a-877f-437d-8464-4a79176629c0",thumb:"https://vz-7533d228-c25.b-cdn.net/c052b05a-877f-437d-8464-4a79176629c0/thumbnail.jpg",size:24196.84,duration:10649},
-  {title:"먼저 놔라. 눈쟁이",url:"https://iframe.mediadelivery.net/play/596875/62d71617-e36e-4845-86de-0852970d8b1f",thumb:"https://vz-7533d228-c25.b-cdn.net/62d71617-e36e-4845-86de-0852970d8b1f/thumbnail.jpg",size:1290.34,duration:444},
-  {title:"먹지 않는다며! 먹지 않는다며! (구구덕 합방)",url:"https://iframe.mediadelivery.net/play/596875/dd3c0556-4e86-40bf-9c18-61b1db942c7f",thumb:"https://vz-7533d228-c25.b-cdn.net/dd3c0556-4e86-40bf-9c18-61b1db942c7f/thumbnail.jpg",size:1587.49,duration:767},
-  {title:"망상감상대상연맹 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/bf67f75f-fef8-4bb5-8002-46faa57fcd5b",thumb:"https://vz-7533d228-c25.b-cdn.net/bf67f75f-fef8-4bb5-8002-46faa57fcd5b/thumbnail.jpg",size:485.48,duration:265},
-  {title:"마크 유튜버의 엑스레이 드립 (23) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/64907286-1684-4021-be67-20b4fbf8ae7d",thumb:"https://vz-7533d228-c25.b-cdn.net/64907286-1684-4021-be67-20b4fbf8ae7d/thumbnail.jpg",size:22.14,duration:23},
-  {title:"마인크래프트인데 챌린지 #마인크래프트인데 #네모인데 #챌린지",url:"https://iframe.mediadelivery.net/play/596875/85bedebd-b400-4f88-a9f6-b8d4bae1b242",thumb:"https://vz-7533d228-c25.b-cdn.net/85bedebd-b400-4f88-a9f6-b8d4bae1b242/thumbnail.jpg",size:35.21,duration:13},
-  {title:"마이크만 키면 목소리가 달라지는 사람",url:"https://iframe.mediadelivery.net/play/596875/3531ae4d-fdf4-4b6a-af28-877cb8243508",thumb:"https://vz-7533d228-c25.b-cdn.net/3531ae4d-fdf4-4b6a-af28-877cb8243508/thumbnail.jpg",size:1681.47,duration:490},
-  {title:"마이 화자 마자 부라자",url:"https://iframe.mediadelivery.net/play/596875/abe64cad-4503-41f6-9f9e-3dff2b35602c",thumb:"https://vz-7533d228-c25.b-cdn.net/abe64cad-4503-41f6-9f9e-3dff2b35602c/thumbnail.jpg",size:7.05,duration:5},
-  {title:"린튜브님.. 나만 바라봐요..♥️",url:"https://iframe.mediadelivery.net/play/596875/15f20638-cebc-4f3a-bfce-fa32f91ae243",thumb:"https://vz-7533d228-c25.b-cdn.net/15f20638-cebc-4f3a-bfce-fa32f91ae243/thumbnail.jpg",size:2486.29,duration:645},
-  {title:"마법소녀 고인물 룩 ㄷㄷ; (40) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/4bc0817c-dd87-41b7-9e83-9e7998df8d5d",thumb:"https://vz-7533d228-c25.b-cdn.net/4bc0817c-dd87-41b7-9e83-9e7998df8d5d/thumbnail.jpg",size:16.61,duration:16},
-  {title:"리썰 컴퍼니라며 하우카우야...",url:"https://iframe.mediadelivery.net/play/596875/9b3a0129-3989-48c3-839c-a3525d519b6c",thumb:"https://vz-7533d228-c25.b-cdn.net/9b3a0129-3989-48c3-839c-a3525d519b6c/thumbnail.jpg",size:2191.52,duration:719},
-  {title:"리듬게임 고인물들이 뉴비를 발견 했을때",url:"https://iframe.mediadelivery.net/play/596875/28ac232d-c76e-4d8c-a7a7-4207c36f7600",thumb:"https://vz-7533d228-c25.b-cdn.net/28ac232d-c76e-4d8c-a7a7-4207c36f7600/thumbnail.jpg",size:1916.52,duration:618},
-  {title:"로기님과 오붓한 협곡 데이트",url:"https://iframe.mediadelivery.net/play/596875/9c507589-26f6-45ba-864d-79474669272d",thumb:"https://vz-7533d228-c25.b-cdn.net/9c507589-26f6-45ba-864d-79474669272d/thumbnail.jpg",size:1127.04,duration:352},
-  {title:"로봇도 생식기가 있나요 제목학원 (8) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/6b2885a5-9b37-4009-8018-e23e90808406",thumb:"https://vz-7533d228-c25.b-cdn.net/6b2885a5-9b37-4009-8018-e23e90808406/thumbnail.jpg",size:25.17,duration:25},
-  {title:"러스트에서 밥이 없다면",url:"https://iframe.mediadelivery.net/play/596875/f4cad724-6860-4beb-afba-415b1a203283",thumb:"https://vz-7533d228-c25.b-cdn.net/f4cad724-6860-4beb-afba-415b1a203283/thumbnail.jpg",size:100.83,duration:38},
-  {title:"레전드 포토샵 장인ㄷㄷ (25) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/bf501b06-6d4e-44f4-ac10-dcc84659abc4",thumb:"https://vz-7533d228-c25.b-cdn.net/bf501b06-6d4e-44f4-ac10-dcc84659abc4/thumbnail.jpg",size:29.58,duration:30},
-  {title:"라이어 댄서 (ライアーダンサー)",url:"https://iframe.mediadelivery.net/play/596875/02ea10b2-018e-46b8-b391-1643c3d63f79",thumb:"https://vz-7533d228-c25.b-cdn.net/02ea10b2-018e-46b8-b391-1643c3d63f79/thumbnail.jpg",size:36.17,duration:23},
-  {title:"랭크를 하면 안되는 이유 (46) #shorts #제목학원 #마인크래프트",url:"https://iframe.mediadelivery.net/play/596875/10db6740-cc93-4ca9-a548-840e6e09c05d",thumb:"https://vz-7533d228-c25.b-cdn.net/10db6740-cc93-4ca9-a548-840e6e09c05d/thumbnail.jpg",size:23.19,duration:23},
-  {title:"라구깡 에서 빛이 난다...!!!!!!",url:"https://iframe.mediadelivery.net/play/596875/5c62a7f8-b6f0-4b6f-83fd-b5456ab1765f",thumb:"https://vz-7533d228-c25.b-cdn.net/5c62a7f8-b6f0-4b6f-83fd-b5456ab1765f/thumbnail.jpg",size:1068.27,duration:494},
-  {title:"땃쥐 쵸봄",url:"https://iframe.mediadelivery.net/play/596875/1a42eca4-2b46-4f09-8977-07a1e912d172",thumb:"https://vz-7533d228-c25.b-cdn.net/1a42eca4-2b46-4f09-8977-07a1e912d172/thumbnail.jpg",size:8.26,duration:4},
-  {title:"들어오면 후회 안함 ㄹㅇ",url:"https://iframe.mediadelivery.net/play/596875/661f4d2b-f702-47b1-896f-755f14da9f85",thumb:"https://vz-7533d228-c25.b-cdn.net/661f4d2b-f702-47b1-896f-755f14da9f85/thumbnail.jpg",size:1139.8,duration:516},
-  {title:"땃쥐 쵸봄 (1)",url:"https://iframe.mediadelivery.net/play/596875/93ce231d-0a82-4d0b-9cd2-b7104b059c2a",thumb:"https://vz-7533d228-c25.b-cdn.net/93ce231d-0a82-4d0b-9cd2-b7104b059c2a/thumbnail.jpg",size:6.58,duration:4},
-  {title:"뒤늦은 시부야에서 만난 잘생긴 남자❤️ #meme  #shorts",url:"https://iframe.mediadelivery.net/play/596875/fa0920c7-468c-4876-93b8-9b4857f0d5f5",thumb:"https://vz-7533d228-c25.b-cdn.net/fa0920c7-468c-4876-93b8-9b4857f0d5f5/thumbnail.jpg",size:30.15,duration:16},
-  {title:"데바데로 리듬게임 하기 #shorts",url:"https://iframe.mediadelivery.net/play/596875/ed04bdfb-4d11-40c3-83cc-9f77f3b4dac3",thumb:"https://vz-7533d228-c25.b-cdn.net/ed04bdfb-4d11-40c3-83cc-9f77f3b4dac3/thumbnail.jpg",size:44.23,duration:50},
-  {title:"대놓고 주작질 하는 유튜버 냄새님 ㄷㄷ",url:"https://iframe.mediadelivery.net/play/596875/9a85d882-6efd-487b-a7c9-b1eede016c26",thumb:"https://vz-7533d228-c25.b-cdn.net/9a85d882-6efd-487b-a7c9-b1eede016c26/thumbnail.jpg",size:1725.87,duration:494},
-  {title:"더 이상 붕어빵 못먹겠다ㅋㅋ  제목학원 레전드 (10) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/b8c41296-c3d9-434f-b0eb-0f300486aeeb",thumb:"https://vz-7533d228-c25.b-cdn.net/b8c41296-c3d9-434f-b0eb-0f300486aeeb/thumbnail.jpg",size:25.97,duration:27},
-  {title:"노루와 뜨거운 사랑을 하는 팔칠님 ㄷㄷ",url:"https://iframe.mediadelivery.net/play/596875/98e112cd-05c6-4637-ba44-690cdd278af8",thumb:"https://vz-7533d228-c25.b-cdn.net/98e112cd-05c6-4637-ba44-690cdd278af8/thumbnail.jpg",size:2460.52,duration:585},
-  {title:"달링 ダーリン 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/45c522fb-00a5-4286-8bac-1885277a0828",thumb:"https://vz-7533d228-c25.b-cdn.net/45c522fb-00a5-4286-8bac-1885277a0828/thumbnail.jpg",size:156.76,duration:146},
-  {title:"단톡방 공감 (31) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/16a69c3c-a9b9-4210-8c80-ea00f147f001",thumb:"https://vz-7533d228-c25.b-cdn.net/16a69c3c-a9b9-4210-8c80-ea00f147f001/thumbnail.jpg",size:25.47,duration:23},
-  {title:"단체로 꽃감이님한테 맞는 영상",url:"https://iframe.mediadelivery.net/play/596875/e48b4f7f-659e-4243-a4dc-2f5b50f7717b",thumb:"https://vz-7533d228-c25.b-cdn.net/e48b4f7f-659e-4243-a4dc-2f5b50f7717b/thumbnail.jpg",size:1575.7,duration:510},
-  {title:"누나가 캐리 해줄게",url:"https://iframe.mediadelivery.net/play/596875/56cfe380-98fe-47d7-9f76-02748a38816a",thumb:"https://vz-7533d228-c25.b-cdn.net/56cfe380-98fe-47d7-9f76-02748a38816a/thumbnail.jpg",size:1050.86,duration:592},
-  {title:"논란의 제목학원 레전드 ㅋㅋㅋㅋ (1) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/d27e041e-9dd5-4e64-adb5-12ccd545cd74",thumb:"https://vz-7533d228-c25.b-cdn.net/d27e041e-9dd5-4e64-adb5-12ccd545cd74/thumbnail.jpg",size:28.83,duration:27},
-  {title:"노팬티 날콤 그는 누구인가 (쵸터뷰) (날콤)",url:"https://iframe.mediadelivery.net/play/596875/4058d446-f1a9-43d6-a972-573a30caeaa7",thumb:"https://vz-7533d228-c25.b-cdn.net/4058d446-f1a9-43d6-a972-573a30caeaa7/thumbnail.jpg",size:946.97,duration:796},
-  {title:"냐류님이 잘못 했으면 책임져야죠",url:"https://iframe.mediadelivery.net/play/596875/9a3fde51-b8da-41f6-9eff-3aaab0e1043c",thumb:"https://vz-7533d228-c25.b-cdn.net/9a3fde51-b8da-41f6-9eff-3aaab0e1043c/thumbnail.jpg",size:1731.35,duration:493},
-  {title:"내 입맛대로 고르는 뷔페",url:"https://iframe.mediadelivery.net/play/596875/af77c101-3f2c-4192-888e-c365d7839356",thumb:"https://vz-7533d228-c25.b-cdn.net/af77c101-3f2c-4192-888e-c365d7839356/thumbnail.jpg",size:959.56,duration:541},
-  {title:"내꺼 하는 법 【Korean Cover】【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/0743704e-b7d2-4735-af60-dc37875cc27e",thumb:"https://vz-7533d228-c25.b-cdn.net/0743704e-b7d2-4735-af60-dc37875cc27e/thumbnail.jpg",size:230.39,duration:137},
-  {title:"나를 사이에 두고..-  (1기 남스 목소리 대회)",url:"https://iframe.mediadelivery.net/play/596875/53e6ce11-421c-4a29-8a1b-98963b9a7a0b",thumb:"https://vz-7533d228-c25.b-cdn.net/53e6ce11-421c-4a29-8a1b-98963b9a7a0b/thumbnail.jpg",size:1558.8,duration:792},
-  {title:"내 썸남의 이상형이란,.. #meme #shorts",url:"https://iframe.mediadelivery.net/play/596875/02fc600e-96d9-40db-a852-cfc5113d82e3",thumb:"https://vz-7533d228-c25.b-cdn.net/02fc600e-96d9-40db-a852-cfc5113d82e3/thumbnail.jpg",size:42.44,duration:26},
-  {title:"남자들은 다 변태야!! #meme #TikTok",url:"https://iframe.mediadelivery.net/play/596875/c898478f-09bc-42b5-b1a5-e56dbef047b0",thumb:"https://vz-7533d228-c25.b-cdn.net/c898478f-09bc-42b5-b1a5-e56dbef047b0/thumbnail.jpg",size:21.27,duration:12},
-  {title:"난 핑크가 제일 잘 어울려 #meme #그림",url:"https://iframe.mediadelivery.net/play/596875/1a73f38e-37f0-4389-b2dc-6f5b862488f8",thumb:"https://vz-7533d228-c25.b-cdn.net/1a73f38e-37f0-4389-b2dc-6f5b862488f8/thumbnail.jpg",size:13.53,duration:12},
-  {title:"나한테 걸리면 다 큰일 나는거야",url:"https://iframe.mediadelivery.net/play/596875/24e348ff-8bbd-439f-bf8b-8d1bc077becd",thumb:"https://vz-7533d228-c25.b-cdn.net/24e348ff-8bbd-439f-bf8b-8d1bc077becd/thumbnail.jpg",size:1576.44,duration:640},
-  {title:"나무위키가 없는데 실검 1위를 갔습니다",url:"https://iframe.mediadelivery.net/play/596875/64aaf1dd-1fda-4014-9b69-c5d9eed0fcfd",thumb:"https://vz-7533d228-c25.b-cdn.net/64aaf1dd-1fda-4014-9b69-c5d9eed0fcfd/thumbnail.jpg",size:937.28,duration:487},
-  {title:"나를 소개하지",url:"https://iframe.mediadelivery.net/play/596875/eeb00f05-7078-498a-9419-f4d90cd01355",thumb:"https://vz-7533d228-c25.b-cdn.net/eeb00f05-7078-498a-9419-f4d90cd01355/thumbnail.jpg",size:222.43,duration:129},
-  {title:"나를 괴롭히는 4인조와 계단 챌린지 #meme #tiktok",url:"https://iframe.mediadelivery.net/play/596875/f031bd8b-44b7-489b-bb25-de8cc9e153ed",thumb:"https://vz-7533d228-c25.b-cdn.net/f031bd8b-44b7-489b-bb25-de8cc9e153ed/thumbnail.jpg",size:19.97,duration:9},
-  {title:"나락간 유튜버의 지갑 (44) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/ba45c8be-00b5-49dd-8e19-c2654c36800f",thumb:"https://vz-7533d228-c25.b-cdn.net/ba45c8be-00b5-49dd-8e19-c2654c36800f/thumbnail.jpg",size:21.96,duration:26},
-  {title:"나도 해버렸다 브링방방봉 #Bling-Bang-Bang-Born",url:"https://iframe.mediadelivery.net/play/596875/1ea2127f-ee03-495c-bb96-6d587065e098",thumb:"https://vz-7533d228-c25.b-cdn.net/1ea2127f-ee03-495c-bb96-6d587065e098/thumbnail.jpg",size:13.17,duration:9},
-  {title:"나는... 우주의..미세먼지.. (w.윤데드)",url:"https://iframe.mediadelivery.net/play/596875/be86f6c7-d67e-4e6c-885c-77ca631d00f7",thumb:"https://vz-7533d228-c25.b-cdn.net/be86f6c7-d67e-4e6c-885c-77ca631d00f7/thumbnail.jpg",size:1598.26,duration:481},
-  {title:"나도 이쁘잖아 (버츄얼.ver",url:"https://iframe.mediadelivery.net/play/596875/d1b413b7-919b-464a-a775-f3f6dec3abb6",thumb:"https://vz-7533d228-c25.b-cdn.net/d1b413b7-919b-464a-a775-f3f6dec3abb6/thumbnail.jpg",size:28.84,duration:21},
-  {title:"김나린♥️라코타 사랑의 결실을 맺다!",url:"https://iframe.mediadelivery.net/play/596875/feec7d9b-e8b4-45e8-aa2f-c883657fe4e5",thumb:"https://vz-7533d228-c25.b-cdn.net/feec7d9b-e8b4-45e8-aa2f-c883657fe4e5/thumbnail.jpg",size:4826.52,duration:1365},
-  {title:"나 임포스터 아니라고!!!!! (20) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/6c61d86a-ebe5-4df7-88ff-084a9b1100f8",thumb:"https://vz-7533d228-c25.b-cdn.net/6c61d86a-ebe5-4df7-88ff-084a9b1100f8/thumbnail.jpg",size:14.94,duration:15},
-  {title:"그림 그려드립니다, 금액은 아시죠ㅎ",url:"https://iframe.mediadelivery.net/play/596875/7a59733f-7bad-43f9-afcf-bb83dcdddda7",thumb:"https://vz-7533d228-c25.b-cdn.net/7a59733f-7bad-43f9-afcf-bb83dcdddda7/thumbnail.jpg",size:1634.78,duration:464},
-  {title:"기리기리댄스 #아슬아슬댄스 #キリギリダンス #기리기리댄스",url:"https://iframe.mediadelivery.net/play/596875/1fcc6e92-6928-432d-8e4f-6270fe342be1",thumb:"https://vz-7533d228-c25.b-cdn.net/1fcc6e92-6928-432d-8e4f-6270fe342be1/thumbnail.jpg",size:122.68,duration:34},
-  {title:"금쪽같은 애새끼",url:"https://iframe.mediadelivery.net/play/596875/13f91226-54e0-4376-87f4-64d7f12d4a4f",thumb:"https://vz-7533d228-c25.b-cdn.net/13f91226-54e0-4376-87f4-64d7f12d4a4f/thumbnail.jpg",size:1795.99,duration:482},
-  {title:"근친 NTR ...ㄷㄷ (26) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/9acd8e09-a5c0-4160-8c6c-93b37cd24d23",thumb:"https://vz-7533d228-c25.b-cdn.net/9acd8e09-a5c0-4160-8c6c-93b37cd24d23/thumbnail.jpg",size:20.08,duration:18},
-  {title:"그녀와 즐기는 트럼펫 연주 (W.마뫄)",url:"https://iframe.mediadelivery.net/play/596875/9a0f15e3-281d-4a39-9fd1-2483f9c5d756",thumb:"https://vz-7533d228-c25.b-cdn.net/9a0f15e3-281d-4a39-9fd1-2483f9c5d756/thumbnail.jpg",size:1760.97,duration:484},
-  {title:"그냥 억까에 개쳐맞는 영상",url:"https://iframe.mediadelivery.net/play/596875/ce343dcc-ec28-47cf-87dd-cc9ff8ac50ef",thumb:"https://vz-7533d228-c25.b-cdn.net/ce343dcc-ec28-47cf-87dd-cc9ff8ac50ef/thumbnail.jpg",size:1672.19,duration:482},
-  {title:"그녀 앞에서 절대 애교 클립을 꺼내면 안돼",url:"https://iframe.mediadelivery.net/play/596875/3b81293b-d546-4eb4-a2ad-a7f5c75cf8d4",thumb:"https://vz-7533d228-c25.b-cdn.net/3b81293b-d546-4eb4-a2ad-a7f5c75cf8d4/thumbnail.jpg",size:282.08,duration:267},
-  {title:"그 유명한 깻잎 논쟁 (주제 토론 대결)",url:"https://iframe.mediadelivery.net/play/596875/e2615d69-7649-49e4-9096-1c0248ca1efd",thumb:"https://vz-7533d228-c25.b-cdn.net/e2615d69-7649-49e4-9096-1c0248ca1efd/thumbnail.jpg",size:511.98,duration:334},
-  {title:"그곳의 크기.. (30) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/5e796fc6-e234-4f01-94cc-27083053aa49",thumb:"https://vz-7533d228-c25.b-cdn.net/5e796fc6-e234-4f01-94cc-27083053aa49/thumbnail.jpg",size:6.8,duration:36},
-  {title:"귀신의 잔치 (鬼ノ宴) 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/e0e8a8f3-2668-46cb-b064-eed1a909752c",thumb:"https://vz-7533d228-c25.b-cdn.net/e0e8a8f3-2668-46cb-b064-eed1a909752c/thumbnail.jpg",size:578.5,duration:177},
-  {title:"규식님 죄송한데 저희 초면 아니신가요",url:"https://iframe.mediadelivery.net/play/596875/893f4684-6f1a-4f05-a675-d15d0ec5e701",thumb:"https://vz-7533d228-c25.b-cdn.net/893f4684-6f1a-4f05-a675-d15d0ec5e701/thumbnail.jpg",size:1572.08,duration:491},
-  {title:"怪物 괴물 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/b7b3dc36-f733-45f1-b4d6-3a555e110000",thumb:"https://vz-7533d228-c25.b-cdn.net/b7b3dc36-f733-45f1-b4d6-3a555e110000/thumbnail.jpg",size:320.83,duration:210},
-  {title:"관종 말기 유미짱",url:"https://iframe.mediadelivery.net/play/596875/db30b034-560d-4709-a2b8-67a849b3a303",thumb:"https://vz-7533d228-c25.b-cdn.net/db30b034-560d-4709-a2b8-67a849b3a303/thumbnail.jpg",size:60.06,duration:44},
-  {title:"고소당할 위기 제목학원 레전드 ㅋㅋㅋㅋ (2) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/5ca9e2a5-bb95-4a2a-9333-cf58f89f86f1",thumb:"https://vz-7533d228-c25.b-cdn.net/5ca9e2a5-bb95-4a2a-9333-cf58f89f86f1/thumbnail.jpg",size:30.8,duration:29},
-  {title:"곧 고소 당할 마크 유튜버의 최후 (11) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/5f8b3a38-a348-4857-bdc8-65d15e14ef27",thumb:"https://vz-7533d228-c25.b-cdn.net/5f8b3a38-a348-4857-bdc8-65d15e14ef27/thumbnail.jpg",size:38.63,duration:34},
-  {title:"고막 파괴범 연다",url:"https://iframe.mediadelivery.net/play/596875/f80d5954-b648-427c-b33c-df7afc1f3d64",thumb:"https://vz-7533d228-c25.b-cdn.net/f80d5954-b648-427c-b33c-df7afc1f3d64/thumbnail.jpg",size:103.11,duration:40},
-  {title:"겟단",url:"https://iframe.mediadelivery.net/play/596875/3814c5ab-2d07-4fc9-8b7a-4ba4f03a7873",thumb:"https://vz-7533d228-c25.b-cdn.net/3814c5ab-2d07-4fc9-8b7a-4ba4f03a7873/thumbnail.jpg",size:62.62,duration:42},
-  {title:"같은 팀 되면 큰일나는 사람 1위",url:"https://iframe.mediadelivery.net/play/596875/e25d967e-9a67-41c4-9fad-3fa3e0468cd4",thumb:"https://vz-7533d228-c25.b-cdn.net/e25d967e-9a67-41c4-9fad-3fa3e0468cd4/thumbnail.jpg",size:1514.61,duration:483},
-  {title:"겟★단",url:"https://iframe.mediadelivery.net/play/596875/908ba66f-8faf-4e99-a9b1-de7f6c29b175",thumb:"https://vz-7533d228-c25.b-cdn.net/908ba66f-8faf-4e99-a9b1-de7f6c29b175/thumbnail.jpg",size:116.74,duration:42},
-  {title:"게코 성우분을 모셔봤습니다! (w.김토키,애덕,세노,라코타)",url:"https://iframe.mediadelivery.net/play/596875/e352e877-d143-44ff-8b5f-3b2b225172d5",thumb:"https://vz-7533d228-c25.b-cdn.net/e352e877-d143-44ff-8b5f-3b2b225172d5/thumbnail.jpg",size:2024.7,duration:577},
-  {title:"게코 성대모사 장인과 진짜 '성우'를 만나게 해보았다",url:"https://iframe.mediadelivery.net/play/596875/fb89db30-e064-43c0-9477-21864d1564ce",thumb:"https://vz-7533d228-c25.b-cdn.net/fb89db30-e064-43c0-9477-21864d1564ce/thumbnail.jpg",size:1024.39,duration:585},
-  {title:"강풍 올백 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/7ed4e3ba-1dbc-406a-9391-9dc625c6bf39",thumb:"https://vz-7533d228-c25.b-cdn.net/7ed4e3ba-1dbc-406a-9391-9dc625c6bf39/thumbnail.jpg",size:248.53,duration:136},
-  {title:"가위바위보 무조건 이기는 방법",url:"https://iframe.mediadelivery.net/play/596875/d34d5bd0-42ed-4a18-9442-4d37e75b8002",thumb:"https://vz-7533d228-c25.b-cdn.net/d34d5bd0-42ed-4a18-9442-4d37e75b8002/thumbnail.jpg",size:1517.95,duration:509},
-  {title:"강풍 올백 【Korean Cover】 【쵸봄】 (1)",url:"https://iframe.mediadelivery.net/play/596875/c6c8697e-ebd0-41bb-be60-ac6d63ab8ece",thumb:"https://vz-7533d228-c25.b-cdn.net/c6c8697e-ebd0-41bb-be60-ac6d63ab8ece/thumbnail.jpg",size:67.1,duration:44},
-  {title:"강아지의 최후... 제목학원 레전드 (9) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/dd6b0ea7-c580-4e16-86f4-6a74f7f0a7ed",thumb:"https://vz-7533d228-c25.b-cdn.net/dd6b0ea7-c580-4e16-86f4-6a74f7f0a7ed/thumbnail.jpg",size:20.88,duration:21},
-  {title:"가슴 크기는 만져보면 알아..☺️",url:"https://iframe.mediadelivery.net/play/596875/0c537176-cb23-435a-b773-5259a9bb6f53",thumb:"https://vz-7533d228-c25.b-cdn.net/0c537176-cb23-435a-b773-5259a9bb6f53/thumbnail.jpg",size:2165.1,duration:658},
-  {title:"가오나시의 다리가 없었던 이유 (17) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/15b12a45-cc42-40e2-8f35-65a0151b7c31",thumb:"https://vz-7533d228-c25.b-cdn.net/15b12a45-cc42-40e2-8f35-65a0151b7c31/thumbnail.jpg",size:31.03,duration:31},
-  {title:"가오나시 울음 소리 최초공개ㅋㅋ 제목학원 (15) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/52511cba-3ef8-4564-ad80-4efb78930f36",thumb:"https://vz-7533d228-c25.b-cdn.net/52511cba-3ef8-4564-ad80-4efb78930f36/thumbnail.jpg",size:28.04,duration:28},
-  {title:"ヴィラン 빌런 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/a31d4db6-0cc3-4d27-8252-4bd3fa3e9b32",thumb:"https://vz-7533d228-c25.b-cdn.net/a31d4db6-0cc3-4d27-8252-4bd3fa3e9b32/thumbnail.jpg",size:0.0,duration:202},
-  {title:"ヴィラン 빌런 【Korean Cover】 【쵸봄】 (1)",url:"https://iframe.mediadelivery.net/play/596875/be2b4856-acb5-4dfa-b407-ba5c905a198f",thumb:"https://vz-7533d228-c25.b-cdn.net/be2b4856-acb5-4dfa-b407-ba5c905a198f/thumbnail.jpg",size:59.68,duration:41},
-  {title:"TOCA TOCA TOCA (meme) ver.2",url:"https://iframe.mediadelivery.net/play/596875/2683184d-f10d-49dd-a4f6-4a2555df3bb3",thumb:"https://vz-7533d228-c25.b-cdn.net/2683184d-f10d-49dd-a4f6-4a2555df3bb3/thumbnail.jpg",size:43.1,duration:18},
-  {title:"TOCA TOCA TOCA (meme) ver.1",url:"https://iframe.mediadelivery.net/play/596875/f301a633-5229-4ddc-b470-89e10bb182d0",thumb:"https://vz-7533d228-c25.b-cdn.net/f301a633-5229-4ddc-b470-89e10bb182d0/thumbnail.jpg",size:41.51,duration:18},
-  {title:"SUPADOPA 슈파도파 민~나! #SUPADOPA #슈파도파 #SUPADOPAChallenge #슈파도파챌린지 #유니 #vtuber #버튜버 #챌린지",url:"https://iframe.mediadelivery.net/play/596875/c7d36f3d-efad-4aef-9d73-1d2c702183d7",thumb:"https://vz-7533d228-c25.b-cdn.net/c7d36f3d-efad-4aef-9d73-1d2c702183d7/thumbnail.jpg",size:100.78,duration:29},
-  {title:"That's Not My Neighbor #meme #neighbor",url:"https://iframe.mediadelivery.net/play/596875/a3e7761c-6d61-4443-8fdc-b7115f2c3d18",thumb:"https://vz-7533d228-c25.b-cdn.net/a3e7761c-6d61-4443-8fdc-b7115f2c3d18/thumbnail.jpg",size:72.41,duration:25},
-  {title:"R.E.P.O가 이렇게 야한 게임이였다고",url:"https://iframe.mediadelivery.net/play/596875/5815e738-8594-4bcd-9e2e-d397dacd3a4a",thumb:"https://vz-7533d228-c25.b-cdn.net/5815e738-8594-4bcd-9e2e-d397dacd3a4a/thumbnail.jpg",size:1463.79,duration:679},
-  {title:"Rabbit Hole Pure Pure 애니메이션 Ver.",url:"https://iframe.mediadelivery.net/play/596875/1f27144d-a4fa-47b8-bde5-9596b3beb5b7",thumb:"https://vz-7533d228-c25.b-cdn.net/1f27144d-a4fa-47b8-bde5-9596b3beb5b7/thumbnail.jpg",size:93.34,duration:59},
-  {title:"phony - 포니 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/b2a48fa8-191f-4c3f-b694-b07daf89e2d9",thumb:"https://vz-7533d228-c25.b-cdn.net/b2a48fa8-191f-4c3f-b694-b07daf89e2d9/thumbnail.jpg",size:387.95,duration:189},
-  {title:"PD의 역대급 신의 드립 (28) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/a3f67902-5b65-4f92-b2cb-64702bb01b21",thumb:"https://vz-7533d228-c25.b-cdn.net/a3f67902-5b65-4f92-b2cb-64702bb01b21/thumbnail.jpg",size:40.06,duration:41},
-  {title:"oh wow! 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/5f88151f-0d99-4464-9b84-8cd281075dab",thumb:"https://vz-7533d228-c25.b-cdn.net/5f88151f-0d99-4464-9b84-8cd281075dab/thumbnail.jpg",size:415.37,duration:217},
-  {title:"NTR 직관 ㄹㅈㄷ;; (35) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/a2db423f-7a0c-4db9-b2a1-bff058a4fbe2",thumb:"https://vz-7533d228-c25.b-cdn.net/a2db423f-7a0c-4db9-b2a1-bff058a4fbe2/thumbnail.jpg",size:32.38,duration:31},
-  {title:"Noot noot meme",url:"https://iframe.mediadelivery.net/play/596875/a9da74df-f99d-474e-99ac-149de9d47bd8",thumb:"https://vz-7533d228-c25.b-cdn.net/a9da74df-f99d-474e-99ac-149de9d47bd8/thumbnail.jpg",size:8.67,duration:9},
-  {title:"Noot noot meme (1)",url:"https://iframe.mediadelivery.net/play/596875/e0ff565b-ade0-4ac0-9383-5d0fc10c4b83",thumb:"https://vz-7533d228-c25.b-cdn.net/e0ff565b-ade0-4ac0-9383-5d0fc10c4b83/thumbnail.jpg",size:5.28,duration:9},
-  {title:"ME TOO CHALLENGE (MEME)",url:"https://iframe.mediadelivery.net/play/596875/e805da95-b9ba-4b70-8ca5-c17654b2a6f3",thumb:"https://vz-7533d228-c25.b-cdn.net/e805da95-b9ba-4b70-8ca5-c17654b2a6f3/thumbnail.jpg",size:37.86,duration:9},
-  {title:"MIKU MIKU BEEEAAAAMMMM!!! #meme #miku",url:"https://iframe.mediadelivery.net/play/596875/4d5eeabe-76e7-4317-bd22-b42c20466a89",thumb:"https://vz-7533d228-c25.b-cdn.net/4d5eeabe-76e7-4317-bd22-b42c20466a89/thumbnail.jpg",size:15.99,duration:15},
-  {title:"KICK BACK 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/3fe74801-1513-494a-bc1d-2fb589e96b4e",thumb:"https://vz-7533d228-c25.b-cdn.net/3fe74801-1513-494a-bc1d-2fb589e96b4e/thumbnail.jpg",size:429.25,duration:195},
-  {title:"Love or Hate #meme #TikTok",url:"https://iframe.mediadelivery.net/play/596875/4d48786b-b0de-4ce3-84c7-dcc9b540d9c7",thumb:"https://vz-7533d228-c25.b-cdn.net/4d48786b-b0de-4ce3-84c7-dcc9b540d9c7/thumbnail.jpg",size:33.74,duration:17},
-  {title:"HITO Mania (人マニア) 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/bffeb13c-3e6e-42ff-9984-3d4d64362646",thumb:"https://vz-7533d228-c25.b-cdn.net/bffeb13c-3e6e-42ff-9984-3d4d64362646/thumbnail.jpg",size:418.03,duration:131},
-  {title:"34명의 스트리머들과 치지직 무단침입 해보기",url:"https://iframe.mediadelivery.net/play/596875/aaab099e-656c-4c12-afa3-cfecd74dbe30",thumb:"https://vz-7533d228-c25.b-cdn.net/aaab099e-656c-4c12-afa3-cfecd74dbe30/thumbnail.jpg",size:1134.0,duration:535},
-  {title:"CH4NGE 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/8e41784b-15c4-43d9-b8c0-f802ef167ed6",thumb:"https://vz-7533d228-c25.b-cdn.net/8e41784b-15c4-43d9-b8c0-f802ef167ed6/thumbnail.jpg",size:396.95,duration:134},
-  {title:"CH4NGE 【Korean Cover】 【쵸봄】 (1)",url:"https://iframe.mediadelivery.net/play/596875/27156816-b369-445a-aa48-5664533026a1",thumb:"https://vz-7533d228-c25.b-cdn.net/27156816-b369-445a-aa48-5664533026a1/thumbnail.jpg",size:151.04,duration:47},
-  {title:"19금 제목학원 레전드 ㅋㅋㅋㅋ (3) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/8568c025-8333-485d-a077-99f3746238e5",thumb:"https://vz-7533d228-c25.b-cdn.net/8568c025-8333-485d-a077-99f3746238e5/thumbnail.jpg",size:36.01,duration:39},
-  {title:"1주년 기념으로 테러를 당했다..!",url:"https://iframe.mediadelivery.net/play/596875/452daf63-6e91-4e1e-9887-bf5ca6a7e16e",thumb:"https://vz-7533d228-c25.b-cdn.net/452daf63-6e91-4e1e-9887-bf5ca6a7e16e/thumbnail.jpg",size:1557.03,duration:443},
-  {title:"17만 따리 주제에!",url:"https://iframe.mediadelivery.net/play/596875/1dc16826-0912-4be4-8a16-701b3bf28903",thumb:"https://vz-7533d228-c25.b-cdn.net/1dc16826-0912-4be4-8a16-701b3bf28903/thumbnail.jpg",size:894.94,duration:540},
-  {title:"16살에 건물주인 트수가 나타났습니다.. ㄷㄷ",url:"https://iframe.mediadelivery.net/play/596875/5bf4ce17-ed8b-4af0-a3f4-22a054226f8c",thumb:"https://vz-7533d228-c25.b-cdn.net/5bf4ce17-ed8b-4af0-a3f4-22a054226f8c/thumbnail.jpg",size:1331.31,duration:699},
-  {title:"12월 9일이 무슨 날인지 아십니까 여러분.. 영상으로 확인하세ㅇ...",url:"https://iframe.mediadelivery.net/play/596875/6ff40d6c-656c-4a7c-877b-973c05df8a20",thumb:"https://vz-7533d228-c25.b-cdn.net/6ff40d6c-656c-4a7c-877b-973c05df8a20/thumbnail.jpg",size:133.82,duration:110},
-  {title:"4호실(Room No.4) 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/63081adf-58b3-415b-85e6-d2ab1c09671a",thumb:"https://vz-7533d228-c25.b-cdn.net/63081adf-58b3-415b-85e6-d2ab1c09671a/thumbnail.jpg",size:682.29,duration:237},
-  {title:"♥cause you got that♥ (meme)",url:"https://iframe.mediadelivery.net/play/596875/3c9e97a5-bd4a-49b7-92eb-2799fe0ef1d6",thumb:"https://vz-7533d228-c25.b-cdn.net/3c9e97a5-bd4a-49b7-92eb-2799fe0ef1d6/thumbnail.jpg",size:199.6,duration:66},
-  {title:"1 2 3 4 5 6 7",url:"https://iframe.mediadelivery.net/play/596875/edcb1e1f-02f0-4488-9c86-48acd3aa5cbd",thumb:"https://vz-7533d228-c25.b-cdn.net/edcb1e1f-02f0-4488-9c86-48acd3aa5cbd/thumbnail.jpg",size:84.32,duration:57},
-  {title:"【위풍당당】(威風堂々) 💋 [쵸봄×비몽×마리모×박도나×투미츠×로에×노이×감규리]",url:"https://iframe.mediadelivery.net/play/596875/f6db34d3-1e28-47a9-b6b6-348b80f9f11f",thumb:"https://vz-7533d228-c25.b-cdn.net/f6db34d3-1e28-47a9-b6b6-348b80f9f11f/thumbnail.jpg",size:473.76,duration:198},
-  {title:"【위풍당당】(威風堂々) 💋 (Teaser)",url:"https://iframe.mediadelivery.net/play/596875/6eba2168-530f-4169-9bb8-01c6219eaac4",thumb:"https://vz-7533d228-c25.b-cdn.net/6eba2168-530f-4169-9bb8-01c6219eaac4/thumbnail.jpg",size:37.07,duration:13},
-  {title:"[👊 필살의 커맨드 👊] [Korean Cover] [최케빈×우고×눈쟁이×쵸봄×매동이×토뎀이×순당무×참외몬]",url:"https://iframe.mediadelivery.net/play/596875/68052278-b1c3-4717-b009-0d3db4e807d5",thumb:"https://vz-7533d228-c25.b-cdn.net/68052278-b1c3-4717-b009-0d3db4e807d5/thumbnail.jpg",size:993.8,duration:246},
-  {title:"[💤잘자요 아가씨💤] 【Korean Cover】 [쵸쵸우×쵸봄]",url:"https://iframe.mediadelivery.net/play/596875/4aeb2a99-f938-46e7-974b-f4ac03206dff",thumb:"https://vz-7533d228-c25.b-cdn.net/4aeb2a99-f938-46e7-974b-f4ac03206dff/thumbnail.jpg",size:206.71,duration:114},
-  {title:"[👊 필살의 커맨드 👊] 【Korean Cover】(Teaser)",url:"https://iframe.mediadelivery.net/play/596875/a71a911f-68af-4817-9417-e9bd6ab422b7",thumb:"https://vz-7533d228-c25.b-cdn.net/a71a911f-68af-4817-9417-e9bd6ab422b7/thumbnail.jpg",size:45.19,duration:16},
-  {title:"[🎸하나 둘 팬클럽🎸] 【Korean Cover】 [쵸쵸우×쵸봄]",url:"https://iframe.mediadelivery.net/play/596875/6a603e61-d3bf-4a17-96a9-90d151324138",thumb:"https://vz-7533d228-c25.b-cdn.net/6a603e61-d3bf-4a17-96a9-90d151324138/thumbnail.jpg",size:301.26,duration:233},
-  {title:"[🎄Black Christmas🎄] 【Korean Cover】 [대타맨×쵸봄×애덕×취무등×카운터×통깡이×솔뮤×휴복]",url:"https://iframe.mediadelivery.net/play/596875/a47c625e-36f7-4063-9b22-462de2bf87f2",thumb:"https://vz-7533d228-c25.b-cdn.net/a47c625e-36f7-4063-9b22-462de2bf87f2/thumbnail.jpg",size:774.17,duration:266},
-  {title:"[🎸하나 둘 팬클럽🎸] 【Korean Cover】(Teaser)",url:"https://iframe.mediadelivery.net/play/596875/6ca84611-aead-412c-ad4a-88c9993ad79c",thumb:"https://vz-7533d228-c25.b-cdn.net/6ca84611-aead-412c-ad4a-88c9993ad79c/thumbnail.jpg",size:15.47,duration:11},
-  {title:"[🎄Black Christmas🎄] 【Korean Cover】(Teaser)",url:"https://iframe.mediadelivery.net/play/596875/a56fb1d2-b02f-4a13-a86d-70a8e87778f6",thumb:"https://vz-7533d228-c25.b-cdn.net/a56fb1d2-b02f-4a13-a86d-70a8e87778f6/thumbnail.jpg",size:58.88,duration:21},
-  {title:"[🎄Black Christmas🎄] 【Korean Cover】 [대타맨×쵸봄×애덕×취무등×카운터×통깡이×솔뮤×휴복] (1)",url:"https://iframe.mediadelivery.net/play/596875/7873bb34-3598-4c9a-b30e-383803108ba6",thumb:"https://vz-7533d228-c25.b-cdn.net/7873bb34-3598-4c9a-b30e-383803108ba6/thumbnail.jpg",size:153.6,duration:40},
-  {title:"[🎃Mrs.Pumpkin의 우스꽝스러운 꿈🎃] 【Korean Cover】(Teaser)",url:"https://iframe.mediadelivery.net/play/596875/d5526152-ec95-4aac-b755-3734622d719e",thumb:"https://vz-7533d228-c25.b-cdn.net/d5526152-ec95-4aac-b755-3734622d719e/thumbnail.jpg",size:26.52,duration:15},
-  {title:"[🎃Mrs.Pumpkin의 우스꽝스러운 꿈🎃] 【Korean Cover】 [앵보×쵸봄×루묭×배카인×연다×쁘허×아트님×파크모]",url:"https://iframe.mediadelivery.net/play/596875/e2367d5a-0101-47b1-8163-9456151cc897",thumb:"https://vz-7533d228-c25.b-cdn.net/e2367d5a-0101-47b1-8163-9456151cc897/thumbnail.jpg",size:503.38,duration:252},
-  {title:"[🎃Mrs.Pumpkin의 우스꽝스러운 꿈🎃] 【Korean Cover】 [앵보×쵸봄×루묭×배카인×연다×쁘허×아트님×파크모] (1)",url:"https://iframe.mediadelivery.net/play/596875/d4c63ddc-3e4e-454a-bfb2-e4ab19d699e4",thumb:"https://vz-7533d228-c25.b-cdn.net/d4c63ddc-3e4e-454a-bfb2-e4ab19d699e4/thumbnail.jpg",size:48.42,duration:34},
-  {title:"[🍻 KANPAI FUNK 🍻] 30명이 다 같이 불러보았다   30인 에디션",url:"https://iframe.mediadelivery.net/play/596875/31781b6b-afb4-4f05-b115-c629dce74d6b",thumb:"https://vz-7533d228-c25.b-cdn.net/31781b6b-afb4-4f05-b115-c629dce74d6b/thumbnail.jpg",size:882.65,duration:221},
-  {title:"[🍬 Drop pop candy 🍬] 【팔칠 × 쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/10234cce-1459-483b-8eae-b874d0d0ed22",thumb:"https://vz-7533d228-c25.b-cdn.net/10234cce-1459-483b-8eae-b874d0d0ed22/thumbnail.jpg",size:257.25,duration:227},
-  {title:"[🌻summertime🌻] 【Korean Cover】[옐언니×신사장×또솔×가토×아누누×혜다×먹스나×쵸봄]",url:"https://iframe.mediadelivery.net/play/596875/ff2e2dac-84e8-4aac-a871-9180b276ac15",thumb:"https://vz-7533d228-c25.b-cdn.net/ff2e2dac-84e8-4aac-a871-9180b276ac15/thumbnail.jpg",size:608.35,duration:248},
-  {title:"[⛄ Must Have Love ⛄] [쵸봄×모잉×하우카우×장마군×헤가×델로략국]",url:"https://iframe.mediadelivery.net/play/596875/5306b66e-2609-4969-be05-e28d4d5fcfc4",thumb:"https://vz-7533d228-c25.b-cdn.net/5306b66e-2609-4969-be05-e28d4d5fcfc4/thumbnail.jpg",size:888.07,duration:255},
-  {title:"[ 🔷Blessing🔷 ] 【Korean Cover】[덕양소×쵸봄×쵸쵸우×안케×김토키×숫노루×김규식×새옴]",url:"https://iframe.mediadelivery.net/play/596875/d0ce3bba-77a3-469b-9095-2353b5a6b763",thumb:"https://vz-7533d228-c25.b-cdn.net/d0ce3bba-77a3-469b-9095-2353b5a6b763/thumbnail.jpg",size:603.21,duration:271},
-  {title:"[🌻summertime🌻] 【Korean Cover】(Teaser)",url:"https://iframe.mediadelivery.net/play/596875/526d37ab-e939-4d8f-814b-a7467ec4fd07",thumb:"https://vz-7533d228-c25.b-cdn.net/526d37ab-e939-4d8f-814b-a7467ec4fd07/thumbnail.jpg",size:25.63,duration:17},
-  {title:"[⛄ Must Have Love ⛄] (Teaser)",url:"https://iframe.mediadelivery.net/play/596875/da9e3c3c-8e4a-459e-a5ac-611376d1d1ee",thumb:"https://vz-7533d228-c25.b-cdn.net/da9e3c3c-8e4a-459e-a5ac-611376d1d1ee/thumbnail.jpg",size:46.25,duration:17},
-  {title:"[ 🎀 쵸봄 버츄얼 데뷔 🎀 ] (Teaser video)",url:"https://iframe.mediadelivery.net/play/596875/ee0522de-0174-4396-ae97-e79aa2727186",thumb:"https://vz-7533d228-c25.b-cdn.net/ee0522de-0174-4396-ae97-e79aa2727186/thumbnail.jpg",size:122.04,duration:45},
-  {title:"[ 🔷Blessing🔷 ] 【Korean Cover】(Teaser)",url:"https://iframe.mediadelivery.net/play/596875/c5d956fc-3061-4efc-9b8b-e96226c91ed4",thumb:"https://vz-7533d228-c25.b-cdn.net/c5d956fc-3061-4efc-9b8b-e96226c91ed4/thumbnail.jpg",size:27.41,duration:29}
+  {title:"죄송합니다",url:"https://iframe.mediadelivery.net/play/596875/744717d5-ffad-4fe8-bfb3-d47095d253be",thumb:"https://vz-7533d228-c25.b-cdn.net/744717d5-ffad-4fe8-bfb3-d47095d253be.jpg",size:78.87,duration:281},
+  {title:"효녀가 아니고 효년이고만.. (w.경식이 할아버지)",url:"https://iframe.mediadelivery.net/play/596875/173ae28d-5fd1-4ba7-a006-41abcb77725b",thumb:"https://vz-7533d228-c25.b-cdn.net/173ae28d-5fd1-4ba7-a006-41abcb77725b.jpg",size:1932.89,duration:550},
+  {title:"(Show me your Phone) 핸드폰 보여줘 지금 당장",url:"https://iframe.mediadelivery.net/play/596875/f2a3f0c1-4056-4217-8fe6-2a7df815babd",thumb:"https://vz-7533d228-c25.b-cdn.net/f2a3f0c1-4056-4217-8fe6-2a7df815babd.jpg",size:19.89,duration:18},
+  {title:"힘이 전부인 세상 (27) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/eda8117f-950a-4e9b-8376-e265395642ca",thumb:"https://vz-7533d228-c25.b-cdn.net/eda8117f-950a-4e9b-8376-e265395642ca.jpg",size:21.76,duration:22},
+  {title:"흐즈므르.....,,즌쯔....^^ ;;;  (w.최케빈,애덕,연다,연비)",url:"https://iframe.mediadelivery.net/play/596875/6ae5c591-ce14-49d0-bafd-ec5aac2f9483",thumb:"https://vz-7533d228-c25.b-cdn.net/6ae5c591-ce14-49d0-bafd-ec5aac2f9483.jpg",size:1429.82,duration:501},
+  {title:"호요랜드 Vlog # 드디어 성덕이 되었다",url:"https://iframe.mediadelivery.net/play/596875/641a356a-8857-45c0-bede-3764ac883a4e",thumb:"https://vz-7533d228-c25.b-cdn.net/641a356a-8857-45c0-bede-3764ac883a4e.jpg",size:1322.7,duration:783},
+  {title:"혼돈부기 ( 混沌ブギ ) 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/da351058-21d5-44fb-b90d-689aa4e224d9",thumb:"https://vz-7533d228-c25.b-cdn.net/da351058-21d5-44fb-b90d-689aa4e224d9.jpg",size:302.5,duration:155},
+  {title:"헤으응 눈나..❤️ (w.포비위키) (1기 여스 목소리 대회)",url:"https://iframe.mediadelivery.net/play/596875/5f7e3a2a-f1aa-46fb-afea-470dcdc3b44f",thumb:"https://vz-7533d228-c25.b-cdn.net/5f7e3a2a-f1aa-46fb-afea-470dcdc3b44f.jpg",size:758.02,duration:607},
+  {title:"하카야, 진짜 딸 수 있다니까",url:"https://iframe.mediadelivery.net/play/596875/50c5e81c-a65f-4042-ad36-109a60a4b701",thumb:"https://vz-7533d228-c25.b-cdn.net/50c5e81c-a65f-4042-ad36-109a60a4b701.jpg",size:1979.58,duration:632},
+  {title:"허~접ㅋ 완전못해~",url:"https://iframe.mediadelivery.net/play/596875/ac024a6e-e501-444d-861d-a2639a1e2e26",thumb:"https://vz-7533d228-c25.b-cdn.net/ac024a6e-e501-444d-861d-a2639a1e2e26.jpg",size:1921.82,duration:533},
+  {title:"햄스터 중성화 시키는 법 (13) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/b4e0d016-1bb7-45c2-9ca4-a8f525f06bcd",thumb:"https://vz-7533d228-c25.b-cdn.net/b4e0d016-1bb7-45c2-9ca4-a8f525f06bcd.jpg",size:29.67,duration:29},
+  {title:"합방에서 지각하면 X되는 이유",url:"https://iframe.mediadelivery.net/play/596875/82074e4a-9125-4b55-9562-5e71b5475a1b",thumb:"https://vz-7533d228-c25.b-cdn.net/82074e4a-9125-4b55-9562-5e71b5475a1b.jpg",size:1602.26,duration:767},
+  {title:"하루토님.. 뭐하시는거에요...",url:"https://iframe.mediadelivery.net/play/596875/e1dc9c47-eff4-4cbd-bf5a-4b5ef5de1b2b",thumb:"https://vz-7533d228-c25.b-cdn.net/e1dc9c47-eff4-4cbd-bf5a-4b5ef5de1b2b.jpg",size:1167.91,duration:556},
+  {title:"하렘물.. (w.포비위키) (1기 여스 대회)",url:"https://iframe.mediadelivery.net/play/596875/4a08b0c9-98d0-4d03-864c-2de029ae788d",thumb:"https://vz-7533d228-c25.b-cdn.net/4a08b0c9-98d0-4d03-864c-2de029ae788d.jpg",size:601.07,duration:556},
+  {title:"하나 둘 셋 야",url:"https://iframe.mediadelivery.net/play/596875/ebe3e539-3b65-4f70-ae59-644d99f32f0e",thumb:"https://vz-7533d228-c25.b-cdn.net/ebe3e539-3b65-4f70-ae59-644d99f32f0e.jpg",size:62.79,duration:59},
+  {title:"픽셀몬에 미싱노가 나타났다!",url:"https://iframe.mediadelivery.net/play/596875/b0741fcf-c2e2-48ce-af81-a073e6a59bce",thumb:"https://vz-7533d228-c25.b-cdn.net/b0741fcf-c2e2-48ce-af81-a073e6a59bce.jpg",size:159.84,duration:59},
+  {title:"포비위키님의 고백...",url:"https://iframe.mediadelivery.net/play/596875/16d151ce-01b2-4948-abeb-95e8b28a958b",thumb:"https://vz-7533d228-c25.b-cdn.net/16d151ce-01b2-4948-abeb-95e8b28a958b.jpg",size:31.74,duration:40},
+  {title:"팔칠님 오늘부터 1일❤️",url:"https://iframe.mediadelivery.net/play/596875/9bb92513-6f42-4136-936c-85031e909458",thumb:"https://vz-7533d228-c25.b-cdn.net/9bb92513-6f42-4136-936c-85031e909458.jpg",size:2074.88,duration:495},
+  {title:"편집자가 살아남는 방법 (18) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/dbb6adeb-e9ef-4688-b33f-cfa51875164c",thumb:"https://vz-7533d228-c25.b-cdn.net/dbb6adeb-e9ef-4688-b33f-cfa51875164c.jpg",size:36.63,duration:34},
+  {title:"파크모님의 결혼을 진심으로 축하드립니다",url:"https://iframe.mediadelivery.net/play/596875/3a7b2953-d62a-4dad-8515-c03c0369107f",thumb:"https://vz-7533d228-c25.b-cdn.net/3a7b2953-d62a-4dad-8515-c03c0369107f.jpg",size:759.62,duration:595},
+  {title:"파크모의 15초 억까 랩",url:"https://iframe.mediadelivery.net/play/596875/2063f6b8-38aa-45ee-9fc3-9877244b4fe5",thumb:"https://vz-7533d228-c25.b-cdn.net/2063f6b8-38aa-45ee-9fc3-9877244b4fe5.jpg",size:64.81,duration:46},
+  {title:"파크모 ) 쵸봄 ( 흰자눈",url:"https://iframe.mediadelivery.net/play/596875/0735b157-a566-4128-a0dc-8d91932fa2aa",thumb:"https://vz-7533d228-c25.b-cdn.net/0735b157-a566-4128-a0dc-8d91932fa2aa.jpg",size:177.45,duration:174},
+  {title:"파크모님의 결혼을 진심으로 축하드립니다 (1)",url:"https://iframe.mediadelivery.net/play/596875/11203d6e-3d78-4013-bc96-951513130b0c",thumb:"https://vz-7533d228-c25.b-cdn.net/11203d6e-3d78-4013-bc96-951513130b0c.jpg",size:27.42,duration:27},
+  {title:"친오빠랑 제대로 한번 붙었습니다",url:"https://iframe.mediadelivery.net/play/596875/26c62a60-be8f-4c1c-af51-6f2c90a79a93",thumb:"https://vz-7533d228-c25.b-cdn.net/26c62a60-be8f-4c1c-af51-6f2c90a79a93.jpg",size:2610.84,duration:688},
+  {title:"트수와 쵸봄TS의 리즈시절 졸업앨범 #반전그림 #졸업앨범",url:"https://iframe.mediadelivery.net/play/596875/905e47f1-ae8d-4e37-b67b-4917a7e0de48",thumb:"https://vz-7533d228-c25.b-cdn.net/905e47f1-ae8d-4e37-b67b-4917a7e0de48.jpg",size:39.0,duration:15},
+  {title:"투디 여자친구분은 조심하세요 (22) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/f25bbf8f-7b04-4c84-bd6e-a243f572503f",thumb:"https://vz-7533d228-c25.b-cdn.net/f25bbf8f-7b04-4c84-bd6e-a243f572503f.jpg",size:21.14,duration:22},
+  {title:"투네 관리자가 오는 방송",url:"https://iframe.mediadelivery.net/play/596875/9460ebd6-004b-49b2-96cb-21e23abfa334",thumb:"https://vz-7533d228-c25.b-cdn.net/9460ebd6-004b-49b2-96cb-21e23abfa334.jpg",size:286.77,duration:179},
+  {title:"텔레캐스터 비보이 【Korean Cover】 【쵸봄 x 악월 x 배카인 x 설경】",url:"https://iframe.mediadelivery.net/play/596875/25cc6b01-58be-4592-be0e-3eb9c1dcee8c",thumb:"https://vz-7533d228-c25.b-cdn.net/25cc6b01-58be-4592-be0e-3eb9c1dcee8c.jpg",size:512.66,duration:165},
+  {title:"텔레캐스터 비보이 【Korean Cover】 【쵸봄 x 악월 x 배카인 x 설경】 (1)",url:"https://iframe.mediadelivery.net/play/596875/8c2b1621-9c40-43ca-8722-d9dd0f6b135f",thumb:"https://vz-7533d228-c25.b-cdn.net/8c2b1621-9c40-43ca-8722-d9dd0f6b135f.jpg",size:76.48,duration:29},
+  {title:"크고....우람한....! 무언가..❤️ (갈틱폰)",url:"https://iframe.mediadelivery.net/play/596875/7af3b340-9771-4317-a38f-d95a4d1db122",thumb:"https://vz-7533d228-c25.b-cdn.net/7af3b340-9771-4317-a38f-d95a4d1db122.jpg",size:754.32,duration:440},
+  {title:"코이 恋 【Korean Cover】 【 쵸봄 × 김토키(김신우) 】",url:"https://iframe.mediadelivery.net/play/596875/06965f0f-251b-4e0f-a004-77a2a63562df",thumb:"https://vz-7533d228-c25.b-cdn.net/06965f0f-251b-4e0f-a004-77a2a63562df.jpg",size:523.3,duration:250},
+  {title:"코이 恋 【Korean Cover】 【 쵸봄 × 김토키(김신우) 】 (1)",url:"https://iframe.mediadelivery.net/play/596875/8098e36c-987f-4f65-ae00-4e8a76b78866",thumb:"https://vz-7533d228-c25.b-cdn.net/8098e36c-987f-4f65-ae00-4e8a76b78866.jpg",size:125.87,duration:45},
+  {title:"ㅋㄷ으로 목졸라 죽인 사람  #Shorts",url:"https://iframe.mediadelivery.net/play/596875/f55bbc5a-fb37-4f0e-9d8c-cc6b70d8f8a9",thumb:"https://vz-7533d228-c25.b-cdn.net/f55bbc5a-fb37-4f0e-9d8c-cc6b70d8f8a9.jpg",size:31.93,duration:59},
+  {title:"친구들한테 버림 받았습니다...",url:"https://iframe.mediadelivery.net/play/596875/17df551d-0868-431a-bf96-b4ea7ecf2c6d",thumb:"https://vz-7533d228-c25.b-cdn.net/17df551d-0868-431a-bf96-b4ea7ecf2c6d.jpg",size:730.21,duration:577},
+  {title:"춘향님 왜 저한테만 그러세요",url:"https://iframe.mediadelivery.net/play/596875/65204683-c656-4898-8d6f-4f88d6e9f85f",thumb:"https://vz-7533d228-c25.b-cdn.net/65204683-c656-4898-8d6f-4f88d6e9f85f.jpg",size:2239.72,duration:719},
+  {title:"취한줄도 모르고 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/d39a8900-16d2-4661-8926-1bc02243f868",thumb:"https://vz-7533d228-c25.b-cdn.net/d39a8900-16d2-4661-8926-1bc02243f868.jpg",size:177.22,duration:135},
+  {title:"취한 무드등이 드디어 미쳤나보다",url:"https://iframe.mediadelivery.net/play/596875/07483408-a59e-49bd-be16-3a82e184165b",thumb:"https://vz-7533d228-c25.b-cdn.net/07483408-a59e-49bd-be16-3a82e184165b.jpg",size:1082.5,duration:744},
+  {title:"춤 (踊) 【쵸봄】【Korean Cover】",url:"https://iframe.mediadelivery.net/play/596875/4954e737-0ed5-40f4-8a07-394b8a7e0129",thumb:"https://vz-7533d228-c25.b-cdn.net/4954e737-0ed5-40f4-8a07-394b8a7e0129.jpg",size:405.51,duration:208},
+  {title:"쵸쵸우랑 싸웠습니다 ㅠ",url:"https://iframe.mediadelivery.net/play/596875/9e8fdca4-301d-4695-9182-ff22bd7c67b4",thumb:"https://vz-7533d228-c25.b-cdn.net/9e8fdca4-301d-4695-9182-ff22bd7c67b4.jpg",size:1101.22,duration:510},
+  {title:"쵸쵸우, 나는 동료를 쉽게 배신하지..",url:"https://iframe.mediadelivery.net/play/596875/17ab0ff4-fda7-46ad-83ca-12944c643c8c",thumb:"https://vz-7533d228-c25.b-cdn.net/17ab0ff4-fda7-46ad-83ca-12944c643c8c.jpg",size:2234.43,duration:663},
+  {title:"최케빈 침대전쟁 #(쵸봄 시점)",url:"https://iframe.mediadelivery.net/play/596875/014b6b69-2979-49b1-9bf6-b5e35d0885fb",thumb:"https://vz-7533d228-c25.b-cdn.net/014b6b69-2979-49b1-9bf6-b5e35d0885fb.jpg",size:1531.2,duration:482},
+  {title:"쵸봄님 이거 두고 가셨어요~!! (w.연다)",url:"https://iframe.mediadelivery.net/play/596875/e6fe46ce-9d8b-4e67-b585-271cd5c7ee1c",thumb:"https://vz-7533d228-c25.b-cdn.net/e6fe46ce-9d8b-4e67-b585-271cd5c7ee1c.jpg",size:1793.85,duration:454},
+  {title:"쵸봄 래빗 홀 DECO 27 Rabbit Hole Pure Pure",url:"https://iframe.mediadelivery.net/play/596875/e62465b8-cc66-4aa4-b052-c261cbc69638",thumb:"https://vz-7533d228-c25.b-cdn.net/e62465b8-cc66-4aa4-b052-c261cbc69638.jpg",size:147.5,duration:59},
+  {title:"초면인데 메이드복이라뇨",url:"https://iframe.mediadelivery.net/play/596875/0b47a29a-b88c-40d8-a3b9-4172f766efe5",thumb:"https://vz-7533d228-c25.b-cdn.net/0b47a29a-b88c-40d8-a3b9-4172f766efe5.jpg",size:510.54,duration:515},
+  {title:"창공 라구 50개 깡 (아 ㅋㅋ 창공 별거 없네)",url:"https://iframe.mediadelivery.net/play/596875/8e566760-aad4-47e7-ae2f-c2d546c8d725",thumb:"https://vz-7533d228-c25.b-cdn.net/8e566760-aad4-47e7-ae2f-c2d546c8d725.jpg",size:796.27,duration:387},
+  {title:"짱구 아빠의 마지막 유언 (12) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/32304c46-0683-46ee-afbd-502e21c252b9",thumb:"https://vz-7533d228-c25.b-cdn.net/32304c46-0683-46ee-afbd-502e21c252b9.jpg",size:28.84,duration:29},
+  {title:"지스타 Vlog # 릴파님 영접하고 왔습니다!!",url:"https://iframe.mediadelivery.net/play/596875/a0c4a88f-5ab2-4d5d-9405-96830d551c8f",thumb:"https://vz-7533d228-c25.b-cdn.net/a0c4a88f-5ab2-4d5d-9405-96830d551c8f.jpg",size:1142.06,duration:306},
+  {title:"진짜 타이나리 성우와 함께 푸리나 뽑기",url:"https://iframe.mediadelivery.net/play/596875/efa93749-cbc1-42d8-abba-a4bf8a2f860d",thumb:"https://vz-7533d228-c25.b-cdn.net/efa93749-cbc1-42d8-abba-a4bf8a2f860d.jpg",size:1451.1,duration:685},
+  {title:"진정한 낭자애 등장.. (트수 랜덤 소개팅)",url:"https://iframe.mediadelivery.net/play/596875/61e87ef6-ff23-4dea-8f01-3ebea76d7a3f",thumb:"https://vz-7533d228-c25.b-cdn.net/61e87ef6-ff23-4dea-8f01-3ebea76d7a3f.jpg",size:496.18,duration:485},
+  {title:"'지스타' Vlog # 대기업 스트리머와의 '현실' 만남!!!",url:"https://iframe.mediadelivery.net/play/596875/2442e276-2ca4-4bae-a3ba-8c87444dd23b",thumb:"https://vz-7533d228-c25.b-cdn.net/2442e276-2ca4-4bae-a3ba-8c87444dd23b.jpg",size:2519.61,duration:630},
+  {title:"좋아해요",url:"https://iframe.mediadelivery.net/play/596875/5b849e39-df3a-4589-be88-2e2375610c51",thumb:"https://vz-7533d228-c25.b-cdn.net/5b849e39-df3a-4589-be88-2e2375610c51.jpg",size:3544.26,duration:905},
+  {title:"지극히 평범한 대화입니다",url:"https://iframe.mediadelivery.net/play/596875/8e1c3c81-b2cb-4e37-993d-5e012b280624",thumb:"https://vz-7533d228-c25.b-cdn.net/8e1c3c81-b2cb-4e37-993d-5e012b280624.jpg",size:246.85,duration:337},
+  {title:"주인님... (24) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/aa0d10cc-1b2c-4c69-bafd-b747a28754d7",thumb:"https://vz-7533d228-c25.b-cdn.net/aa0d10cc-1b2c-4c69-bafd-b747a28754d7.jpg",size:24.74,duration:24},
+  {title:"절정찬가(絶頂讃歌) 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/788a8759-de1d-46ca-8296-d6d7934fe1d4",thumb:"https://vz-7533d228-c25.b-cdn.net/788a8759-de1d-46ca-8296-d6d7934fe1d4.jpg",size:536.71,duration:182},
+  {title:"저희.. 사이.. 좋아요...^^^^.. (w.참외몬)",url:"https://iframe.mediadelivery.net/play/596875/e2129147-d160-4ed3-ac03-97774ade59c6",thumb:"https://vz-7533d228-c25.b-cdn.net/e2129147-d160-4ed3-ac03-97774ade59c6.jpg",size:1525.98,duration:493},
+  {title:"절정찬가(絶頂讃歌) 【Korean Cover】 【쵸봄】 (1)",url:"https://iframe.mediadelivery.net/play/596875/f92a69dc-f23d-4192-8458-d0895e8de1fc",thumb:"https://vz-7533d228-c25.b-cdn.net/f92a69dc-f23d-4192-8458-d0895e8de1fc.jpg",size:90.79,duration:30},
+  {title:"절대 연다님이 괴롭히는 영상  (w.연다)",url:"https://iframe.mediadelivery.net/play/596875/d7abb591-fe2e-4f70-9a38-179b19d2689a",thumb:"https://vz-7533d228-c25.b-cdn.net/d7abb591-fe2e-4f70-9a38-179b19d2689a.jpg",size:1809.7,duration:497},
+  {title:"전방향 미소녀 #全方向美少女 #meme #tiktok",url:"https://iframe.mediadelivery.net/play/596875/cbcd5812-df30-40b2-ac8d-486b77e1f804",thumb:"https://vz-7533d228-c25.b-cdn.net/cbcd5812-df30-40b2-ac8d-486b77e1f804.jpg",size:21.79,duration:9},
+  {title:"저질러 버렸습니다.. (곧 감옥 갑니다)",url:"https://iframe.mediadelivery.net/play/596875/9fdb228e-ed55-4ddb-a801-3abb89483a51",thumb:"https://vz-7533d228-c25.b-cdn.net/9fdb228e-ed55-4ddb-a801-3abb89483a51.jpg",size:1762.44,duration:542},
+  {title:"저는 이 발언과 무관합니다 (36) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/6c359bc6-2942-4373-bd8c-873172e98fce",thumb:"https://vz-7533d228-c25.b-cdn.net/6c359bc6-2942-4373-bd8c-873172e98fce.jpg",size:22.9,duration:24},
+  {title:"장기자랑 국룰 (39) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/ff6a53ae-52ac-454a-8bfb-c21fd5a57174",thumb:"https://vz-7533d228-c25.b-cdn.net/ff6a53ae-52ac-454a-8bfb-c21fd5a57174.jpg",size:17.64,duration:20},
+  {title:"이것만 잡으면 에이스..ㄷ.....! (발로란트)",url:"https://iframe.mediadelivery.net/play/596875/960c9433-3d1d-4c4e-8bd4-06dcb35664c8",thumb:"https://vz-7533d228-c25.b-cdn.net/960c9433-3d1d-4c4e-8bd4-06dcb35664c8.jpg",size:1806.31,duration:509},
+  {title:"자 입 안에 있는건 애기씨 라는거에요~ (w.박지,취무등)",url:"https://iframe.mediadelivery.net/play/596875/2f680cb0-f9d1-499d-97dd-ac703f71aa94",thumb:"https://vz-7533d228-c25.b-cdn.net/2f680cb0-f9d1-499d-97dd-ac703f71aa94.jpg",size:900.29,duration:378},
+  {title:"ㅈ됨을 감지함..ㄷㄷ 제목학원 레전드 (5) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/05f424fc-c4dd-4e21-ba79-9f2cfedeeeba",thumb:"https://vz-7533d228-c25.b-cdn.net/05f424fc-c4dd-4e21-ba79-9f2cfedeeeba.jpg",size:32.54,duration:34},
+  {title:"이분이 유명한 갈통 성우님...",url:"https://iframe.mediadelivery.net/play/596875/1a14a92e-4dbe-4ba4-b02e-8273ed48a560",thumb:"https://vz-7533d228-c25.b-cdn.net/1a14a92e-4dbe-4ba4-b02e-8273ed48a560.jpg",size:1917.74,duration:664},
+  {title:"이게,. 초심자의 행운인가! 한번에 뽑아버렸다...!",url:"https://iframe.mediadelivery.net/play/596875/8c594310-6b3c-47ba-b0ea-cc3171cf549c",thumb:"https://vz-7533d228-c25.b-cdn.net/8c594310-6b3c-47ba-b0ea-cc3171cf549c.jpg",size:1546.67,duration:555},
+  {title:"이거 진짜 겁나 무서운 게임",url:"https://iframe.mediadelivery.net/play/596875/fb8994c1-6f2b-412c-843d-e79b87a87652",thumb:"https://vz-7533d228-c25.b-cdn.net/fb8994c1-6f2b-412c-843d-e79b87a87652.jpg",size:2029.21,duration:677},
+  {title:"이걸 이기네 #Shorts",url:"https://iframe.mediadelivery.net/play/596875/2ed05bed-f453-4822-96c3-a94ba51496c9",thumb:"https://vz-7533d228-c25.b-cdn.net/2ed05bed-f453-4822-96c3-a94ba51496c9.jpg",size:96.56,duration:59},
+  {title:"윤데드와 포켓몬 모드 탐방! (포켓몬 모드)",url:"https://iframe.mediadelivery.net/play/596875/a979b21a-ecfb-490c-868b-5d96fb39523a",thumb:"https://vz-7533d228-c25.b-cdn.net/a979b21a-ecfb-490c-868b-5d96fb39523a.jpg",size:1163.17,duration:414},
+  {title:"유튜버들이 쵸봄을 따라한다면",url:"https://iframe.mediadelivery.net/play/596875/13af1b5f-2ffb-4387-9a03-db00104c6f6a",thumb:"https://vz-7533d228-c25.b-cdn.net/13af1b5f-2ffb-4387-9a03-db00104c6f6a.jpg",size:401.72,duration:362},
+  {title:"유튜브 접습니다 그동안 감사했습니다..",url:"https://iframe.mediadelivery.net/play/596875/c580d2fe-4b85-4ab2-9827-e808e7861536",thumb:"https://vz-7533d228-c25.b-cdn.net/c580d2fe-4b85-4ab2-9827-e808e7861536.jpg",size:51.58,duration:41},
+  {title:"유튜버들의 진귀한 애교 영상 (후회 안함)",url:"https://iframe.mediadelivery.net/play/596875/c232b32d-f4a1-4f0f-9f66-697b1e3449d5",thumb:"https://vz-7533d228-c25.b-cdn.net/c232b32d-f4a1-4f0f-9f66-697b1e3449d5.jpg",size:2124.78,duration:562},
+  {title:"유튜버 햄식이 실물 ㄷㄷ (47) #shorts #제목학원 #마인크래프트",url:"https://iframe.mediadelivery.net/play/596875/618e42e6-0c64-44f0-acf8-fa557019db5f",thumb:"https://vz-7533d228-c25.b-cdn.net/618e42e6-0c64-44f0-acf8-fa557019db5f.jpg",size:23.5,duration:26},
+  {title:"유콘님 애교 잘 하시네요 ㅋㅋㅋㅋ",url:"https://iframe.mediadelivery.net/play/596875/51271acc-bcf9-4f09-b5e4-6c5b199d9708",thumb:"https://vz-7533d228-c25.b-cdn.net/51271acc-bcf9-4f09-b5e4-6c5b199d9708.jpg",size:1479.0,duration:481},
+  {title:"유시후님이 그린 노래 보고 갈래",url:"https://iframe.mediadelivery.net/play/596875/197ed243-5d20-425d-801c-baed4248d8c6",thumb:"https://vz-7533d228-c25.b-cdn.net/197ed243-5d20-425d-801c-baed4248d8c6.jpg",size:134.58,duration:42},
+  {title:"웨이백홈 원툴 가수 숀 님과 게임 했습니다",url:"https://iframe.mediadelivery.net/play/596875/979cd9cc-b82d-4ced-b45a-faf6df6ea3f0",thumb:"https://vz-7533d228-c25.b-cdn.net/979cd9cc-b82d-4ced-b45a-faf6df6ea3f0.jpg",size:1827.76,duration:591},
+  {title:"유명 틱톡커들과 함께 부른 여름 노래",url:"https://iframe.mediadelivery.net/play/596875/59a8451c-926d-4dae-b619-07aad0b2ef14",thumb:"https://vz-7533d228-c25.b-cdn.net/59a8451c-926d-4dae-b619-07aad0b2ef14.jpg",size:61.87,duration:31},
+  {title:"원신 나비아 떴냐! 40만원 질러버렸다...",url:"https://iframe.mediadelivery.net/play/596875/70764e6b-5f66-43f2-ab24-8896b38144be",thumb:"https://vz-7533d228-c25.b-cdn.net/70764e6b-5f66-43f2-ab24-8896b38144be.jpg",size:2175.6,duration:728},
+  {title:"원신 클로린드의 로리신 레퀴엠 #genshinimpact #Genshin",url:"https://iframe.mediadelivery.net/play/596875/4b6f69e6-6e79-4320-b51c-f9f7007729ce",thumb:"https://vz-7533d228-c25.b-cdn.net/4b6f69e6-6e79-4320-b51c-f9f7007729ce.jpg",size:56.25,duration:26},
+  {title:"원신 뉴비에요ㅠㅠ 하지만 느비예트 풀돌을 곁들인....",url:"https://iframe.mediadelivery.net/play/596875/d0b1a79b-ce03-4b2a-867c-4893458ee9fc",thumb:"https://vz-7533d228-c25.b-cdn.net/d0b1a79b-ce03-4b2a-867c-4893458ee9fc.jpg",size:1817.57,duration:586},
+  {title:"연다야 다치면 엑스레이 찍으러 가야지",url:"https://iframe.mediadelivery.net/play/596875/9ae89ddf-0e18-43cf-8163-11a2b884817f",thumb:"https://vz-7533d228-c25.b-cdn.net/9ae89ddf-0e18-43cf-8163-11a2b884817f.jpg",size:2002.58,duration:657},
+  {title:"원신 가명 그자체, 김윤기 성우님 영접 해버렸다야~!",url:"https://iframe.mediadelivery.net/play/596875/8f546b6c-0cf8-41c6-a839-94c874aabbd4",thumb:"https://vz-7533d228-c25.b-cdn.net/8f546b6c-0cf8-41c6-a839-94c874aabbd4.jpg",size:2071.24,duration:1816},
+  {title:"운터의 온몸 비틀기 개그 (19) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/6c85a540-b691-4738-9bcd-ffdcf8753e87",thumb:"https://vz-7533d228-c25.b-cdn.net/6c85a540-b691-4738-9bcd-ffdcf8753e87.jpg",size:26.91,duration:24},
+  {title:"운터 애교 보고 가세요 (21) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/60ae3376-cdd1-405f-a8d2-a539bc27bde2",thumb:"https://vz-7533d228-c25.b-cdn.net/60ae3376-cdd1-405f-a8d2-a539bc27bde2.jpg",size:23.64,duration:23},
+  {title:"운터야.. 이미지 챙겨.. (29) #shorts #제목학원 #마인크래프트 #웃긴영상",url:"https://iframe.mediadelivery.net/play/596875/a879552b-2a2d-482c-ad57-6b9637d67c86",thumb:"https://vz-7533d228-c25.b-cdn.net/a879552b-2a2d-482c-ad57-6b9637d67c86.jpg",size:23.9,duration:25},
+  {title:"우린.. 친구... 잖아요 ㅎㅎ",url:"https://iframe.mediadelivery.net/play/596875/0029f46e-9866-4d06-a708-7877a64010c6",thumb:"https://vz-7533d228-c25.b-cdn.net/0029f46e-9866-4d06-a708-7877a64010c6.jpg",size:581.33,duration:473},
+  {title:"우리가 발로란트를 하는 이유 (Why We Play Valorant)",url:"https://iframe.mediadelivery.net/play/596875/7d137b44-3cbe-40f1-b168-7a8bdb1774e5",thumb:"https://vz-7533d228-c25.b-cdn.net/7d137b44-3cbe-40f1-b168-7a8bdb1774e5.jpg",size:134.27,duration:32},
+  {title:"우고님을 믿으면 안돼....",url:"https://iframe.mediadelivery.net/play/596875/19b47164-7c58-4584-8b04-bb5912d691ce",thumb:"https://vz-7533d228-c25.b-cdn.net/19b47164-7c58-4584-8b04-bb5912d691ce.jpg",size:820.33,duration:479},
+  {title:"우는 고양이 댄스",url:"https://iframe.mediadelivery.net/play/596875/5193ec2f-e36c-4fd1-991d-b1432e19a398",thumb:"https://vz-7533d228-c25.b-cdn.net/5193ec2f-e36c-4fd1-991d-b1432e19a398.jpg",size:22.26,duration:17},
+  {title:"용술사라구 150개 깡",url:"https://iframe.mediadelivery.net/play/596875/9aec8a19-0cda-464c-943c-9953ec008e12",thumb:"https://vz-7533d228-c25.b-cdn.net/9aec8a19-0cda-464c-943c-9953ec008e12.jpg",size:1206.21,duration:638},
+  {title:"와! 포켓몬빵! 와! 섅즈!",url:"https://iframe.mediadelivery.net/play/596875/bb1404bd-b582-4435-8e77-451eed44fd93",thumb:"https://vz-7533d228-c25.b-cdn.net/bb1404bd-b582-4435-8e77-451eed44fd93.jpg",size:297.89,duration:179},
+  {title:"요새 유행하는 마라 '탕' 후루 #meme #마라탕후루",url:"https://iframe.mediadelivery.net/play/596875/f93175d7-b154-4bc9-99a8-491e06339059",thumb:"https://vz-7533d228-c25.b-cdn.net/f93175d7-b154-4bc9-99a8-491e06339059.jpg",size:19.11,duration:7},
+  {title:"옥쓔님과 막이마기님은 제가 NTR 하겠습니다! (w.막이마기,옥쓔,연다)",url:"https://iframe.mediadelivery.net/play/596875/083a224f-6e35-4ead-82fd-565104da71ba",thumb:"https://vz-7533d228-c25.b-cdn.net/083a224f-6e35-4ead-82fd-565104da71ba.jpg",size:1854.28,duration:561},
+  {title:"오징어 게임 우승자 스포 제목학원 레전드 ㅋㅋㅋㅋ (7) #shorts",url:"https://iframe.mediadelivery.net/play/596875/fdc4eaec-0c4d-4aff-b900-381ce82df69c",thumb:"https://vz-7533d228-c25.b-cdn.net/fdc4eaec-0c4d-4aff-b900-381ce82df69c.jpg",size:23.67,duration:24},
+  {title:"오이시소~! #mochimochi #모찌모찌",url:"https://iframe.mediadelivery.net/play/596875/012af5df-be05-4b9f-996d-f6abeb00a765",thumb:"https://vz-7533d228-c25.b-cdn.net/012af5df-be05-4b9f-996d-f6abeb00a765.jpg",size:79.41,duration:20},
+  {title:"옆 집 개가 개시끄럽다",url:"https://iframe.mediadelivery.net/play/596875/96b09e3c-6833-4385-88d3-1157a9b2a6a4",thumb:"https://vz-7533d228-c25.b-cdn.net/96b09e3c-6833-4385-88d3-1157a9b2a6a4.jpg",size:54.42,duration:38},
+  {title:"영포티의 제목학원 레전드ㅋㅋㅋ (6) #shorts",url:"https://iframe.mediadelivery.net/play/596875/0b1b6b89-1189-43f0-a113-665a1626a56f",thumb:"https://vz-7533d228-c25.b-cdn.net/0b1b6b89-1189-43f0-a113-665a1626a56f.jpg",size:27.49,duration:27},
+  {title:"어이쿠 , 손이 미끄러졌네",url:"https://iframe.mediadelivery.net/play/596875/d5155b7b-39dd-4a5e-84f0-0eeb85ac2a9d",thumb:"https://vz-7533d228-c25.b-cdn.net/d5155b7b-39dd-4a5e-84f0-0eeb85ac2a9d.jpg",size:1338.09,duration:607},
+  {title:"열사병을 천천히 말해봐! #열사병 #반전",url:"https://iframe.mediadelivery.net/play/596875/a072c98d-f973-4557-ba2a-f784090c098c",thumb:"https://vz-7533d228-c25.b-cdn.net/a072c98d-f973-4557-ba2a-f784090c098c.jpg",size:20.54,duration:12},
+  {title:"여름엔 summertime",url:"https://iframe.mediadelivery.net/play/596875/d30238d1-5e9c-4584-90cf-cd681b76b0ee",thumb:"https://vz-7533d228-c25.b-cdn.net/d30238d1-5e9c-4584-90cf-cd681b76b0ee.jpg",size:119.12,duration:42},
+  {title:"역대급 웃긴 제목학원 레전드ㅋㅋㅋㅋ (4) #shorts",url:"https://iframe.mediadelivery.net/play/596875/7b548926-109a-48b9-89f5-b89e7e1cafb6",thumb:"https://vz-7533d228-c25.b-cdn.net/7b548926-109a-48b9-89f5-b89e7e1cafb6.jpg",size:22.35,duration:27},
+  {title:"에이 설마 괴물이 나오겠어 ㅋㅋ",url:"https://iframe.mediadelivery.net/play/596875/8b7a0c11-a52d-465a-acc2-4b669e3d5076",thumb:"https://vz-7533d228-c25.b-cdn.net/8b7a0c11-a52d-465a-acc2-4b669e3d5076.jpg",size:1767.94,duration:666},
+  {title:"에스파 카리나가 제로투 추는걸 볼 수 있다고",url:"https://iframe.mediadelivery.net/play/596875/3ded06d5-cfec-4b75-99eb-46a5c0c11622",thumb:"https://vz-7533d228-c25.b-cdn.net/3ded06d5-cfec-4b75-99eb-46a5c0c11622.jpg",size:1245.12,duration:561},
+  {title:"에고록 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/26ea3f13-ef2a-4006-8177-904ea98375dc",thumb:"https://vz-7533d228-c25.b-cdn.net/26ea3f13-ef2a-4006-8177-904ea98375dc.jpg",size:257.24,duration:167},
+  {title:"언니야 나랑 놀아~ #비챤 #이세돌 #언니야",url:"https://iframe.mediadelivery.net/play/596875/2d7160b0-3f26-4929-9029-f465cba6738b",thumb:"https://vz-7533d228-c25.b-cdn.net/2d7160b0-3f26-4929-9029-f465cba6738b.jpg",size:15.99,duration:10},
+  {title:"어서오세요 집사 카페에 (집사카페)",url:"https://iframe.mediadelivery.net/play/596875/2e2911c1-d714-4a6d-aebb-544648f62804",thumb:"https://vz-7533d228-c25.b-cdn.net/2e2911c1-d714-4a6d-aebb-544648f62804.jpg",size:1130.06,duration:649},
+  {title:"아니.. 넌 뭔가 보일거 같아서...",url:"https://iframe.mediadelivery.net/play/596875/615dfe2c-0006-4755-9289-283f9464e1e0",thumb:"https://vz-7533d228-c25.b-cdn.net/615dfe2c-0006-4755-9289-283f9464e1e0.jpg",size:1565.4,duration:527},
+  {title:"앤비베이비 (エンヴィーベイビー) 【쵸봄】【Cover】",url:"https://iframe.mediadelivery.net/play/596875/932ee38d-2c99-4fb1-9331-8133eb5fffeb",thumb:"https://vz-7533d228-c25.b-cdn.net/932ee38d-2c99-4fb1-9331-8133eb5fffeb.jpg",size:170.3,duration:135},
+  {title:"앞으로 먼저 가 김재원..!!",url:"https://iframe.mediadelivery.net/play/596875/e67d7af3-9dec-4926-a233-82d0d6d2da26",thumb:"https://vz-7533d228-c25.b-cdn.net/e67d7af3-9dec-4926-a233-82d0d6d2da26.jpg",size:2322.53,duration:716},
+  {title:"악마를 만났다.... (w.박지,취무등)",url:"https://iframe.mediadelivery.net/play/596875/1f8b1312-df6f-44f5-8520-f637459196ed",thumb:"https://vz-7533d228-c25.b-cdn.net/1f8b1312-df6f-44f5-8520-f637459196ed.jpg",size:721.17,duration:538},
+  {title:"아이돌 アイドル 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/c61c1ef8-081a-4a01-abe3-0300fd1d7582",thumb:"https://vz-7533d228-c25.b-cdn.net/c61c1ef8-081a-4a01-abe3-0300fd1d7582.jpg",size:566.33,duration:213},
+  {title:"아니 왜 나한테 오는데 !!!!!!!!!! ( 러스트 #1 )",url:"https://iframe.mediadelivery.net/play/596875/fa5b4213-a0a1-45aa-8542-530c0ac3833e",thumb:"https://vz-7533d228-c25.b-cdn.net/fa5b4213-a0a1-45aa-8542-530c0ac3833e.jpg",size:2140.76,duration:549},
+  {title:"아리 성대모사 19금... #shorts",url:"https://iframe.mediadelivery.net/play/596875/e93c63f1-9349-47b8-ad26-b324e0cc7950",thumb:"https://vz-7533d228-c25.b-cdn.net/e93c63f1-9349-47b8-ad26-b324e0cc7950.jpg",size:22.3,duration:41},
+  {title:"아니 파크모님 말을 하세요 말을 (금지어 전데) (w.파크모)",url:"https://iframe.mediadelivery.net/play/596875/da57b839-ff98-416c-9943-0f2cf729b051",thumb:"https://vz-7533d228-c25.b-cdn.net/da57b839-ff98-416c-9943-0f2cf729b051.jpg",size:708.79,duration:439},
+  {title:"아니 그래서 이게 뭔데",url:"https://iframe.mediadelivery.net/play/596875/0e80f6ad-8112-4551-8dd1-78c4361c7c69",thumb:"https://vz-7533d228-c25.b-cdn.net/0e80f6ad-8112-4551-8dd1-78c4361c7c69.jpg",size:1374.07,duration:601},
+  {title:"아니 이거 뭔 신종 밀당이야 #Shorts",url:"https://iframe.mediadelivery.net/play/596875/5d78d94a-4795-4d72-a778-a361db919851",thumb:"https://vz-7533d228-c25.b-cdn.net/5d78d94a-4795-4d72-a778-a361db919851.jpg",size:32.51,duration:59},
+  {title:"아니 왜 나만 따라오는건데!!!",url:"https://iframe.mediadelivery.net/play/596875/9e67d96b-6c23-4b2d-ba93-923cb877626a",thumb:"https://vz-7533d228-c25.b-cdn.net/9e67d96b-6c23-4b2d-ba93-923cb877626a.jpg",size:1116.3,duration:494},
+  {title:"아니 금지어가 영어 라니까 (금지어 전데)",url:"https://iframe.mediadelivery.net/play/596875/3d7fb7da-0438-451b-92c8-d14e6c3c1dd8",thumb:"https://vz-7533d228-c25.b-cdn.net/3d7fb7da-0438-451b-92c8-d14e6c3c1dd8.jpg",size:728.01,duration:489},
+  {title:"아니 금지어가 네 라니까.. (금지어 전화)",url:"https://iframe.mediadelivery.net/play/596875/779c0092-92e7-4661-8a63-8a58edfc4221",thumb:"https://vz-7533d228-c25.b-cdn.net/779c0092-92e7-4661-8a63-8a58edfc4221.jpg",size:410.8,duration:363},
+  {title:"아 막이님은 내꺼라고! 놔라!!!! (w.막이마기,옥쓔,연다,윤데드)",url:"https://iframe.mediadelivery.net/play/596875/91feef61-e049-4479-8a68-449a576c5a02",thumb:"https://vz-7533d228-c25.b-cdn.net/91feef61-e049-4479-8a68-449a576c5a02.jpg",size:1984.61,duration:565},
+  {title:"아가씨 또 핸드폰 하는거에요 #집사",url:"https://iframe.mediadelivery.net/play/596875/9714fe87-c26b-4721-9f3d-2710d4c7958f",thumb:"https://vz-7533d228-c25.b-cdn.net/9714fe87-c26b-4721-9f3d-2710d4c7958f.jpg",size:16.7,duration:20},
+  {title:"아 하지 말라고 !!!!!!!!!!!!!!!!!!!! (w.파크모)",url:"https://iframe.mediadelivery.net/play/596875/9b9a2793-5454-4933-8cd6-dc4099790918",thumb:"https://vz-7533d228-c25.b-cdn.net/9b9a2793-5454-4933-8cd6-dc4099790918.jpg",size:537.26,duration:451},
+  {title:"시카노코노코노코호시탄탄 #meme #사슴아이",url:"https://iframe.mediadelivery.net/play/596875/337e47d8-bb0d-4970-97a1-0e8bf9587e71",thumb:"https://vz-7533d228-c25.b-cdn.net/337e47d8-bb0d-4970-97a1-0e8bf9587e71.jpg",size:57.7,duration:13},
+  {title:"싸울때 무조건 화 풀리는 방법 (37) #shorts",url:"https://iframe.mediadelivery.net/play/596875/208a7258-f07d-4d66-b7b2-20110a9c70d6",thumb:"https://vz-7533d228-c25.b-cdn.net/208a7258-f07d-4d66-b7b2-20110a9c70d6.jpg",size:26.3,duration:26},
+  {title:"스파이더맨 신작 출시 (32) #shorts",url:"https://iframe.mediadelivery.net/play/596875/18d4b1b4-77e2-48dd-8020-3d415b87fe85",thumb:"https://vz-7533d228-c25.b-cdn.net/18d4b1b4-77e2-48dd-8020-3d415b87fe85.jpg",size:16.71,duration:17},
+  {title:"쉿 나의 아기 고양이..♡ (1기 남스 목소리 대회) (완)",url:"https://iframe.mediadelivery.net/play/596875/092ee316-82ea-4cce-8b2d-a7b38bc70e12",thumb:"https://vz-7533d228-c25.b-cdn.net/092ee316-82ea-4cce-8b2d-a7b38bc70e12.jpg",size:1014.84,duration:611},
+  {title:"스켈레톤이 만들어지는 과정 (34) #shorts",url:"https://iframe.mediadelivery.net/play/596875/cd9ef2e3-be03-4894-8e04-34990fd7cc3f",thumb:"https://vz-7533d228-c25.b-cdn.net/cd9ef2e3-be03-4894-8e04-34990fd7cc3f.jpg",size:20.47,duration:19},
+  {title:"손가락 챱챱챱",url:"https://iframe.mediadelivery.net/play/596875/119e4f0a-9b37-4f5c-af86-b2c419e1b562",thumb:"https://vz-7533d228-c25.b-cdn.net/119e4f0a-9b37-4f5c-af86-b2c419e1b562.jpg",size:55.58,duration:30},
+  {title:"수위 높은 자학개그.. (33) #shorts",url:"https://iframe.mediadelivery.net/play/596875/39878503-5e09-4de9-ab29-06e4fb01093a",thumb:"https://vz-7533d228-c25.b-cdn.net/39878503-5e09-4de9-ab29-06e4fb01093a.jpg",size:23.55,duration:23},
+  {title:"서로의 음식이 뭔지 모른다! [랜덤 배달 디펜스] #1",url:"https://iframe.mediadelivery.net/play/596875/60430799-5504-48a3-a6ed-bce587d14298",thumb:"https://vz-7533d228-c25.b-cdn.net/60430799-5504-48a3-a6ed-bce587d14298.jpg",size:904.88,duration:481},
+  {title:"성대모사 대회 하다가 정지 먹을뻔..",url:"https://iframe.mediadelivery.net/play/596875/93e400e9-b72b-4019-9464-6c94d9aa84c0",thumb:"https://vz-7533d228-c25.b-cdn.net/93e400e9-b72b-4019-9464-6c94d9aa84c0.jpg",size:621.65,duration:384},
+  {title:"생일때 친오빠의 반응은!",url:"https://iframe.mediadelivery.net/play/596875/d6b9b911-b3fa-4910-abe1-6423abdb7155",thumb:"https://vz-7533d228-c25.b-cdn.net/d6b9b911-b3fa-4910-abe1-6423abdb7155.jpg",size:84.45,duration:50},
+  {title:"살고싶으면 도망쳐라.. skull meme 제목학원 (16) #shorts",url:"https://iframe.mediadelivery.net/play/596875/6874527c-33ca-4cea-afe4-7507bf4f624d",thumb:"https://vz-7533d228-c25.b-cdn.net/6874527c-33ca-4cea-afe4-7507bf4f624d.jpg",size:17.77,duration:18},
+  {title:"사신 shinigami 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/84d00092-c406-4548-9291-85043d93d342",thumb:"https://vz-7533d228-c25.b-cdn.net/84d00092-c406-4548-9291-85043d93d342.jpg",size:268.56,duration:182},
+  {title:"사진 찍을때 공감 ㅋㅋ (41) #shorts",url:"https://iframe.mediadelivery.net/play/596875/ef7560ad-ceb6-403d-ad96-286cb6f0f4f2",thumb:"https://vz-7533d228-c25.b-cdn.net/ef7560ad-ceb6-403d-ad96-286cb6f0f4f2.jpg",size:19.84,duration:19},
+  {title:"사람 살려!! ㅠㅠ 나만 괴롭혀!!ㅜㅜ (w.파크모,우고,연다,제미니)",url:"https://iframe.mediadelivery.net/play/596875/a99a1aad-1a2e-4aaa-8361-c00080af9990",thumb:"https://vz-7533d228-c25.b-cdn.net/a99a1aad-1a2e-4aaa-8361-c00080af9990.jpg",size:1592.64,duration:576},
+  {title:"사신 shinigami 【Korean Cover】 【쵸봄】 (1)",url:"https://iframe.mediadelivery.net/play/596875/2df4ea38-035e-45c4-8d10-063c9120816a",thumb:"https://vz-7533d228-c25.b-cdn.net/2df4ea38-035e-45c4-8d10-063c9120816a.jpg",size:94.77,duration:41},
+  {title:"빵 드실래요 죽  빵",url:"https://iframe.mediadelivery.net/play/596875/f0234ec3-4e1a-4714-85be-b548178d7c42",thumb:"https://vz-7533d228-c25.b-cdn.net/f0234ec3-4e1a-4714-85be-b548178d7c42.jpg",size:2019.04,duration:541},
+  {title:"불륜 (비비) 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/8ee5c0cb-511c-4aa8-9718-9ffe4c7e63b6",thumb:"https://vz-7533d228-c25.b-cdn.net/8ee5c0cb-511c-4aa8-9718-9ffe4c7e63b6.jpg",size:57.13,duration:68},
+  {title:"부엉이 フクロウ 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/b557a212-4e8b-4e75-9836-e28d31db3007",thumb:"https://vz-7533d228-c25.b-cdn.net/b557a212-4e8b-4e75-9836-e28d31db3007.jpg",size:437.84,duration:288},
+  {title:"버츄얼 데뷔 한다니까요",url:"https://iframe.mediadelivery.net/play/596875/12df07e2-4869-4a50-b06a-4b8cc1f3b0af",thumb:"https://vz-7533d228-c25.b-cdn.net/12df07e2-4869-4a50-b06a-4b8cc1f3b0af.jpg",size:1403.44,duration:684},
+  {title:"별수호자 라구 50개 깡",url:"https://iframe.mediadelivery.net/play/596875/8d46817c-1a36-470e-8014-f6bb9f11983d",thumb:"https://vz-7533d228-c25.b-cdn.net/8d46817c-1a36-470e-8014-f6bb9f11983d.jpg",size:880.96,duration:446},
+  {title:"백출 배꼽 강화하기 #원신 #백출",url:"https://iframe.mediadelivery.net/play/596875/9a5263f0-4495-44b5-ac4a-f2865e11f9fc",thumb:"https://vz-7533d228-c25.b-cdn.net/9a5263f0-4495-44b5-ac4a-f2865e11f9fc.jpg",size:90.14,duration:55},
+  {title:"배카인님의 생일 축하 송",url:"https://iframe.mediadelivery.net/play/596875/24f1e00b-106a-4710-8636-edd850221800",thumb:"https://vz-7533d228-c25.b-cdn.net/24f1e00b-106a-4710-8636-edd850221800.jpg",size:91.53,duration:53},
+  {title:"밟아 그냥 밟아 (w.일하는 용형)",url:"https://iframe.mediadelivery.net/play/596875/ff37a4f5-ea9f-4930-bf2d-75e6dd611f44",thumb:"https://vz-7533d228-c25.b-cdn.net/ff37a4f5-ea9f-4930-bf2d-75e6dd611f44.jpg",size:2060.88,duration:489},
+  {title:"방송의 재미를 위해서라면...",url:"https://iframe.mediadelivery.net/play/596875/a069ee16-b37d-4fc2-bdc9-ab0ac0ec4ff2",thumb:"https://vz-7533d228-c25.b-cdn.net/a069ee16-b37d-4fc2-bdc9-ab0ac0ec4ff2.jpg",size:379.9,duration:240},
+  {title:"발키리라구 50개 깡",url:"https://iframe.mediadelivery.net/play/596875/c6f516e6-1958-4509-9d9b-15eaf2394a93",thumb:"https://vz-7533d228-c25.b-cdn.net/c6f516e6-1958-4509-9d9b-15eaf2394a93.jpg",size:865.41,duration:438},
+  {title:"발로란트 잼민이 특 (42) #shorts",url:"https://iframe.mediadelivery.net/play/596875/c80dab46-d0c5-4c38-9c01-b8f68b36b4ef",thumb:"https://vz-7533d228-c25.b-cdn.net/c80dab46-d0c5-4c38-9c01-b8f68b36b4ef.jpg",size:22.02,duration:21},
+  {title:"발로란트 에이스",url:"https://iframe.mediadelivery.net/play/596875/995dbe4b-ff57-409c-b0fb-bcb203ee5ef8",thumb:"https://vz-7533d228-c25.b-cdn.net/995dbe4b-ff57-409c-b0fb-bcb203ee5ef8.jpg",size:169.71,duration:41},
+  {title:"발로란트 스킨충 (45) #shorts",url:"https://iframe.mediadelivery.net/play/596875/763760b4-f3e6-489c-a4be-4e6d6b2cfb30",thumb:"https://vz-7533d228-c25.b-cdn.net/763760b4-f3e6-489c-a4be-4e6d6b2cfb30.jpg",size:19.1,duration:21},
+  {title:"발로란트 고인물 (데스매치)",url:"https://iframe.mediadelivery.net/play/596875/04a06e30-0989-47db-a9fe-37e748195797",thumb:"https://vz-7533d228-c25.b-cdn.net/04a06e30-0989-47db-a9fe-37e748195797.jpg",size:62.24,duration:25},
+  {title:"발로란트 서폿 특징 ㅋㅋㅋ (43) #shorts",url:"https://iframe.mediadelivery.net/play/596875/86e62334-2e47-47c0-ae7a-96129469ad6e",thumb:"https://vz-7533d228-c25.b-cdn.net/86e62334-2e47-47c0-ae7a-96129469ad6e.jpg",size:20.24,duration:24},
+  {title:"바니걸 입은 트수",url:"https://iframe.mediadelivery.net/play/596875/46bde775-8ece-477b-af07-6c73caa40797",thumb:"https://vz-7533d228-c25.b-cdn.net/46bde775-8ece-477b-af07-6c73caa40797.jpg",size:80.74,duration:55},
+  {title:"박지님 골탕 먹이기",url:"https://iframe.mediadelivery.net/play/596875/70c9e349-3ca9-4f6a-8d2c-d0c20f57ab8c",thumb:"https://vz-7533d228-c25.b-cdn.net/70c9e349-3ca9-4f6a-8d2c-d0c20f57ab8c.jpg",size:82.38,duration:51},
+  {title:"미드가 너무 크면 생기는 일",url:"https://iframe.mediadelivery.net/play/596875/56bdeeed-2f37-4e5f-8f71-ae6647527e9c",thumb:"https://vz-7533d228-c25.b-cdn.net/56bdeeed-2f37-4e5f-8f71-ae6647527e9c.jpg",size:1606.93,duration:450},
+  {title:"뭔가 이상한 IRIS OUT 커버",url:"https://iframe.mediadelivery.net/play/596875/27b8777f-deb5-477e-afe0-a216123eb247",thumb:"https://vz-7533d228-c25.b-cdn.net/27b8777f-deb5-477e-afe0-a216123eb247.jpg",size:37.13,duration:74},
+  {title:"뭐야 빅헤드님 내 말 돌려줘요",url:"https://iframe.mediadelivery.net/play/596875/cf836df9-378a-4068-a517-60f824b82b4b",thumb:"https://vz-7533d228-c25.b-cdn.net/cf836df9-378a-4068-a517-60f824b82b4b.jpg",size:1751.17,duration:467},
+  {title:"뭐지.. 방시우 성우님 운이 장난이 아니신데...",url:"https://iframe.mediadelivery.net/play/596875/1cd0ef30-aa44-4e4d-adb8-5ccd0623b3d3",thumb:"https://vz-7533d228-c25.b-cdn.net/1cd0ef30-aa44-4e4d-adb8-5ccd0623b3d3.jpg",size:1276.93,duration:500},
+  {title:"뭐가 보인다는거야 규식아...",url:"https://iframe.mediadelivery.net/play/596875/3b1979f0-4263-472d-8610-7da52d92581e",thumb:"https://vz-7533d228-c25.b-cdn.net/3b1979f0-4263-472d-8610-7da52d92581e.jpg",size:1424.96,duration:759},
+  {title:"뭐가 자꾸 덜렁거려;;",url:"https://iframe.mediadelivery.net/play/596875/4d653a77-5421-4550-ba2f-fab311d0b083",thumb:"https://vz-7533d228-c25.b-cdn.net/4d653a77-5421-4550-ba2f-fab311d0b083.jpg",size:1814.13,duration:518},
+  {title:"모잉님의 첫 빵댕이는 제가 가져갑니다",url:"https://iframe.mediadelivery.net/play/596875/c8058cf2-95e8-4dbe-b24e-6e227a946ac9",thumb:"https://vz-7533d228-c25.b-cdn.net/c8058cf2-95e8-4dbe-b24e-6e227a946ac9.jpg",size:3896.62,duration:1225},
+  {title:"무슨 색깔을 좋아하시나요 (38) #shorts",url:"https://iframe.mediadelivery.net/play/596875/7ae945d2-4532-49a3-b0f9-b15339299ab9",thumb:"https://vz-7533d228-c25.b-cdn.net/7ae945d2-4532-49a3-b0f9-b15339299ab9.jpg",size:18.44,duration:18},
+  {title:"모두에게 사랑 받고있는 나!",url:"https://iframe.mediadelivery.net/play/596875/a19c959b-d200-426c-87a6-ab4544a60ab6",thumb:"https://vz-7533d228-c25.b-cdn.net/a19c959b-d200-426c-87a6-ab4544a60ab6.jpg",size:1381.97,duration:717},
+  {title:"모잉님만을 위한 사랑의 홋치홋치",url:"https://iframe.mediadelivery.net/play/596875/ef5926ff-5a31-4475-a90c-a657489f0c89",thumb:"https://vz-7533d228-c25.b-cdn.net/ef5926ff-5a31-4475-a90c-a657489f0c89.jpg",size:1375.34,duration:506},
+  {title:"메이드복 이야기 그만하라고!!!!!!!!!!!!",url:"https://iframe.mediadelivery.net/play/596875/50f81cce-7e61-4254-ae52-1381c27643b1",thumb:"https://vz-7533d228-c25.b-cdn.net/50f81cce-7e61-4254-ae52-1381c27643b1.jpg",size:1332.94,duration:772},
+  {title:"모니터링 실사화 (14) #shorts",url:"https://iframe.mediadelivery.net/play/596875/d0044cec-efc5-456a-872a-9203eaed3acb",thumb:"https://vz-7533d228-c25.b-cdn.net/d0044cec-efc5-456a-872a-9203eaed3acb.jpg",size:23.8,duration:25},
+  {title:"메이드 카페 알바생이 되버린 쵸봄쨩",url:"https://iframe.mediadelivery.net/play/596875/a6cf4fd3-91cb-4234-b7ad-8307a1dcaa6a",thumb:"https://vz-7533d228-c25.b-cdn.net/a6cf4fd3-91cb-4234-b7ad-8307a1dcaa6a.jpg",size:2467.0,duration:769},
+  {title:"마카오톡 Twilight 콘서트 롱편집 풀영상",url:"https://iframe.mediadelivery.net/play/596875/c052b05a-877f-437d-8464-4a79176629c0",thumb:"https://vz-7533d228-c25.b-cdn.net/c052b05a-877f-437d-8464-4a79176629c0.jpg",size:24196.84,duration:10649},
+  {title:"먼저 놔라. 눈쟁이",url:"https://iframe.mediadelivery.net/play/596875/62d71617-e36e-4845-86de-0852970d8b1f",thumb:"https://vz-7533d228-c25.b-cdn.net/62d71617-e36e-4845-86de-0852970d8b1f.jpg",size:1290.34,duration:444},
+  {title:"먹지 않는다며! 먹지 않는다며! (구구덕 합방)",url:"https://iframe.mediadelivery.net/play/596875/dd3c0556-4e86-40bf-9c18-61b1db942c7f",thumb:"https://vz-7533d228-c25.b-cdn.net/dd3c0556-4e86-40bf-9c18-61b1db942c7f.jpg",size:1587.49,duration:767},
+  {title:"망상감상대상연맹 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/bf67f75f-fef8-4bb5-8002-46faa57fcd5b",thumb:"https://vz-7533d228-c25.b-cdn.net/bf67f75f-fef8-4bb5-8002-46faa57fcd5b.jpg",size:485.48,duration:265},
+  {title:"마크 유튜버의 엑스레이 드립 (23) #shorts",url:"https://iframe.mediadelivery.net/play/596875/64907286-1684-4021-be67-20b4fbf8ae7d",thumb:"https://vz-7533d228-c25.b-cdn.net/64907286-1684-4021-be67-20b4fbf8ae7d.jpg",size:22.14,duration:23},
+  {title:"마인크래프트인데 챌린지",url:"https://iframe.mediadelivery.net/play/596875/85bedebd-b400-4f88-a9f6-b8d4bae1b242",thumb:"https://vz-7533d228-c25.b-cdn.net/85bedebd-b400-4f88-a9f6-b8d4bae1b242.jpg",size:35.21,duration:13},
+  {title:"마이크만 키면 목소리가 달라지는 사람",url:"https://iframe.mediadelivery.net/play/596875/3531ae4d-fdf4-4b6a-af28-877cb8243508",thumb:"https://vz-7533d228-c25.b-cdn.net/3531ae4d-fdf4-4b6a-af28-877cb8243508.jpg",size:1681.47,duration:490},
+  {title:"마이 화자 마자 부라자",url:"https://iframe.mediadelivery.net/play/596875/abe64cad-4503-41f6-9f9e-3dff2b35602c",thumb:"https://vz-7533d228-c25.b-cdn.net/abe64cad-4503-41f6-9f9e-3dff2b35602c.jpg",size:7.05,duration:5},
+  {title:"린튜브님.. 나만 바라봐요..♥️",url:"https://iframe.mediadelivery.net/play/596875/15f20638-cebc-4f3a-bfce-fa32f91ae243",thumb:"https://vz-7533d228-c25.b-cdn.net/15f20638-cebc-4f3a-bfce-fa32f91ae243.jpg",size:2486.29,duration:645},
+  {title:"마법소녀 고인물 룩 ㄷㄷ; (40) #shorts",url:"https://iframe.mediadelivery.net/play/596875/4bc0817c-dd87-41b7-9e83-9e7998df8d5d",thumb:"https://vz-7533d228-c25.b-cdn.net/4bc0817c-dd87-41b7-9e83-9e7998df8d5d.jpg",size:16.61,duration:16},
+  {title:"리썰 컴퍼니라며 하우카우야...",url:"https://iframe.mediadelivery.net/play/596875/9b3a0129-3989-48c3-839c-a3525d519b6c",thumb:"https://vz-7533d228-c25.b-cdn.net/9b3a0129-3989-48c3-839c-a3525d519b6c.jpg",size:2191.52,duration:719},
+  {title:"리듬게임 고인물들이 뉴비를 발견 했을때",url:"https://iframe.mediadelivery.net/play/596875/28ac232d-c76e-4d8c-a7a7-4207c36f7600",thumb:"https://vz-7533d228-c25.b-cdn.net/28ac232d-c76e-4d8c-a7a7-4207c36f7600.jpg",size:1916.52,duration:618},
+  {title:"로기님과 오붓한 협곡 데이트",url:"https://iframe.mediadelivery.net/play/596875/9c507589-26f6-45ba-864d-79474669272d",thumb:"https://vz-7533d228-c25.b-cdn.net/9c507589-26f6-45ba-864d-79474669272d.jpg",size:1127.04,duration:352},
+  {title:"로봇도 생식기가 있나요 제목학원 (8) #shorts",url:"https://iframe.mediadelivery.net/play/596875/6b2885a5-9b37-4009-8018-e23e90808406",thumb:"https://vz-7533d228-c25.b-cdn.net/6b2885a5-9b37-4009-8018-e23e90808406.jpg",size:25.17,duration:25},
+  {title:"러스트에서 밥이 없다면",url:"https://iframe.mediadelivery.net/play/596875/f4cad724-6860-4beb-afba-415b1a203283",thumb:"https://vz-7533d228-c25.b-cdn.net/f4cad724-6860-4beb-afba-415b1a203283.jpg",size:100.83,duration:38},
+  {title:"레전드 포토샵 장인ㄷㄷ (25) #shorts",url:"https://iframe.mediadelivery.net/play/596875/bf501b06-6d4e-44f4-ac10-dcc84659abc4",thumb:"https://vz-7533d228-c25.b-cdn.net/bf501b06-6d4e-44f4-ac10-dcc84659abc4.jpg",size:29.58,duration:30},
+  {title:"라이어 댄서 (ライアーダンサー)",url:"https://iframe.mediadelivery.net/play/596875/02ea10b2-018e-46b8-b391-1643c3d63f79",thumb:"https://vz-7533d228-c25.b-cdn.net/02ea10b2-018e-46b8-b391-1643c3d63f79.jpg",size:36.17,duration:23},
+  {title:"랭크를 하면 안되는 이유 (46) #shorts",url:"https://iframe.mediadelivery.net/play/596875/10db6740-cc93-4ca9-a548-840e6e09c05d",thumb:"https://vz-7533d228-c25.b-cdn.net/10db6740-cc93-4ca9-a548-840e6e09c05d.jpg",size:23.19,duration:23},
+  {title:"라구깡 에서 빛이 난다...!!!!!!",url:"https://iframe.mediadelivery.net/play/596875/5c62a7f8-b6f0-4b6f-83fd-b5456ab1765f",thumb:"https://vz-7533d228-c25.b-cdn.net/5c62a7f8-b6f0-4b6f-83fd-b5456ab1765f.jpg",size:1068.27,duration:494},
+  {title:"땃쥐 쵸봄",url:"https://iframe.mediadelivery.net/play/596875/1a42eca4-2b46-4f09-8977-07a1e912d172",thumb:"https://vz-7533d228-c25.b-cdn.net/1a42eca4-2b46-4f09-8977-07a1e912d172.jpg",size:8.26,duration:4},
+  {title:"들어오면 후회 안함 ㄹㅇ",url:"https://iframe.mediadelivery.net/play/596875/661f4d2b-f702-47b1-896f-755f14da9f85",thumb:"https://vz-7533d228-c25.b-cdn.net/661f4d2b-f702-47b1-896f-755f14da9f85.jpg",size:1139.8,duration:516},
+  {title:"땃쥐 쵸봄 (1)",url:"https://iframe.mediadelivery.net/play/596875/93ce231d-0a82-4d0b-9cd2-b7104b059c2a",thumb:"https://vz-7533d228-c25.b-cdn.net/93ce231d-0a82-4d0b-9cd2-b7104b059c2a.jpg",size:6.58,duration:4},
+  {title:"뒤늦은 시부야에서 만난 잘생긴 남자❤️ #meme #shorts",url:"https://iframe.mediadelivery.net/play/596875/fa0920c7-468c-4876-93b8-9b4857f0d5f5",thumb:"https://vz-7533d228-c25.b-cdn.net/fa0920c7-468c-4876-93b8-9b4857f0d5f5.jpg",size:30.15,duration:16},
+  {title:"데바데로 리듬게임 하기 #shorts",url:"https://iframe.mediadelivery.net/play/596875/ed04bdfb-4d11-40c3-83cc-9f77f3b4dac3",thumb:"https://vz-7533d228-c25.b-cdn.net/ed04bdfb-4d11-40c3-83cc-9f77f3b4dac3.jpg",size:44.23,duration:50},
+  {title:"대놓고 주작질 하는 유튜버 냄새님 ㄷㄷ",url:"https://iframe.mediadelivery.net/play/596875/9a85d882-6efd-487b-a7c9-b1eede016c26",thumb:"https://vz-7533d228-c25.b-cdn.net/9a85d882-6efd-487b-a7c9-b1eede016c26.jpg",size:1725.87,duration:494},
+  {title:"더 이상 붕어빵 못먹겠다ㅋㅋ 제목학원 레전드 (10) #shorts",url:"https://iframe.mediadelivery.net/play/596875/b8c41296-c3d9-434f-b0eb-0f300486aeeb",thumb:"https://vz-7533d228-c25.b-cdn.net/b8c41296-c3d9-434f-b0eb-0f300486aeeb.jpg",size:25.97,duration:27},
+  {title:"노루와 뜨거운 사랑을 하는 팔칠님 ㄷㄷ",url:"https://iframe.mediadelivery.net/play/596875/98e112cd-05c6-4637-ba44-690cdd278af8",thumb:"https://vz-7533d228-c25.b-cdn.net/98e112cd-05c6-4637-ba44-690cdd278af8.jpg",size:2460.52,duration:585},
+  {title:"달링 ダーリン 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/45c522fb-00a5-4286-8bac-1885277a0828",thumb:"https://vz-7533d228-c25.b-cdn.net/45c522fb-00a5-4286-8bac-1885277a0828.jpg",size:156.76,duration:146},
+  {title:"단톡방 공감 (31) #shorts",url:"https://iframe.mediadelivery.net/play/596875/16a69c3c-a9b9-4210-8c80-ea00f147f001",thumb:"https://vz-7533d228-c25.b-cdn.net/16a69c3c-a9b9-4210-8c80-ea00f147f001.jpg",size:25.47,duration:23},
+  {title:"단체로 꽃감이님한테 맞는 영상",url:"https://iframe.mediadelivery.net/play/596875/e48b4f7f-659e-4243-a4dc-2f5b50f7717b",thumb:"https://vz-7533d228-c25.b-cdn.net/e48b4f7f-659e-4243-a4dc-2f5b50f7717b.jpg",size:1575.7,duration:510},
+  {title:"누나가 캐리 해줄게",url:"https://iframe.mediadelivery.net/play/596875/56cfe380-98fe-47d7-9f76-02748a38816a",thumb:"https://vz-7533d228-c25.b-cdn.net/56cfe380-98fe-47d7-9f76-02748a38816a.jpg",size:1050.86,duration:592},
+  {title:"논란의 제목학원 레전드 ㅋㅋㅋㅋ (1) #shorts",url:"https://iframe.mediadelivery.net/play/596875/d27e041e-9dd5-4e64-adb5-12ccd545cd74",thumb:"https://vz-7533d228-c25.b-cdn.net/d27e041e-9dd5-4e64-adb5-12ccd545cd74.jpg",size:28.83,duration:27},
+  {title:"노팬티 날콤 그는 누구인가 (쵸터뷰) (날콤)",url:"https://iframe.mediadelivery.net/play/596875/4058d446-f1a9-43d6-a972-573a30caeaa7",thumb:"https://vz-7533d228-c25.b-cdn.net/4058d446-f1a9-43d6-a972-573a30caeaa7.jpg",size:946.97,duration:796},
+  {title:"냐류님이 잘못 했으면 책임져야죠",url:"https://iframe.mediadelivery.net/play/596875/9a3fde51-b8da-41f6-9eff-3aaab0e1043c",thumb:"https://vz-7533d228-c25.b-cdn.net/9a3fde51-b8da-41f6-9eff-3aaab0e1043c.jpg",size:1731.35,duration:493},
+  {title:"내 입맛대로 고르는 뷔페",url:"https://iframe.mediadelivery.net/play/596875/af77c101-3f2c-4192-888e-c365d7839356",thumb:"https://vz-7533d228-c25.b-cdn.net/af77c101-3f2c-4192-888e-c365d7839356.jpg",size:959.56,duration:541},
+  {title:"내꺼 하는 법 【Korean Cover】【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/0743704e-b7d2-4735-af60-dc37875cc27e",thumb:"https://vz-7533d228-c25.b-cdn.net/0743704e-b7d2-4735-af60-dc37875cc27e.jpg",size:230.39,duration:137},
+  {title:"나를 사이에 두고..- (1기 남스 목소리 대회)",url:"https://iframe.mediadelivery.net/play/596875/53e6ce11-421c-4a29-8a1b-98963b9a7a0b",thumb:"https://vz-7533d228-c25.b-cdn.net/53e6ce11-421c-4a29-8a1b-98963b9a7a0b.jpg",size:1558.8,duration:792},
+  {title:"내 썸남의 이상형이란,.. #meme #shorts",url:"https://iframe.mediadelivery.net/play/596875/02fc600e-96d9-40db-a852-cfc5113d82e3",thumb:"https://vz-7533d228-c25.b-cdn.net/02fc600e-96d9-40db-a852-cfc5113d82e3.jpg",size:42.44,duration:26},
+  {title:"남자들은 다 변태야!! #meme #TikTok",url:"https://iframe.mediadelivery.net/play/596875/c898478f-09bc-42b5-b1a5-e56dbef047b0",thumb:"https://vz-7533d228-c25.b-cdn.net/c898478f-09bc-42b5-b1a5-e56dbef047b0.jpg",size:21.27,duration:12},
+  {title:"난 핑크가 제일 잘 어울려 #meme #그림",url:"https://iframe.mediadelivery.net/play/596875/1a73f38e-37f0-4389-b2dc-6f5b862488f8",thumb:"https://vz-7533d228-c25.b-cdn.net/1a73f38e-37f0-4389-b2dc-6f5b862488f8.jpg",size:13.53,duration:12},
+  {title:"나한테 걸리면 다 큰일 나는거야",url:"https://iframe.mediadelivery.net/play/596875/24e348ff-8bbd-439f-bf8b-8d1bc077becd",thumb:"https://vz-7533d228-c25.b-cdn.net/24e348ff-8bbd-439f-bf8b-8d1bc077becd.jpg",size:1576.44,duration:640},
+  {title:"나무위키가 없는데 실검 1위를 갔습니다",url:"https://iframe.mediadelivery.net/play/596875/64aaf1dd-1fda-4014-9b69-c5d9eed0fcfd",thumb:"https://vz-7533d228-c25.b-cdn.net/64aaf1dd-1fda-4014-9b69-c5d9eed0fcfd.jpg",size:937.28,duration:487},
+  {title:"나를 소개하지",url:"https://iframe.mediadelivery.net/play/596875/eeb00f05-7078-498a-9419-f4d90cd01355",thumb:"https://vz-7533d228-c25.b-cdn.net/eeb00f05-7078-498a-9419-f4d90cd01355.jpg",size:222.43,duration:129},
+  {title:"나를 괴롭히는 4인조와 계단 챌린지 #meme #tiktok",url:"https://iframe.mediadelivery.net/play/596875/f031bd8b-44b7-489b-bb25-de8cc9e153ed",thumb:"https://vz-7533d228-c25.b-cdn.net/f031bd8b-44b7-489b-bb25-de8cc9e153ed.jpg",size:19.97,duration:9},
+  {title:"나락간 유튜버의 지갑 (44) #shorts",url:"https://iframe.mediadelivery.net/play/596875/ba45c8be-00b5-49dd-8e19-c2654c36800f",thumb:"https://vz-7533d228-c25.b-cdn.net/ba45c8be-00b5-49dd-8e19-c2654c36800f.jpg",size:21.96,duration:26},
+  {title:"나도 해버렸다 브링방방봉 #Bling-Bang-Bang-Born",url:"https://iframe.mediadelivery.net/play/596875/1ea2127f-ee03-495c-bb96-6d587065e098",thumb:"https://vz-7533d228-c25.b-cdn.net/1ea2127f-ee03-495c-bb96-6d587065e098.jpg",size:13.17,duration:9},
+  {title:"나는... 우주의..미세먼지.. (w.윤데드)",url:"https://iframe.mediadelivery.net/play/596875/be86f6c7-d67e-4e6c-885c-77ca631d00f7",thumb:"https://vz-7533d228-c25.b-cdn.net/be86f6c7-d67e-4e6c-885c-77ca631d00f7.jpg",size:1598.26,duration:481},
+  {title:"나도 이쁘잖아 (버츄얼.ver",url:"https://iframe.mediadelivery.net/play/596875/d1b413b7-919b-464a-a775-f3f6dec3abb6",thumb:"https://vz-7533d228-c25.b-cdn.net/d1b413b7-919b-464a-a775-f3f6dec3abb6.jpg",size:28.84,duration:21},
+  {title:"김나린♥️라코타 사랑의 결실을 맺다!",url:"https://iframe.mediadelivery.net/play/596875/feec7d9b-e8b4-45e8-aa2f-c883657fe4e5",thumb:"https://vz-7533d228-c25.b-cdn.net/feec7d9b-e8b4-45e8-aa2f-c883657fe4e5.jpg",size:4826.52,duration:1365},
+  {title:"나 임포스터 아니라고!!!!! (20) #shorts",url:"https://iframe.mediadelivery.net/play/596875/6c61d86a-ebe5-4df7-88ff-084a9b1100f8",thumb:"https://vz-7533d228-c25.b-cdn.net/6c61d86a-ebe5-4df7-88ff-084a9b1100f8.jpg",size:14.94,duration:15},
+  {title:"그림 그려드립니다, 금액은 아시죠ㅎ",url:"https://iframe.mediadelivery.net/play/596875/7a59733f-7bad-43f9-afcf-bb83dcdddda7",thumb:"https://vz-7533d228-c25.b-cdn.net/7a59733f-7bad-43f9-afcf-bb83dcdddda7.jpg",size:1634.78,duration:464},
+  {title:"기리기리댄스 #아슬아슬댄스 #キリギリダンス",url:"https://iframe.mediadelivery.net/play/596875/1fcc6e92-6928-432d-8e4f-6270fe342be1",thumb:"https://vz-7533d228-c25.b-cdn.net/1fcc6e92-6928-432d-8e4f-6270fe342be1.jpg",size:122.68,duration:34},
+  {title:"금쪽같은 애새끼",url:"https://iframe.mediadelivery.net/play/596875/13f91226-54e0-4376-87f4-64d7f12d4a4f",thumb:"https://vz-7533d228-c25.b-cdn.net/13f91226-54e0-4376-87f4-64d7f12d4a4f.jpg",size:1795.99,duration:482},
+  {title:"근친 NTR ...ㄷㄷ (26) #shorts",url:"https://iframe.mediadelivery.net/play/596875/9acd8e09-a5c0-4160-8c6c-93b37cd24d23",thumb:"https://vz-7533d228-c25.b-cdn.net/9acd8e09-a5c0-4160-8c6c-93b37cd24d23.jpg",size:20.08,duration:18},
+  {title:"그녀와 즐기는 트럼펫 연주 (W.마뫄)",url:"https://iframe.mediadelivery.net/play/596875/9a0f15e3-281d-4a39-9fd1-2483f9c5d756",thumb:"https://vz-7533d228-c25.b-cdn.net/9a0f15e3-281d-4a39-9fd1-2483f9c5d756.jpg",size:1760.97,duration:484},
+  {title:"그냥 억까에 개쳐맞는 영상",url:"https://iframe.mediadelivery.net/play/596875/ce343dcc-ec28-47cf-87dd-cc9ff8ac50ef",thumb:"https://vz-7533d228-c25.b-cdn.net/ce343dcc-ec28-47cf-87dd-cc9ff8ac50ef.jpg",size:1672.19,duration:482},
+  {title:"그녀 앞에서 절대 애교 클립을 꺼내면 안돼",url:"https://iframe.mediadelivery.net/play/596875/3b81293b-d546-4eb4-a2ad-a7f5c75cf8d4",thumb:"https://vz-7533d228-c25.b-cdn.net/3b81293b-d546-4eb4-a2ad-a7f5c75cf8d4.jpg",size:282.08,duration:267},
+  {title:"그 유명한 깻잎 논쟁 (주제 토론 대결)",url:"https://iframe.mediadelivery.net/play/596875/e2615d69-7649-49e4-9096-1c0248ca1efd",thumb:"https://vz-7533d228-c25.b-cdn.net/e2615d69-7649-49e4-9096-1c0248ca1efd.jpg",size:511.98,duration:334},
+  {title:"그곳의 크기.. (30) #shorts",url:"https://iframe.mediadelivery.net/play/596875/5e796fc6-e234-4f01-94cc-27083053aa49",thumb:"https://vz-7533d228-c25.b-cdn.net/5e796fc6-e234-4f01-94cc-27083053aa49.jpg",size:6.8,duration:36},
+  {title:"귀신의 잔치 (鬼ノ宴) 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/e0e8a8f3-2668-46cb-b064-eed1a909752c",thumb:"https://vz-7533d228-c25.b-cdn.net/e0e8a8f3-2668-46cb-b064-eed1a909752c.jpg",size:578.5,duration:177},
+  {title:"규식님 죄송한데 저희 초면 아니신가요",url:"https://iframe.mediadelivery.net/play/596875/893f4684-6f1a-4f05-a675-d15d0ec5e701",thumb:"https://vz-7533d228-c25.b-cdn.net/893f4684-6f1a-4f05-a675-d15d0ec5e701.jpg",size:1572.08,duration:491},
+  {title:"怪物 괴물 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/b7b3dc36-f733-45f1-b4d6-3a555e110000",thumb:"https://vz-7533d228-c25.b-cdn.net/b7b3dc36-f733-45f1-b4d6-3a555e110000.jpg",size:320.83,duration:210},
+  {title:"관종 말기 유미짱",url:"https://iframe.mediadelivery.net/play/596875/db30b034-560d-4709-a2b8-67a849b3a303",thumb:"https://vz-7533d228-c25.b-cdn.net/db30b034-560d-4709-a2b8-67a849b3a303.jpg",size:60.06,duration:44},
+  {title:"고소당할 위기 제목학원 레전드 ㅋㅋㅋㅋ (2) #shorts",url:"https://iframe.mediadelivery.net/play/596875/5ca9e2a5-bb95-4a2a-9333-cf58f89f86f1",thumb:"https://vz-7533d228-c25.b-cdn.net/5ca9e2a5-bb95-4a2a-9333-cf58f89f86f1.jpg",size:30.8,duration:29},
+  {title:"곧 고소 당할 마크 유튜버의 최후 (11) #shorts",url:"https://iframe.mediadelivery.net/play/596875/5f8b3a38-a348-4857-bdc8-65d15e14ef27",thumb:"https://vz-7533d228-c25.b-cdn.net/5f8b3a38-a348-4857-bdc8-65d15e14ef27.jpg",size:38.63,duration:34},
+  {title:"고막 파괴범 연다",url:"https://iframe.mediadelivery.net/play/596875/f80d5954-b648-427c-b33c-df7afc1f3d64",thumb:"https://vz-7533d228-c25.b-cdn.net/f80d5954-b648-427c-b33c-df7afc1f3d64.jpg",size:103.11,duration:40},
+  {title:"겟단",url:"https://iframe.mediadelivery.net/play/596875/3814c5ab-2d07-4fc9-8b7a-4ba4f03a7873",thumb:"https://vz-7533d228-c25.b-cdn.net/3814c5ab-2d07-4fc9-8b7a-4ba4f03a7873.jpg",size:62.62,duration:42},
+  {title:"같은 팀 되면 큰일나는 사람 1위",url:"https://iframe.mediadelivery.net/play/596875/e25d967e-9a67-41c4-9fad-3fa3e0468cd4",thumb:"https://vz-7533d228-c25.b-cdn.net/e25d967e-9a67-41c4-9fad-3fa3e0468cd4.jpg",size:1514.61,duration:483},
+  {title:"겟★단",url:"https://iframe.mediadelivery.net/play/596875/908ba66f-8faf-4e99-a9b1-de7f6c29b175",thumb:"https://vz-7533d228-c25.b-cdn.net/908ba66f-8faf-4e99-a9b1-de7f6c29b175.jpg",size:116.74,duration:42},
+  {title:"게코 성우분을 모셔봤습니다! (w.김토키,애덕,세노,라코타)",url:"https://iframe.mediadelivery.net/play/596875/e352e877-d143-44ff-8b5f-3b2b225172d5",thumb:"https://vz-7533d228-c25.b-cdn.net/e352e877-d143-44ff-8b5f-3b2b225172d5.jpg",size:2024.7,duration:577},
+  {title:"게코 성대모사 장인과 진짜 '성우'를 만나게 해보았다",url:"https://iframe.mediadelivery.net/play/596875/fb89db30-e064-43c0-9477-21864d1564ce",thumb:"https://vz-7533d228-c25.b-cdn.net/fb89db30-e064-43c0-9477-21864d1564ce.jpg",size:1024.39,duration:585},
+  {title:"강풍 올백 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/7ed4e3ba-1dbc-406a-9391-9dc625c6bf39",thumb:"https://vz-7533d228-c25.b-cdn.net/7ed4e3ba-1dbc-406a-9391-9dc625c6bf39.jpg",size:248.53,duration:136},
+  {title:"가위바위보 무조건 이기는 방법",url:"https://iframe.mediadelivery.net/play/596875/d34d5bd0-42ed-4a18-9442-4d37e75b8002",thumb:"https://vz-7533d228-c25.b-cdn.net/d34d5bd0-42ed-4a18-9442-4d37e75b8002.jpg",size:1517.95,duration:509},
+  {title:"강풍 올백 【Korean Cover】 【쵸봄】 (1)",url:"https://iframe.mediadelivery.net/play/596875/c6c8697e-ebd0-41bb-be60-ac6d63ab8ece",thumb:"https://vz-7533d228-c25.b-cdn.net/c6c8697e-ebd0-41bb-be60-ac6d63ab8ece.jpg",size:67.1,duration:44},
+  {title:"강아지의 최후... 제목학원 레전드 (9) #shorts",url:"https://iframe.mediadelivery.net/play/596875/dd6b0ea7-c580-4e16-86f4-6a74f7f0a7ed",thumb:"https://vz-7533d228-c25.b-cdn.net/dd6b0ea7-c580-4e16-86f4-6a74f7f0a7ed.jpg",size:20.88,duration:21},
+  {title:"가슴 크기는 만져보면 알아..☺️",url:"https://iframe.mediadelivery.net/play/596875/0c537176-cb23-435a-b773-5259a9bb6f53",thumb:"https://vz-7533d228-c25.b-cdn.net/0c537176-cb23-435a-b773-5259a9bb6f53.jpg",size:2165.1,duration:658},
+  {title:"가오나시의 다리가 없었던 이유 (17) #shorts",url:"https://iframe.mediadelivery.net/play/596875/15b12a45-cc42-40e2-8f35-65a0151b7c31",thumb:"https://vz-7533d228-c25.b-cdn.net/15b12a45-cc42-40e2-8f35-65a0151b7c31.jpg",size:31.03,duration:31},
+  {title:"가오나시 울음 소리 최초공개ㅋㅋ 제목학원 (15) #shorts",url:"https://iframe.mediadelivery.net/play/596875/52511cba-3ef8-4564-ad80-4efb78930f36",thumb:"https://vz-7533d228-c25.b-cdn.net/52511cba-3ef8-4564-ad80-4efb78930f36.jpg",size:28.04,duration:28},
+  {title:"ヴィラン 빌런 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/a31d4db6-0cc3-4d27-8252-4bd3fa3e9b32",thumb:"https://vz-7533d228-c25.b-cdn.net/a31d4db6-0cc3-4d27-8252-4bd3fa3e9b32.jpg",size:0.0,duration:202},
+  {title:"ヴィラン 빌런 【Korean Cover】 【쵸봄】 (1)",url:"https://iframe.mediadelivery.net/play/596875/be2b4856-acb5-4dfa-b407-ba5c905a198f",thumb:"https://vz-7533d228-c25.b-cdn.net/be2b4856-acb5-4dfa-b407-ba5c905a198f.jpg",size:59.68,duration:41},
+  {title:"TOCA TOCA TOCA (meme) ver.2",url:"https://iframe.mediadelivery.net/play/596875/2683184d-f10d-49dd-a4f6-4a2555df3bb3",thumb:"https://vz-7533d228-c25.b-cdn.net/2683184d-f10d-49dd-a4f6-4a2555df3bb3.jpg",size:43.1,duration:18},
+  {title:"TOCA TOCA TOCA (meme) ver.1",url:"https://iframe.mediadelivery.net/play/596875/f301a633-5229-4ddc-b470-89e10bb182d0",thumb:"https://vz-7533d228-c25.b-cdn.net/f301a633-5229-4ddc-b470-89e10bb182d0.jpg",size:41.51,duration:18},
+  {title:"SUPADOPA 슈파도파 민~나!",url:"https://iframe.mediadelivery.net/play/596875/c7d36f3d-efad-4aef-9d73-1d2c702183d7",thumb:"https://vz-7533d228-c25.b-cdn.net/c7d36f3d-efad-4aef-9d73-1d2c702183d7.jpg",size:100.78,duration:29},
+  {title:"That's Not My Neighbor #meme #neighbor",url:"https://iframe.mediadelivery.net/play/596875/a3e7761c-6d61-4443-8fdc-b7115f2c3d18",thumb:"https://vz-7533d228-c25.b-cdn.net/a3e7761c-6d61-4443-8fdc-b7115f2c3d18.jpg",size:72.41,duration:25},
+  {title:"R.E.P.O가 이렇게 야한 게임이였다고",url:"https://iframe.mediadelivery.net/play/596875/5815e738-8594-4bcd-9e2e-d397dacd3a4a",thumb:"https://vz-7533d228-c25.b-cdn.net/5815e738-8594-4bcd-9e2e-d397dacd3a4a.jpg",size:1463.79,duration:679},
+  {title:"Rabbit Hole Pure Pure 애니메이션 Ver.",url:"https://iframe.mediadelivery.net/play/596875/1f27144d-a4fa-47b8-bde5-9596b3beb5b7",thumb:"https://vz-7533d228-c25.b-cdn.net/1f27144d-a4fa-47b8-bde5-9596b3beb5b7.jpg",size:93.34,duration:59},
+  {title:"phony - 포니 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/b2a48fa8-191f-4c3f-b694-b07daf89e2d9",thumb:"https://vz-7533d228-c25.b-cdn.net/b2a48fa8-191f-4c3f-b694-b07daf89e2d9.jpg",size:387.95,duration:189},
+  {title:"PD의 역대급 신의 드립 (28) #shorts",url:"https://iframe.mediadelivery.net/play/596875/a3f67902-5b65-4f92-b2cb-64702bb01b21",thumb:"https://vz-7533d228-c25.b-cdn.net/a3f67902-5b65-4f92-b2cb-64702bb01b21.jpg",size:40.06,duration:41},
+  {title:"oh wow! 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/5f88151f-0d99-4464-9b84-8cd281075dab",thumb:"https://vz-7533d228-c25.b-cdn.net/5f88151f-0d99-4464-9b84-8cd281075dab.jpg",size:415.37,duration:217},
+  {title:"NTR 직관 ㄹㅈㄷ;; (35) #shorts",url:"https://iframe.mediadelivery.net/play/596875/a2db423f-7a0c-4db9-b2a1-bff058a4fbe2",thumb:"https://vz-7533d228-c25.b-cdn.net/a2db423f-7a0c-4db9-b2a1-bff058a4fbe2.jpg",size:32.38,duration:31},
+  {title:"Noot noot meme",url:"https://iframe.mediadelivery.net/play/596875/a9da74df-f99d-474e-99ac-149de9d47bd8",thumb:"https://vz-7533d228-c25.b-cdn.net/a9da74df-f99d-474e-99ac-149de9d47bd8.jpg",size:8.67,duration:9},
+  {title:"Noot noot meme (1)",url:"https://iframe.mediadelivery.net/play/596875/e0ff565b-ade0-4ac0-9383-5d0fc10c4b83",thumb:"https://vz-7533d228-c25.b-cdn.net/e0ff565b-ade0-4ac0-9383-5d0fc10c4b83.jpg",size:5.28,duration:9},
+  {title:"ME TOO CHALLENGE (MEME)",url:"https://iframe.mediadelivery.net/play/596875/e805da95-b9ba-4b70-8ca5-c17654b2a6f3",thumb:"https://vz-7533d228-c25.b-cdn.net/e805da95-b9ba-4b70-8ca5-c17654b2a6f3.jpg",size:37.86,duration:9},
+  {title:"MIKU MIKU BEEEAAAAMMMM!!! #meme #miku",url:"https://iframe.mediadelivery.net/play/596875/4d5eeabe-76e7-4317-bd22-b42c20466a89",thumb:"https://vz-7533d228-c25.b-cdn.net/4d5eeabe-76e7-4317-bd22-b42c20466a89.jpg",size:15.99,duration:15},
+  {title:"KICK BACK 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/3fe74801-1513-494a-bc1d-2fb589e96b4e",thumb:"https://vz-7533d228-c25.b-cdn.net/3fe74801-1513-494a-bc1d-2fb589e96b4e.jpg",size:429.25,duration:195},
+  {title:"Love or Hate #meme #TikTok",url:"https://iframe.mediadelivery.net/play/596875/4d48786b-b0de-4ce3-84c7-dcc9b540d9c7",thumb:"https://vz-7533d228-c25.b-cdn.net/4d48786b-b0de-4ce3-84c7-dcc9b540d9c7.jpg",size:33.74,duration:17},
+  {title:"HITO Mania (人マニア) 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/bffeb13c-3e6e-42ff-9984-3d4d64362646",thumb:"https://vz-7533d228-c25.b-cdn.net/bffeb13c-3e6e-42ff-9984-3d4d64362646.jpg",size:418.03,duration:131},
+  {title:"34명의 스트리머들과 치지직 무단침입 해보기",url:"https://iframe.mediadelivery.net/play/596875/aaab099e-656c-4c12-afa3-cfecd74dbe30",thumb:"https://vz-7533d228-c25.b-cdn.net/aaab099e-656c-4c12-afa3-cfecd74dbe30.jpg",size:1134.0,duration:535},
+  {title:"CH4NGE 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/8e41784b-15c4-43d9-b8c0-f802ef167ed6",thumb:"https://vz-7533d228-c25.b-cdn.net/8e41784b-15c4-43d9-b8c0-f802ef167ed6.jpg",size:396.95,duration:134},
+  {title:"CH4NGE 【Korean Cover】 【쵸봄】 (1)",url:"https://iframe.mediadelivery.net/play/596875/27156816-b369-445a-aa48-5664533026a1",thumb:"https://vz-7533d228-c25.b-cdn.net/27156816-b369-445a-aa48-5664533026a1.jpg",size:151.04,duration:47},
+  {title:"19금 제목학원 레전드 ㅋㅋㅋㅋ (3) #shorts",url:"https://iframe.mediadelivery.net/play/596875/8568c025-8333-485d-a077-99f3746238e5",thumb:"https://vz-7533d228-c25.b-cdn.net/8568c025-8333-485d-a077-99f3746238e5.jpg",size:36.01,duration:39},
+  {title:"1주년 기념으로 테러를 당했다..!",url:"https://iframe.mediadelivery.net/play/596875/452daf63-6e91-4e1e-9887-bf5ca6a7e16e",thumb:"https://vz-7533d228-c25.b-cdn.net/452daf63-6e91-4e1e-9887-bf5ca6a7e16e.jpg",size:1557.03,duration:443},
+  {title:"17만 따리 주제에!",url:"https://iframe.mediadelivery.net/play/596875/1dc16826-0912-4be4-8a16-701b3bf28903",thumb:"https://vz-7533d228-c25.b-cdn.net/1dc16826-0912-4be4-8a16-701b3bf28903.jpg",size:894.94,duration:540},
+  {title:"16살에 건물주인 트수가 나타났습니다.. ㄷㄷ",url:"https://iframe.mediadelivery.net/play/596875/5bf4ce17-ed8b-4af0-a3f4-22a054226f8c",thumb:"https://vz-7533d228-c25.b-cdn.net/5bf4ce17-ed8b-4af0-a3f4-22a054226f8c.jpg",size:1331.31,duration:699},
+  {title:"12월 9일이 무슨 날인지 아십니까 여러분..",url:"https://iframe.mediadelivery.net/play/596875/6ff40d6c-656c-4a7c-877b-973c05df8a20",thumb:"https://vz-7533d228-c25.b-cdn.net/6ff40d6c-656c-4a7c-877b-973c05df8a20.jpg",size:133.82,duration:110},
+  {title:"4호실(Room No.4) 【Korean Cover】 【쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/63081adf-58b3-415b-85e6-d2ab1c09671a",thumb:"https://vz-7533d228-c25.b-cdn.net/63081adf-58b3-415b-85e6-d2ab1c09671a.jpg",size:682.29,duration:237},
+  {title:"♥cause you got that♥ (meme)",url:"https://iframe.mediadelivery.net/play/596875/3c9e97a5-bd4a-49b7-92eb-2799fe0ef1d6",thumb:"https://vz-7533d228-c25.b-cdn.net/3c9e97a5-bd4a-49b7-92eb-2799fe0ef1d6.jpg",size:199.6,duration:66},
+  {title:"1 2 3 4 5 6 7",url:"https://iframe.mediadelivery.net/play/596875/edcb1e1f-02f0-4488-9c86-48acd3aa5cbd",thumb:"https://vz-7533d228-c25.b-cdn.net/edcb1e1f-02f0-4488-9c86-48acd3aa5cbd.jpg",size:84.32,duration:57},
+  {title:"【위풍당당】(威風堂々) 💋 [쵸봄×비몽×마리모×박도나×투미츠×로에×노이×감규리]",url:"https://iframe.mediadelivery.net/play/596875/f6db34d3-1e28-47a9-b6b6-348b80f9f11f",thumb:"https://vz-7533d228-c25.b-cdn.net/f6db34d3-1e28-47a9-b6b6-348b80f9f11f.jpg",size:473.76,duration:198},
+  {title:"【위풍당당】(威風堂々) 💋 (Teaser)",url:"https://iframe.mediadelivery.net/play/596875/6eba2168-530f-4169-9bb8-01c6219eaac4",thumb:"https://vz-7533d228-c25.b-cdn.net/6eba2168-530f-4169-9bb8-01c6219eaac4.jpg",size:37.07,duration:13},
+  {title:"[👊 필살의 커맨드 👊] [Korean Cover] [최케빈×우고×눈쟁이×쵸봄×매동이×토뎀이×순당무×참외몬]",url:"https://iframe.mediadelivery.net/play/596875/68052278-b1c3-4717-b009-0d3db4e807d5",thumb:"https://vz-7533d228-c25.b-cdn.net/68052278-b1c3-4717-b009-0d3db4e807d5.jpg",size:993.8,duration:246},
+  {title:"[💤잘자요 아가씨💤] 【Korean Cover】 [쵸쵸우×쵸봄]",url:"https://iframe.mediadelivery.net/play/596875/4aeb2a99-f938-46e7-974b-f4ac03206dff",thumb:"https://vz-7533d228-c25.b-cdn.net/4aeb2a99-f938-46e7-974b-f4ac03206dff.jpg",size:206.71,duration:114},
+  {title:"[👊 필살의 커맨드 👊] 【Korean Cover】(Teaser)",url:"https://iframe.mediadelivery.net/play/596875/a71a911f-68af-4817-9417-e9bd6ab422b7",thumb:"https://vz-7533d228-c25.b-cdn.net/a71a911f-68af-4817-9417-e9bd6ab422b7.jpg",size:45.19,duration:16},
+  {title:"[🎸하나 둘 팬클럽🎸] 【Korean Cover】 [쵸쵸우×쵸봄]",url:"https://iframe.mediadelivery.net/play/596875/6a603e61-d3bf-4a17-96a9-90d151324138",thumb:"https://vz-7533d228-c25.b-cdn.net/6a603e61-d3bf-4a17-96a9-90d151324138.jpg",size:301.26,duration:233},
+  {title:"[🎄Black Christmas🎄] 【Korean Cover】 [대타맨×쵸봄×애덕×취무등×카운터×통깡이×솔뮤×휴복]",url:"https://iframe.mediadelivery.net/play/596875/a47c625e-36f7-4063-9b22-462de2bf87f2",thumb:"https://vz-7533d228-c25.b-cdn.net/a47c625e-36f7-4063-9b22-462de2bf87f2.jpg",size:774.17,duration:266},
+  {title:"[🎸하나 둘 팬클럽🎸] 【Korean Cover】(Teaser)",url:"https://iframe.mediadelivery.net/play/596875/6ca84611-aead-412c-ad4a-88c9993ad79c",thumb:"https://vz-7533d228-c25.b-cdn.net/6ca84611-aead-412c-ad4a-88c9993ad79c.jpg",size:15.47,duration:11},
+  {title:"[🎄Black Christmas🎄] 【Korean Cover】(Teaser)",url:"https://iframe.mediadelivery.net/play/596875/a56fb1d2-b02f-4a13-a86d-70a8e87778f6",thumb:"https://vz-7533d228-c25.b-cdn.net/a56fb1d2-b02f-4a13-a86d-70a8e87778f6.jpg",size:58.88,duration:21},
+  {title:"[🎄Black Christmas🎄] 【Korean Cover】 (1)",url:"https://iframe.mediadelivery.net/play/596875/7873bb34-3598-4c9a-b30e-383803108ba6",thumb:"https://vz-7533d228-c25.b-cdn.net/7873bb34-3598-4c9a-b30e-383803108ba6.jpg",size:153.6,duration:40},
+  {title:"[🎃Mrs.Pumpkin의 우스꽝스러운 꿈🎃] (Teaser)",url:"https://iframe.mediadelivery.net/play/596875/d5526152-ec95-4aac-b755-3734622d719e",thumb:"https://vz-7533d228-c25.b-cdn.net/d5526152-ec95-4aac-b755-3734622d719e.jpg",size:26.52,duration:15},
+  {title:"[🎃Mrs.Pumpkin의 우스꽝스러운 꿈🎃] 【Korean Cover】",url:"https://iframe.mediadelivery.net/play/596875/e2367d5a-0101-47b1-8163-9456151cc897",thumb:"https://vz-7533d228-c25.b-cdn.net/e2367d5a-0101-47b1-8163-9456151cc897.jpg",size:503.38,duration:252},
+  {title:"[🎃Mrs.Pumpkin의 우스꽝스러운 꿈🎃] 【Korean Cover】 (1)",url:"https://iframe.mediadelivery.net/play/596875/d4c63ddc-3e4e-454a-bfb2-e4ab19d699e4",thumb:"https://vz-7533d228-c25.b-cdn.net/d4c63ddc-3e4e-454a-bfb2-e4ab19d699e4.jpg",size:48.42,duration:34},
+  {title:"[🍻 KANPAI FUNK 🍻] 30명이 다 같이 불러보았다",url:"https://iframe.mediadelivery.net/play/596875/31781b6b-afb4-4f05-b115-c629dce74d6b",thumb:"https://vz-7533d228-c25.b-cdn.net/31781b6b-afb4-4f05-b115-c629dce74d6b.jpg",size:882.65,duration:221},
+  {title:"[🍬 Drop pop candy 🍬] 【팔칠 × 쵸봄】",url:"https://iframe.mediadelivery.net/play/596875/10234cce-1459-483b-8eae-b874d0d0ed22",thumb:"https://vz-7533d228-c25.b-cdn.net/10234cce-1459-483b-8eae-b874d0d0ed22.jpg",size:257.25,duration:227},
+  {title:"[🌻summertime🌻] 【Korean Cover】",url:"https://iframe.mediadelivery.net/play/596875/ff2e2dac-84e8-4aac-a871-9180b276ac15",thumb:"https://vz-7533d228-c25.b-cdn.net/ff2e2dac-84e8-4aac-a871-9180b276ac15.jpg",size:608.35,duration:248},
+  {title:"[⛄ Must Have Love ⛄] [쵸봄×모잉×하우카우×장마군×헤가×델로략국]",url:"https://iframe.mediadelivery.net/play/596875/5306b66e-2609-4969-be05-e28d4d5fcfc4",thumb:"https://vz-7533d228-c25.b-cdn.net/5306b66e-2609-4969-be05-e28d4d5fcfc4.jpg",size:888.07,duration:255},
+  {title:"[ 🔷Blessing🔷 ] 【Korean Cover】",url:"https://iframe.mediadelivery.net/play/596875/d0ce3bba-77a3-469b-9095-2353b5a6b763",thumb:"https://vz-7533d228-c25.b-cdn.net/d0ce3bba-77a3-469b-9095-2353b5a6b763.jpg",size:603.21,duration:271},
+  {title:"[🌻summertime🌻] 【Korean Cover】(Teaser)",url:"https://iframe.mediadelivery.net/play/596875/526d37ab-e939-4d8f-814b-a7467ec4fd07",thumb:"https://vz-7533d228-c25.b-cdn.net/526d37ab-e939-4d8f-814b-a7467ec4fd07.jpg",size:25.63,duration:17},
+  {title:"[⛄ Must Have Love ⛄] (Teaser)",url:"https://iframe.mediadelivery.net/play/596875/da9e3c3c-8e4a-459e-a5ac-611376d1d1ee",thumb:"https://vz-7533d228-c25.b-cdn.net/da9e3c3c-8e4a-459e-a5ac-611376d1d1ee.jpg",size:46.25,duration:17},
+  {title:"[ 🎀 쵸봄 버츄얼 데뷔 🎀 ] (Teaser video)",url:"https://iframe.mediadelivery.net/play/596875/ee0522de-0174-4396-ae97-e79aa2727186",thumb:"https://vz-7533d228-c25.b-cdn.net/ee0522de-0174-4396-ae97-e79aa2727186.jpg",size:122.04,duration:45},
+  {title:"[ 🔷Blessing🔷 ] 【Korean Cover】(Teaser)",url:"https://iframe.mediadelivery.net/play/596875/c5d956fc-3061-4efc-9b8b-e96226c91ed4",thumb:"https://vz-7533d228-c25.b-cdn.net/c5d956fc-3061-4efc-9b8b-e96226c91ed4.jpg",size:27.41,duration:29}
 ];
 
-// Utility functions
+// ── Utility ──
 function formatDuration(sec) {
     const h = Math.floor(sec / 3600);
     const m = Math.floor((sec % 3600) / 60);
@@ -817,14 +819,24 @@ function formatTotalDuration(sec) {
     return `${h}시간 ${m}분`;
 }
 
-// Categorize videos
+// play → embed 변환
+function toEmbedUrl(url) {
+    return url.replace('/play/', '/embed/');
+}
+
+// Shorts 판별: 제목에 #shorts 포함 또는 duration 60초 이하
+function isShorts(v) {
+    return v.duration <= 60 || v.title.toLowerCase().includes('#shorts');
+}
+
+// ── Category ──
 function getCategory(title) {
     const t = title.toLowerCase();
     if (t.includes('cover') || t.includes('【쵸봄】') || t.includes('【korean') || t.includes('커버'))
         return 'cover';
-    if (t.includes('#shorts') || t.includes('#제목학원') || (t.includes('#') && (t.includes('shorts') || t.includes('meme'))))
+    if (t.includes('#shorts') || t.includes('#제목학원'))
         return 'shorts';
-    if (t.includes('w.') || t.includes('×') || t.includes(' x ') || t.includes('합방') || t.includes('콜라보'))
+    if (t.includes('w.') || t.includes('×') || t.includes(' x ') || t.includes('합방'))
         return 'collab';
     if (t.includes('발로란트') || t.includes('마인크래프트') || t.includes('원신') || t.includes('러스트') || t.includes('게임') || t.includes('포켓몬') || t.includes('데바데') || t.includes('리썰') || t.includes('r.e.p.o'))
         return 'gaming';
@@ -836,66 +848,62 @@ function getCategory(title) {
 }
 
 function getCategoryLabel(cat) {
-    const map = {
-        cover: '커버곡', shorts: 'Shorts', collab: '콜라보',
-        gaming: '게임', meme: '밈/틱톡', vlog: 'Vlog', other: '기타'
-    };
+    const map = { cover:'커버곡', shorts:'Shorts', collab:'콜라보', gaming:'게임', meme:'밈/틱톡', vlog:'Vlog', other:'기타' };
     return map[cat] || cat;
 }
 
-function getCategoryClass(cat) {
-    return 'cat-' + cat;
-}
+function getCategoryClass(cat) { return 'cat-' + cat; }
 
-// State
+// ── State ──
 let currentFilter = 'all';
 let currentSort = 'default';
 let currentSearch = '';
 let activeIndex = -1;
 
-// Stats
+// ── Stats ──
 const totalCount = videos.length;
 const totalSize = videos.reduce((a, v) => a + v.size, 0);
 const totalDuration = videos.reduce((a, v) => a + v.duration, 0);
-
 document.getElementById('totalCount').textContent = totalCount;
 document.getElementById('totalSize').textContent = formatSize(totalSize);
 document.getElementById('totalDuration').textContent = formatTotalDuration(totalDuration);
 
-// Render
+// ── Filter & Sort ──
 function getFilteredVideos() {
     let filtered = videos.map((v, i) => ({...v, origIndex: i}));
-
     if (currentSearch) {
         const q = currentSearch.toLowerCase();
         filtered = filtered.filter(v => v.title.toLowerCase().includes(q));
     }
-
     if (currentFilter !== 'all') {
         filtered = filtered.filter(v => getCategory(v.title) === currentFilter);
     }
-
     switch (currentSort) {
-        case 'title-asc': filtered.sort((a, b) => a.title.localeCompare(b.title, 'ko')); break;
-        case 'title-desc': filtered.sort((a, b) => b.title.localeCompare(a.title, 'ko')); break;
-        case 'duration-asc': filtered.sort((a, b) => a.duration - b.duration); break;
-        case 'duration-desc': filtered.sort((a, b) => b.duration - a.duration); break;
-        case 'size-asc': filtered.sort((a, b) => a.size - b.size); break;
-        case 'size-desc': filtered.sort((a, b) => b.size - a.size); break;
+        case 'title-asc': filtered.sort((a,b) => a.title.localeCompare(b.title,'ko')); break;
+        case 'title-desc': filtered.sort((a,b) => b.title.localeCompare(a.title,'ko')); break;
+        case 'duration-asc': filtered.sort((a,b) => a.duration - b.duration); break;
+        case 'duration-desc': filtered.sort((a,b) => b.duration - a.duration); break;
+        case 'size-asc': filtered.sort((a,b) => a.size - b.size); break;
+        case 'size-desc': filtered.sort((a,b) => b.size - a.size); break;
     }
-
     return filtered;
 }
 
+function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+
+// ── Render List ──
 function renderList() {
     const filtered = getFilteredVideos();
     const list = document.getElementById('videoList');
     document.getElementById('resultsCount').textContent = `${filtered.length}개 영상`;
-
-    list.innerHTML = filtered.map((v, idx) => {
+    list.innerHTML = filtered.map(v => {
         const cat = getCategory(v.title);
         return `
-        <div class="video-item ${v.origIndex === activeIndex ? 'active' : ''}" data-index="${v.origIndex}" onclick="playVideo(${v.origIndex})">
+        <div class="video-item ${v.origIndex === activeIndex ? 'active' : ''}" onclick="playVideo(${v.origIndex})">
             <div class="video-thumb">
                 <img src="${v.thumb}" alt="" loading="lazy" onerror="this.style.display='none'" />
                 <span class="duration">${formatDuration(v.duration)}</span>
@@ -912,18 +920,30 @@ function renderList() {
     }).join('');
 }
 
-function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-}
-
+// ── Play Video ──
 function playVideo(index) {
     const v = videos[index];
     activeIndex = index;
-
     const wrapper = document.getElementById('playerWrapper');
-    wrapper.innerHTML = `<iframe src="${v.url}" loading="lazy" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+    const embedUrl = toEmbedUrl(v.url);
+    const vertical = isShorts(v);
+
+    // 세로/가로 모드 전환
+    if (vertical) {
+        wrapper.classList.add('vertical-mode');
+    } else {
+        wrapper.classList.remove('vertical-mode');
+    }
+
+    wrapper.innerHTML = `
+        <div class="iframe-box">
+            <iframe
+                src="${embedUrl}?autoplay=true&responsive=true"
+                loading="lazy"
+                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>`;
 
     const info = document.getElementById('videoInfo');
     info.style.display = 'block';
@@ -932,26 +952,21 @@ function playVideo(index) {
     const cat = getCategory(v.title);
     document.getElementById('videoMeta').innerHTML = `
         <span class="category-tag ${getCategoryClass(cat)}">${getCategoryLabel(cat)}</span>
+        ${vertical ? '<span class="tag">세로 영상</span>' : ''}
         <span class="tag">${formatDuration(v.duration)}</span>
         <span class="tag">${formatSize(v.size)}</span>
     `;
 
     renderList();
 
-    // Scroll to active item
     const activeEl = document.querySelector('.video-item.active');
-    if (activeEl) {
-        activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
+    if (activeEl) activeEl.scrollIntoView({ behavior:'smooth', block:'nearest' });
 
-    // On mobile, scroll to player
-    if (window.innerWidth <= 1024) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    if (window.innerWidth <= 1024) window.scrollTo({ top:0, behavior:'smooth' });
 }
 
-// Event listeners
-document.getElementById('searchInput').addEventListener('input', (e) => {
+// ── Events ──
+document.getElementById('searchInput').addEventListener('input', e => {
     currentSearch = e.target.value;
     renderList();
 });
@@ -965,45 +980,36 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     });
 });
 
-document.getElementById('sortSelect').addEventListener('change', (e) => {
+document.getElementById('sortSelect').addEventListener('change', e => {
     currentSort = e.target.value;
     renderList();
 });
 
-// Scroll to top button
-const videoList = document.getElementById('videoList');
-videoList.addEventListener('scroll', () => {
-    const btn = document.getElementById('scrollTopBtn');
-    btn.classList.toggle('visible', videoList.scrollTop > 300);
+const videoListEl = document.getElementById('videoList');
+videoListEl.addEventListener('scroll', () => {
+    document.getElementById('scrollTopBtn').classList.toggle('visible', videoListEl.scrollTop > 300);
 });
 
 document.getElementById('scrollTopBtn').addEventListener('click', () => {
-    videoList.scrollTo({ top: 0, behavior: 'smooth' });
+    videoListEl.scrollTo({ top:0, behavior:'smooth' });
 });
 
-// Keyboard shortcuts
-document.addEventListener('keydown', (e) => {
+// Keyboard nav
+document.addEventListener('keydown', e => {
     if (e.target.tagName === 'INPUT') return;
-
     const filtered = getFilteredVideos();
     if (!filtered.length) return;
-
-    let currentFiltered = filtered.findIndex(v => v.origIndex === activeIndex);
-
+    let cur = filtered.findIndex(v => v.origIndex === activeIndex);
     if (e.key === 'ArrowDown' || e.key === 'j') {
         e.preventDefault();
-        const next = currentFiltered + 1;
-        if (next < filtered.length) playVideo(filtered[next].origIndex);
+        if (cur + 1 < filtered.length) playVideo(filtered[cur + 1].origIndex);
     } else if (e.key === 'ArrowUp' || e.key === 'k') {
         e.preventDefault();
-        const prev = currentFiltered - 1;
-        if (prev >= 0) playVideo(filtered[prev].origIndex);
+        if (cur - 1 >= 0) playVideo(filtered[cur - 1].origIndex);
     }
 });
 
-// Initial render
 renderList();
 </script>
-
 </body>
 </html>
